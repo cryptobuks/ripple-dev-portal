@@ -2,7 +2,7 @@ It can take several minutes for `rippled` to sync with the rest of the network, 
 
 For information about `rippled` log messages, see [Understanding Log Messages](understanding-log-messages.html).
 
-After your `rippled` has synchronized with the rest of the network, you have a fully functional stock `rippled` server that you can use for local signing and API access to the XRP Ledger. Use [`rippled` server states](rippled-server-states.html) to tell whether your `rippled` server has synchronized with the network. You can use the [`rippled` commandline interface](get-started-with-the-rippled-api.html#commandline) to test this quickly:
+After your `rippled` has synchronized with the rest of the network, you have a fully functional stock `rippled` server that you can use for local signing and API access to the XRP Ledger. Use [`rippled` server states](rippled-server-states.html) to tell whether your `rippled` server has synchronized with the network. You can use the [`rippled` commandline interface](get-started-using-http-websocket-apis.html#commandline) to test this quickly:
 
 {% if currentpage.md == "tutorials/manage-the-rippled-server/installation/build-run-rippled-ubuntu.md" or
       currentpage.md == "tutorials/manage-the-rippled-server/installation/build-run-rippled-macos.md" %}
@@ -28,7 +28,7 @@ See [the `rippled` GitHub repository](https://github.com/ripple/rippled/blob/mas
 You must restart `rippled` for any configuration changes to take effect:
 
 
-{% if currentpage.md == "tutorials/manage-the-rippled-server/installation/install-rippled-on-ubuntu-with-alien.md" or
+{% if currentpage.md == "tutorials/manage-the-rippled-server/installation/install-rippled-on-ubuntu.md" or
       currentpage.md == "tutorials/manage-the-rippled-server/installation/install-rippled-on-centos-rhel-with-yum" %}
         $ sudo systemctl restart rippled.service
 
@@ -48,4 +48,4 @@ If you change the `[debug_logfile]` or `[database_path]` sections, you may need 
 
 You must update `rippled` regularly to remain synced with the rest of the XRP Ledger network. You can subscribe to the [rippled Google Group](https://groups.google.com/forum/#!forum/ripple-server) to receive notifications of new `rippled` releases.
 
-The `rippled` package for Red Hat Enterprise Linux and CentOS includes a script you can use to [enable automatic updates](update-rippled-automatically-on-centos-rhel.html) on those platforms. On other platforms, you must update manually.
+The `rippled` package includes a script you can use to [enable automatic updates on Linux](update-rippled-automatically-on-linux.html). On other platforms, you must update manually.

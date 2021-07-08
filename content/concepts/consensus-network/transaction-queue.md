@@ -1,3 +1,10 @@
+---
+html: transaction-queue.html
+parent: consensus-network.html
+blurb: Understand how transactions can be queued before reaching consensus.
+labels:
+  - Transaction Sending
+---
 # Transaction Queue
 
 The `rippled` server uses a transaction queue to help enforce the [open ledger cost](transaction-cost.html#open-ledger-cost). The open ledger cost sets a target number of transactions in a given ledger, and escalates the required transaction cost very quickly when the open ledger surpasses this size. Rather than discarding transactions that cannot pay the escalated transaction cost, `rippled` tries to put them in a transaction queue, which it uses to build the next ledger.
@@ -6,7 +13,7 @@ The `rippled` server uses a transaction queue to help enforce the [open ledger c
 
 The transaction queue plays an important role in selecting the transactions that are included or excluded from a given ledger version in the consensus process. The following steps describe how the transaction queue relates to the [consensus process](consensus.html).
 
-[![Transaction queue and consensus diagram](img/consensus-with-queue.png)](img/consensus-with-queue.png)
+{{ include_svg("img/consensus-with-queue.svg", "Transaction queue and consensus diagram") }}
 
 1. **Consensus Round 1** - Each validator proposes a set of transactions to be included in the next ledger version. Each also keeps a queue of candidate transactions not currently proposed.
 
@@ -28,11 +35,15 @@ The transaction queue plays an important role in selecting the transactions that
 
 The `rippled` server uses a variety of heuristics to estimate which transactions are "likely to be included in a ledger." The current implementation uses the following rules to decide which transactions to queue:
 
-* Transactions must be properly-formed and [authorized](transaction-basics.html#authorizing-transactions) with valid signatures.
-* Transactions with an `AccountTxnID` field cannot be queued.
-* A single sending address can have at most 10 transactions queued at the same time. In order for a transaction to be queued, the sender must have enough XRP to pay all the XRP costs of all the sender's queued transactions including both the `Fee` fields and the sum of the XRP that each transaction could send. [New in: rippled 0.32.0][]
-* If a transaction affects how the sending address authorizes transactions, no other transactions from the same address can be queued behind it. [New in: rippled 0.32.0][]
-* If a transaction includes a `LastLedgerSequence` field, the value of that field must be at least **the current ledger index + 2**.
+- Transactions must be properly-formed and [authorized](transaction-basics.html#authorizing-transactions) with valid signatures.
+- Transactions with an `AccountTxnID` field cannot be queued.
+- A single sending address can have at most 10 transactions queued at the same time.
+- To queue a transaction, the sender must have enough XRP for all of the following: [Updated in: rippled 1.2.0][]
+    - Destroying the XRP [transaction cost](transaction-cost.html) as specified in the `Fee` fields of all the sender's queued transactions. The total amount among queued transactions cannot be more than the base account reserve (currently 20 XRP). (Transactions paying significantly more than the minimum transaction cost of 0.00001 XRP typically skip the queue and go straight into the open ledger.)
+    - Sending the maximum sum of XRP that all the sender's queued transactions could send.
+    - Keeping enough XRP to meet the account's [reserve requirements](reserves.html).
+- If a transaction affects how the sending address authorizes transactions, no other transactions from the same address can be queued behind it. [New in: rippled 0.32.0][]
+- If a transaction includes a `LastLedgerSequence` field, the value of that field must be at least **the current ledger index + 2**.
 
 ### Fee Averaging
 

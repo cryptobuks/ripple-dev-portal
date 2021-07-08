@@ -1,3 +1,10 @@
+---
+html: clustering.html
+parent: the-rippled-server.html
+blurb: Run rippled servers in a cluster to share the load of cryptography between them.
+labels:
+  - Core Server
+---
 # Clustering
 
 If you are running multiple `rippled` servers in a single datacenter, you can configure those servers into a cluster to maximize efficiency. Running your `rippled` servers in a cluster provides the following benefits:
@@ -8,7 +15,16 @@ If you are running multiple `rippled` servers in a single datacenter, you can co
 
 If you are running a validator as a [private peer](peer-protocol.html#private-peers), Ripple recommends using a cluster of `rippled` servers as proxy servers.
 
-For a tutorial on how to set up your servers in a cluster, see [Cluster `rippled` Servers](cluster-rippled-servers.html).
+## See Also
+
+- **Tutorials:**
+    - [Cluster `rippled` Servers](cluster-rippled-servers.html)
+    - [Run rippled as a Validator](run-rippled-as-a-validator.html)
+- **References:**
+    - [peers method][]
+    - [connect method][]
+    - [Peer Crawler](peer-crawler.html)
+
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

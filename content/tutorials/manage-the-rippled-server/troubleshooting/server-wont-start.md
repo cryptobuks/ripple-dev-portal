@@ -1,6 +1,13 @@
+---
+html: server-wont-start.html
+parent: troubleshoot-the-rippled-server.html
+blurb: A collection of problems that would cause a rippled server not to start, and how to fix them.
+labels:
+  - Core Server
+---
 # rippled Server Won't Start
 
-This page explains possible reasons the `rippled` server does not start and how to fix them.
+This page explains possible reasons [the `rippled` server](the-rippled-server.html) does not start and how to fix them.
 
 These instructions assume you have [installed `rippled`](install-rippled.html) on a supported platform.
 
@@ -107,7 +114,7 @@ Possible solutions:
 
 ## State DB Error
 
-The following error can occur if the `rippled` server's state database is corrupted (possibly as the result of being shutdown unexpectedly):
+The following error can occur if the `rippled` server's state database is corrupted. This can occur as the result of being shutdown unexpectedly, or if you change the type of database from RocksDB to NuDB without changing the `path` and `[database_path]` settings in the config file.
 
 ```text
 2018-Aug-21 23:06:38.675117810 SHAMapStore:ERR state db error:
@@ -133,6 +140,17 @@ rm -r /var/lib/rippled/db
 
 **Tip:** It is generally safe to delete the `rippled` databases, because any individual server can re-download ledger history from other servers in the XRP Ledger network.
 
+Alternatively, you can change the paths to the databases in the config file. For example:
+
+```
+[node_db]
+type=NuDB
+path=/var/lib/rippled/custom_nudb_path
+
+[database_path]
+/var/lib/rippled/custom_sqlite_db_path
+```
+
 
 ## Online Delete is Less Than Ledger History
 
@@ -155,7 +173,7 @@ An error such as the following indicates that the `rippled.cfg` file has an impr
 Terminating thread rippled: main: unhandled N5beast14BadLexicalCastE 'std::bad_cast'
 ```
 
-Valid parameters for the `node_size` field are `tiny`, `small`, `medium`, or `huge`. For more information see [Node Size](capacity-planning.html#node-size).
+Valid parameters for the `node_size` field are `tiny`, `small`, `medium`, `large`, or `huge`. For more information see [Node Size](capacity-planning.html#node-size).
 
 
 ## Shard path missing
@@ -168,17 +186,38 @@ Terminating thread rippled: main: unhandled St13runtime_error 'shard path missin
 
 If your config includes a `[shard_db]` stanza, it must contain a `path` field, which points to a directory where `rippled` can write the data for the shard store. This error means the `path` field is missing or located in the wrong place. Check for extra whitespace or typos in your config file, and compare against the [Shard Configuration Example](configure-history-sharding.html#2-edit-rippledcfg).
 
+## Unsupported shard store type: RocksDB
 
-## ShardStore unable to open/create RocksDB
+RocksDB is no longer supported as a backend for [history sharding](history-sharding.html). If you have an existing configuration that defines a RocksDB shard store, the server fails to start. [New in: rippled 1.3.1][]
 
-If you enable [history sharding](history-sharding.html), then later change the configuration to use RocksDB instead of NuDB, the server may try to read the existing NuDB data as RocksDB data and fail to start. In this case, the server writes an error such as the following:
+In this case, the process dies shortly after the log startup command, with a message such as the following appearing earlier in the output log:
 
 ```text
-ShardStore:ERR shard 504 error: Unable to open/create RocksDB: Invalid argument: /var/lib/rippled/db/shards/504: does not exist (create_if_missing is false)
+ShardStore:ERR Unsupported shard store type: RocksDB
 ```
 
-To fix this problem, do one of the following:
 
-- Move or delete the existing shard data from the configured folder
-- Change where the shard store is located on disk by changing the `path` of the `[shard_db]` stanza in the `rippled.cfg` file.
-- Change the shard store back to using NuDB.
+To fix this problem, do one of the following, then restart the server:
+
+- Change your shard store to use NuDB instead.
+- Disable history sharding.
+
+
+## See Also
+
+- **Concepts:**
+    - [The `rippled` Server](the-rippled-server.html)
+    - [Technical FAQ](technical-faq.html)
+- **Tutorials:**
+    - [Understanding Log Messages](understanding-log-messages.html)
+    - [Capacity Planning](capacity-planning.html)
+- **References:**
+    - [rippled API Reference](rippled-api.html)
+        - [`rippled` Commandline Usage](commandline-usage.html)
+        - [server_info method][]
+
+<!-- SPELLING_IGNORE: cfg, node_size -->
+<!--{# common link defs #}-->
+{% include '_snippets/rippled-api-links.md' %}
+{% include '_snippets/tx-type-links.md' %}
+{% include '_snippets/rippled_versions.md' %}

@@ -1,9 +1,16 @@
+---
+html: fee.html
+parent: server-info-methods.html
+blurb: Get information about transaction cost.
+labels:
+  - Fees
+---
 # fee
-[[Source]<br>](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/Fee1.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/Fee1.cpp "Source")
 
-The `fee` command reports the current state of the open-ledger requirements for the [transaction cost](transaction-cost.html). This requires the [FeeEscalation amendment](known-amendments.html#feeescalation) to be enabled. [New in: rippled 0.31.0][]
+The `fee` command reports the current state of the open-ledger requirements for the [transaction cost](transaction-cost.html). This requires the [FeeEscalation amendment][] to be enabled. [New in: rippled 0.31.0][]
 
-This is a public command available to unprivileged users. [Updated in: rippled 0.32.0][New in: rippled 0.32.0]
+This is a public command available to unprivileged users. [Updated in: rippled 0.32.0][]
 
 ## Request Format
 An example of the request format:
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "fee_websocket_example",
   "command": "fee"
@@ -21,7 +28,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "fee",
     "params": [{}]
@@ -30,7 +37,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: fee
 rippled fee
 ```
@@ -47,7 +54,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "fee_websocket_example",
   "status": "success",
@@ -76,8 +83,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "current_ledger_size": "56",
@@ -104,9 +112,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "current_ledger_size" : "16",
@@ -155,10 +164,10 @@ The response follows the [standard format][], with a successful result containin
 
 ## Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
 
 
-<!-- TODO: fee levels link to rippled-api-links.md - it is being used one off in a couple of files -->
-[fee levels]: transaction-cost.html#fee-levels
-{% include '_snippets/rippled_versions.md' %}
+<!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}
+{% include '_snippets/tx-type-links.md' %}
+{% include '_snippets/rippled_versions.md' %}

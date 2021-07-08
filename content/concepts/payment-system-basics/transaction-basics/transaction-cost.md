@@ -1,6 +1,14 @@
+---
+html: transaction-cost.html
+parent: transaction-basics.html
+blurb: The transaction cost is a small amount of XRP destroyed to send a transaction, which protects the ledger from spam. Learn how the transaction cost applies.
+labels:
+  - Fees
+  - Transaction Sending
+---
 # Transaction Cost
 
-To protect the XRP Ledger from being disrupted by spam and denial-of-service attacks, each transaction must destroy a small amount of [XRP](https://ripple.com/xrp-portal/). This _transaction cost_ is designed to increase along with the load on the network, making it very expensive to deliberately or inadvertently overload the network.
+To protect the XRP Ledger from being disrupted by spam and denial-of-service attacks, each transaction must destroy a small amount of [XRP](xrp.html). This _transaction cost_ is designed to increase along with the load on the network, making it very expensive to deliberately or inadvertently overload the network.
 
 Every transaction must [specify how much XRP to destroy](#specifying-the-transaction-cost) to pay the transaction cost.
 
@@ -21,6 +29,7 @@ Some transactions have different transaction costs:
 | [Key Reset Transaction](#key-reset-transaction) | 0 |
 | [Multi-signed Transaction](multi-signing.html) | 10 drops × (1 + Number of Signatures Provided) |
 | [EscrowFinish Transaction with Fulfillment](escrowfinish.html) | 10 drops × (33 + (Fulfillment size in bytes ÷ 16)) |
+| [AccountDelete Transaction](accounts.html#deletion-of-accounts) | 5,000,000 drops |
 
 
 ## Beneficiaries of the Transaction Cost
@@ -30,7 +39,7 @@ The transaction cost is not paid to any party: the XRP is irrevocably destroyed.
 
 ## Load Cost and Open Ledger Cost
 
-When the [FeeEscalation amendment](known-amendments.html#feeescalation) is enabled, there are two thresholds for the transaction cost:
+When the [FeeEscalation amendment][] is enabled, there are two thresholds for the transaction cost:
 
 * If the transaction cost does not meet a `rippled` server's [load-based transaction cost threshold](#local-load-cost), the server ignores the transaction completely. (This logic is essentially unchanged with or without the amendment.)
 * If the transaction cost does not meet a `rippled` server's [open ledger cost threshold](#open-ledger-cost), the server queues the transaction for a later ledger.
@@ -44,7 +53,7 @@ This divides transactions into roughly three categories:
 
 ## Local Load Cost
 
-Each `rippled` server maintains a cost threshold based on its current load. If you submit a transaction with a `Fee` value that is lower than current load-based transaction cost of the `rippled` server, that server neither applies nor relays the transaction. (**Note:** If you submit a transaction through an [admin connection](get-started-with-the-rippled-api.html), the server applies and relays the transaction as long as the transaction meets the un-scaled minimum transaction cost.) A transaction is very unlikely to survive [the consensus process](https://ripple.com/build/ripple-ledger-consensus-process/) unless its `Fee` value meets the requirements of a majority of servers.
+Each `rippled` server maintains a cost threshold based on its current load. If you submit a transaction with a `Fee` value that is lower than current load-based transaction cost of the `rippled` server, that server neither applies nor relays the transaction. (**Note:** If you submit a transaction through an [admin connection](get-started-using-http-websocket-apis.html), the server applies and relays the transaction as long as the transaction meets the un-scaled minimum transaction cost.) A transaction is very unlikely to survive [the consensus process](consensus.html) unless its `Fee` value meets the requirements of a majority of servers.
 
 ## Open Ledger Cost
 
@@ -82,7 +91,7 @@ _Fee levels_ represent the proportional difference between the minimum cost and 
 
 The `rippled` APIs have two ways to query the local load-based transaction cost: the `server_info` command (intended for humans) and the `server_state` command (intended for machines).
 
-If the [FeeEscalation amendment](known-amendments.html#feeescalation) is enabled, you can use the [fee method][] to check the open ledger cost.
+If the [FeeEscalation amendment][] is enabled, you can use the [fee method][] to check the open ledger cost.
 
 ### server_info
 
@@ -138,18 +147,33 @@ When a transaction has already been distributed to the network, but the account 
 
 ## Key Reset Transaction
 
-As a special case, an account can send a [SetRegularKey](setregularkey.html) transaction with a transaction cost of `0`, as long as the account's [lsfPasswordSpent flag](accountroot.html) is disabled. This transaction must be signed by the account's _master key pair_. Sending this transaction enables the lsfPasswordSpent flag.
+As a special case, an account can send a [SetRegularKey](setregularkey.html) transaction with a transaction cost of `0`, as long as the account's [`lsfPasswordSpent` flag](accountroot.html) is disabled. This transaction must be signed by the account's _master key pair_. Sending this transaction enables the `lsfPasswordSpent` flag.
 
 This feature is designed to allow you to recover an account if the regular key is compromised, without worrying about whether the compromised account has any XRP available. This way, you can regain control of the account before you send more XRP to it.
 
-The [lsfPasswordSpent flag](accountroot.html) starts out disabled. It gets enabled when you send a SetRegularKey transaction signed by the master key pair. It gets disabled again when the account receives a [Payment](payment.html) of XRP.
+The [`lsfPasswordSpent` flag](accountroot.html) starts out disabled. It gets enabled when you send a SetRegularKey transaction signed by the master key pair. It gets disabled again when the account receives a [Payment](payment.html) of XRP.
 
-When the [FeeEscalation amendment](known-amendments.html#feeescalation) is enabled, `rippled` prioritizes key reset transactions above other transactions even though the nominal transaction cost of a key reset transaction is zero.
+When the [FeeEscalation amendment][] is enabled, `rippled` prioritizes key reset transactions above other transactions even though the nominal transaction cost of a key reset transaction is zero.
 
 
 ## Changing the Transaction Cost
 
 The XRP Ledger has a mechanism for changing the minimum transaction cost to account for long-term changes in the value of XRP. Any changes have to be approved by the consensus process. See [Fee Voting](fee-voting.html) for more information.
+
+
+## See Also
+
+- **Concepts:**
+    - [Reserves](reserves.html)
+    - [Fee Voting](fee-voting.html)
+    - [Transaction Queue](transaction-queue.html)
+- **Tutorials:**
+    - [Reliable Transaction Submission](reliable-transaction-submission.html)
+- **References:**
+    - [fee method][]
+    - [server_info method][]
+    - [FeeSettings object](feesettings.html)
+    - [SetFee pseudo-transaction][]
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

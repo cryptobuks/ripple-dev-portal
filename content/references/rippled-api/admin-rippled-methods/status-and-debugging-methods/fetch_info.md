@@ -1,5 +1,12 @@
+---
+html: fetch_info.html
+parent: status-and-debugging-methods.html
+blurb: Get information about the server's sync with the network.
+labels:
+  - Core Server
+---
 # fetch_info
-[[Source]<br>](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/FetchInfo.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/315a8b6b602798a4cff4d8e1911936011e12abdb/src/ripple/rpc/handlers/FetchInfo.cpp "Source")
 
 The `fetch_info` command returns information about objects that this server is currently fetching from the network, and how many peers have that information. It can also be used to reset current fetches.
 
@@ -12,7 +19,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 91,
     "command": "fetch_info",
@@ -22,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "fetch_info",
     "params": [
@@ -35,7 +42,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: fetch_info [clear]
 rippled fetch_info
 ```
@@ -56,7 +63,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "info" : {
@@ -94,9 +101,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "info" : {
@@ -138,7 +146,7 @@ The response follows the [standard format][], with a successful result containin
 
 | `Field` | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
-| `info`  | Object | Map of objects being fetched and the status of that object being fetched. A ledger being fetched may be identified by its sequence number; ledgers and other objects being fetched may also be identified by their hashes. |
+| `info`  | Object | Map of objects being fetched and the status of that object being fetched. A ledger being fetched may be identified by its [ledger index][]; ledgers and other objects being fetched may also be identified by their hashes. |
 
 The fields describing a fetch in progress are subject to change without notice. The following fields may be included:
 
@@ -153,7 +161,8 @@ The fields describing a fetch in progress are subject to change without notice. 
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

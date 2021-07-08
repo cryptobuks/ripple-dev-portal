@@ -1,6 +1,12 @@
+---
+html: demurrage.html
+parent: issued-currencies.html
+blurb: (Obsolete) Some older XRP Ledger tools used to support currency codes with built-in interest and negative interest rates.
+status: removed
+---
 # Demurrage
 
-**Warning:** Demurrage is a deprecated feature with no ongoing support. This page describes historical behavior of older versions of Ripple software.
+**Warning:** Demurrage is a deprecated feature with no ongoing support. This page describes historical behavior of older versions of XRP Ledger software.
 
 [Demurrage](http://en.wikipedia.org/wiki/Demurrage_%28currency%29) is a negative interest rate on assets held that represents the cost of holding those assets. To represent the demurrage on an issued currency in the XRP Ledger, you can track it using a custom [currency code](currency-formats.html#currency-codes) that indicates the demurrage rate. This effectively creates separate versions of the currency for each varying amount of demurrage. Client applications can support this by representing the demurraging currency code with an annual percentage rate alongside the currency code. For example: "XAU (-0.5%pa)".
 
@@ -27,7 +33,7 @@ D = A × ( e ^ (t ÷ τ) )
 - **A** is the pre-demurrage amount as recorded in the global ledger
 - **e** is Euler's number
 - **t** is the number of seconds since the Ripple Epoch (0:00 on January 1, 2000 UTC)
-- **τ** is the e-folding time in seconds. This value is [calculated from the desired interest rate](#calculating-e-folding-time).
+- **τ** is the e-folding time in seconds. This value is [calculated from the desired interest rate](#calculating-e-folding-time). <!-- SPELLING_IGNORE: τ -->
 
 To convert between display amounts and ledger amounts, you can use the following steps:
 
@@ -62,7 +68,7 @@ To calculate an e-folding time for a given rate of annual percent interest:
 3. Take the natural log of that number. For example, **ln(0.995) = -0.005012541823544286**. (This number is positive if the initial interest rate was positive, and negative if the interest rate was negative.)
 4. Take the number of seconds in one year (31536000) and divide by the natural log result from the previous step. For example, **31536000 ÷ -0.005012541823544286 = -6291418827.045599**. This result is the e-folding time in seconds.
 
-**Note:** By convention, Ripple's interest/demurrage rules use a fixed number of seconds per year (31536000), which is not adjusted for leap days or leap seconds.
+**Note:** By convention, the XRP Ledger's interest/demurrage rules use a fixed number of seconds per year (31536000), which is not adjusted for leap days or leap seconds.
 
 ## Client Support
 

@@ -1,16 +1,26 @@
+---
+html: gateway_balances.html
+parent: account-methods.html
+blurb: Calculate total amounts issued by an account.
+labels:
+  - Tokens
+  - Accounts
+---
 # gateway_balances
-[[Source]<br>](https://github.com/ripple/rippled/blob/9111ad1a9dc37d49d085aa317712625e635197c0/src/ripple/rpc/handlers/GatewayBalances.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/9111ad1a9dc37d49d085aa317712625e635197c0/src/ripple/rpc/handlers/GatewayBalances.cpp "Source")
 
 The `gateway_balances` command calculates the total balances issued by a given account, optionally excluding amounts held by [operational addresses](issuing-and-operational-addresses.html). [New in: rippled 0.28.2][]
 
 ## Request Format
 An example of the request format:
 
+{% include '_snippets/no-cli-syntax.md' %}
+
 <!-- MULTICODE_BLOCK_START -->
 
 *WebSocket*
 
-```
+```json
 {
     "id": "example_gateway_balances_1",
     "command": "gateway_balances",
@@ -23,7 +33,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "gateway_balances",
     "params": [
@@ -40,6 +50,11 @@ An example of the request format:
 }
 ```
 
+*Commandline*
+```sh
+rippled json gateway_balances ' {"account": "rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q", "hotwallet": ["rKm4uWpg9tfwbVSeATv4KxDe6mpE9yPkgJ", "ra7JkEzrgeKHdzKgo4EUUVBnxggY4z37kt"],"ledger_index": "validated","strict": true} '
+```
+
 <!-- MULTICODE_BLOCK_END -->
 
 The request includes the following parameters:
@@ -50,7 +65,7 @@ The request includes the following parameters:
 | `strict`       | Boolean                    | _(Optional)_ If true, only accept an address or public key for the account parameter. Defaults to false. |
 | `hotwallet`    | String or Array            | _(Optional)_ An [operational address](issuing-and-operational-addresses.html) to exclude from the balances issued, or an array of such addresses. |
 | `ledger_hash`  | String                     | _(Optional)_ A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
-| `ledger_index` | String or Unsigned Integer | _(Optional)_ The sequence number of the ledger version to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
+| `ledger_index` | String or Unsigned Integer | _(Optional)_ The [ledger index][] of the ledger version to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
 
 ## Response Format
 
@@ -60,7 +75,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 3,
   "status": "success",
@@ -128,7 +143,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
 {
     "result": {
@@ -193,21 +208,86 @@ An example of a successful response:
 }
 ```
 
-<!-- MULTICODE_BLOCK_END -->
+*Commandline*
+```json
+{
+   "result" : {
+      "account" : "rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q",
+      "assets" : {
+         "r9F6wk8HkXrgYWoJ7fsv4VrUBVoqDVtzkH" : [
+            {
+               "currency" : "BTC",
+               "value" : "5444166510000000e-26"
+            }
+         ],
+         "rPU6VbckqCLW4kb51CWqZdxvYyQrQVsnSj" : [
+            {
+               "currency" : "BTC",
+               "value" : "1029900000000000e-26"
+            }
+         ],
+         "rpR95n1iFkTqpoy1e878f4Z1pVHVtWKMNQ" : [
+            {
+               "currency" : "BTC",
+               "value" : "4000000000000000e-30"
+            }
+         ],
+         "rwmUaXsWtXU4Z843xSYwgt1is97bgY8yj6" : [
+            {
+               "currency" : "BTC",
+               "value" : "8700000000000000e-30"
+            }
+         ]
+      },
+      "balances" : {
+         "rKm4uWpg9tfwbVSeATv4KxDe6mpE9yPkgJ" : [
+            {
+               "currency" : "EUR",
+               "value" : "144816.1965999999"
+            }
+         ],
+         "ra7JkEzrgeKHdzKgo4EUUVBnxggY4z37kt" : [
+            {
+               "currency" : "USD",
+               "value" : "6677.38614"
+            }
+         ]
+      },
+      "frozen_balances" : {
+         "r4keXr5myiU4iTLh68ZqZ2CgsJ8dM9FSW6" : [
+            {
+               "currency" : "BTC",
+               "value" : "0.091207822800868"
+            }
+         ]
+      },
+      "ledger_hash" : "6C789EAF25A931565E5936042EED037F287F3348B61A70777649552E0385B0E4",
+      "ledger_index" : 57111383,
+      "obligations" : {
+         "BTC" : "1762.700511879441",
+         "EUR" : "813792.4267005104",
+         "GBP" : "4974.337212333351",
+         "USD" : "6739710.218284974"
+      },
+      "status" : "success",
+      "validated" : true
+   }
+}
+```
 
-**Note:** There is no command-line syntax for this method. Use the [json method][] to access this from the command line.
+<!-- MULTICODE_BLOCK_END -->
 
 The response follows the [standard format][], with a successful result containing the following fields:
 
-| `Field`                | Type   | Description                                |
-|:-----------------------|:-------|:-------------------------------------------|
-| `account`              | String | Unique [Address][] identifying the account that issued the balances. |
-| `obligations`          | Object | (Omitted if empty) Total amounts issued to addresses not excluded, as a map of currencies to the total value issued. |
-| `balances`             | Object | (Omitted if empty) Amounts issued to the `hotwallet` addresses from the request. The keys are addresses and the values are arrays of currency amounts they hold. |
-| `assets`               | Object | (Omitted if empty) Total amounts held that are issued by others. In the recommended configuration, the [issuing address](issuing-and-operational-addresses.html) should have none. |
-| `ledger_hash`          | String | (May be omitted) The identifying hash of the ledger that was used to generate this response. |
-| `ledger_index`         | Number | (May be omitted) The sequence number of the ledger version that was used to generate this response. |
-| `ledger_current_index` | Number | (May be omitted) The sequence number of the current in-progress ledger version that was used to generate this response. |
+| `Field`                | Type                      | Description             |
+|:-----------------------|:--------------------------|:------------------------|
+| `account`              | String - [Address][]      | The address of the account that issued the balances. |
+| `obligations`          | Object                    | (Omitted if empty) Total amounts issued to addresses not excluded, as a map of currencies to the total value issued. |
+| `balances`             | Object                    | _(Omitted if empty)_ Amounts issued to the `hotwallet` addresses from the request. The keys are addresses and the values are arrays of currency amounts they hold. |
+| `assets`               | Object                    | _(Omitted if empty)_ Total amounts held that are issued by others. In the recommended configuration, the [issuing address](issuing-and-operational-addresses.html) should have none. |
+| `ledger_hash`          | String - [Hash][]         | _(May be omitted)_ The identifying hash of the ledger version that was used to generate this response. |
+| `ledger_index`         | Number - [Ledger Index][] | _(May be omitted)_ The ledger index of the ledger version that was used to generate this response. |
+| `ledger_current_index` | Number - [Ledger Index][] | _(Omitted if `ledger_current_index` is provided)_ The [ledger index][] of the current in-progress ledger version, which was used to retrieve this information. |
 
 ## Possible Errors
 

@@ -1,12 +1,19 @@
+---
+html: sign_for.html
+parent: transaction-methods.html
+blurb: Contribute to a multi-signature.
+labels:
+  - Transaction Sending
+---
 # sign_for
-[[Source]<br>](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SignFor.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SignFor.cpp "Source")
 
 The `sign_for` command provides one signature for a [multi-signed transaction](multi-signing.html).
 
 {% include '_snippets/public-signing-note.md' %}
 <!--_ -->
 
-This command requires the [MultiSign amendment](known-amendments.html#multisign) to be enabled. [New in: rippled 0.31.0][]
+This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0][]
 
 ## Request Format
 An example of the request format:
@@ -15,7 +22,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": "sign_for_example",
     "command": "sign_for",
@@ -40,8 +47,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
-POST http://localhost:5005/
+```json
 {
     "method": "sign_for",
     "params": [{
@@ -67,7 +73,7 @@ POST http://localhost:5005/
 
 *Commandline*
 
-```
+```sh
 #Syntax: rippled sign_for <signer_address> <signer_secret> [offline]
 rippled sign_for rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW s████████████████████████████ '{
     "TransactionType": "TrustSet",
@@ -93,14 +99,14 @@ The request includes the following parameters:
 | `account`    | String - [Address][] | The address which is providing the signature. |
 | `tx_json`    | Object               | The [Transaction](transaction-formats.html) to sign. Unlike using the [sign method][], all fields of the transaction must be provided, including `Fee` and `Sequence`. The transaction must include the field `SigningPubKey` with an empty string as the value. The object may optionally contain a `Signers` array with previously-collected signatures. |
 | `secret`       | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Do not send your secret to untrusted servers or through unsecured network connections. Cannot be used with `key_type`, `seed`, `seed_hex`, or `passphrase`. |
-| `seed`         | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in [base58][] format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed_hex`, or `passphrase`. |
+| `seed`         | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in the XRP Ledger's [base58][] format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed_hex`, or `passphrase`. |
 | `seed_hex`     | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in hexadecimal format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed`, or `passphrase`. |
 | `passphrase`   | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it, as a string passphrase. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed`, or `seed_hex`. |
 | `key_type`     | String  | _(Optional)_ Type of cryptographic key provided in this request. Valid types are `secp256k1` or `ed25519`. Defaults to `secp256k1`. Cannot be used with `secret`. **Caution:** Ed25519 support is experimental. |
 
 You must provide **exactly 1 field** with the secret key, which can be either of the following:
 
-* Provide a `secret` value and omit the `key_type` field. This value can be formatted as [base58][] seed, RFC-1751, hexadecimal, or as a string passphrase. (secp256k1 keys only)
+* Provide a `secret` value and omit the `key_type` field. This value can be formatted as an XRP Ledger [base58][] seed, RFC-1751, hexadecimal, or as a string passphrase. (secp256k1 keys only)
 * Provide a `key_type` value and exactly one of `seed`, `seed_hex`, or `passphrase`. Omit the `secret` field. (Not supported by the commandline syntax.)
 
 ## Response Format
@@ -111,7 +117,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "sign_for_example",
   "status": "success",
@@ -147,8 +153,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
    "result" : {
       "status" : "success",
@@ -182,9 +189,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "status" : "success",

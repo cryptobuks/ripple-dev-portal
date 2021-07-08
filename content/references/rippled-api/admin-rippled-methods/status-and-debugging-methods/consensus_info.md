@@ -1,7 +1,15 @@
+---
+html: consensus_info.html
+parent: status-and-debugging-methods.html
+blurb: Get information about the state of consensus as it happens.
+labels:
+  - Blockchain
+  - Core Server
+---
 # consensus_info
-[[Source]<br>](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
 
-The `consensus_info` command provides information about the consensus process for debugging purposes.
+The `consensus_info` command provides information about the [consensus process](consensus.html) for debugging purposes.
 
 _The `consensus_info` method is an [admin method](admin-rippled-methods.html) that cannot be run by unprivileged users._
 
@@ -12,7 +20,7 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 99,
     "command": "consensus_info"
@@ -21,7 +29,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "consensus_info",
     "params": [
@@ -32,7 +40,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: consensus_info
 rippled consensus_info
 ```
@@ -49,7 +57,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
    "result" : {
       "info" : {
@@ -124,9 +132,10 @@ An example of a successful response:
 
 *Commandline*
 
-```
+```json
 Loading: "/etc/rippled.cfg"
 Connecting to 127.0.0.1:5005
+
 {
    "result" : {
       "info" : {
@@ -211,7 +220,7 @@ The following is an incomplete summary of fields that may be contained in the `i
 
 | `Field`          | Type    | Description                                     |
 |:-----------------|:--------|:------------------------------------------------|
-| `ledger_seq`     | Number  | The sequence number of the ledger currently in the consensus process |
+| `ledger_seq`     | Number  | The [ledger index][Ledger Index] of the [ledger](ledgers.html) currently in the consensus process |
 | `our_position`   | Object  | This server's expectation for the ledger in the consensus process. |
 | `peer_positions` | Object  | Map of peers and their proposed versions of the ledger in the consensus process. |
 | `proposers`      | Number  | The number of trusted validators participating in this consensus process. Which validators are trusted depends on this server's configuration. |
@@ -225,7 +234,8 @@ The results of the `consensus_info` command can vary dramatically if you run it 
 
 ### Possible Errors
 
-* Any of the [universal error types][].
+- Any of the [universal error types][].
+- `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

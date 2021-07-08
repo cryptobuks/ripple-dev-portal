@@ -1,9 +1,16 @@
+---
+html: submit_multisigned.html
+parent: transaction-methods.html
+blurb: Send a multi-signed transaction to the network.
+labels:
+  - Transaction Sending
+---
 # submit_multisigned
-[[Source]<br>](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
 
 The `submit_multisigned` command applies a [multi-signed](multi-signing.html) transaction and sends it to the network to be included in future ledgers. (You can also submit multi-signed transactions in binary form using the [`submit` command in submit-only mode](submit.html#submit-only-mode).)
 
-This command requires the [MultiSign amendment](known-amendments.html#multisign) to be enabled. [New in: rippled 0.31.0][]
+This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0][]
 
 ## Request Format
 An example of the request format:
@@ -12,9 +19,9 @@ An example of the request format:
 
 *WebSocket*
 
-```
+```json
 {
-    "id": "submit_multisigned_example"
+    "id": "submit_multisigned_example",
     "command": "submit_multisigned",
     "tx_json": {
         "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -48,7 +55,7 @@ An example of the request format:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "submit_multisigned",
     "params": [
@@ -90,7 +97,7 @@ An example of the request format:
 
 *Commandline*
 
-```
+```sh
 #Syntax: submit_multisigned <tx_json>
 rippled submit_multisigned '{
     "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -141,7 +148,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
   "id": "submit_multisigned_example",
   "status": "success",
@@ -187,8 +194,9 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 200 OK
+
 {
     "result": {
         "engine_result": "tesSUCCESS",

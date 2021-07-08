@@ -1,63 +1,107 @@
-ripple-dev-portal
-=================
+# XRPL Dev Portal
 
-The [Ripple Developer Portal](https://dev.ripple.com) is the authoritative source for Ripple documentation, including the `rippled` server, RippleAPI, the Ripple Data API, and other Ripple open-source software.
+The [XRP Ledger Dev Portal](https://xrpl.org) is the authoritative source for XRP Ledger documentation, including the `rippled` server, RippleAPI, the Ripple Data API, and other open-source XRP Ledger software.
 
+To build the site locally:
 
-Repository Layout
------------------
+1. Install [**Dactyl**](https://github.com/ripple/dactyl) and `lxml`:
 
-The HTML pages in this portal are generated from the markdown files in the [content/](content/) folder. Always edit the markdown files, not the HTML files. The [assets/](assets/) folder contains static files used by the site's templates. The [img](img/) folder contains images used in the docs.
+        sudo pip3 install dactyl lxml
 
-The HTML files are generated using Ripple's documentation tool, called [**Dactyl**](https://github.com/ripple/dactyl). After you've done the [Dactyl Setup](#dactyl-setup), you can build the docs from the project root directory:
+2. Clone the repo and change into its directory:
 
+        git clone git@github.com:ripple/xrpl-dev-portal.git && cd xrpl-dev-portal
+
+3. Build the site to the `out/` directory:
+
+        dactyl_build -t en
+
+If you get an error, try upgrading Dactyl before building:
+
+      sudo pip3 install --upgrade dactyl
+
+For more details, see the [contribution guidelines (EN)](CONTRIBUTING.md) ([日本語](CONTRIBUTING.ja.md)) and the [contributor Code of Conduct (EN)](CODE_OF_CONDUCT.md) ([日本語](CODE_OF_CONDUCT.ja.md)).
+
+## Domain Verification Checker
+
+If you make changes to the [Domain Verification Checker](https://xrpl.org/validator-domain-verifier.html) tool and edit the domain-verifier-checker.js file, you will need to do the following:
+
+1. Install [webpack](https://webpack.js.org/) and required libraries via npm:
+
+        npm install webpack webpack-cli --save-dev
+        npm install ripple-binary-codec ripple-address-codec ripple-keypairs
+
+2. From the project root directory (this step may be different depending on how you installed webpack)
+
+        cd assets/js
+        webpack-cli domain-verifier-checker.js --optimize-minimize -o domain-verifier-bundle.js
+
+3. Build the site:
+
+        cd ../..
+        dactyl_build -t en
+
+## Locale Strings
+
+The templates can contain strings that are intended to be translated. These strings are marked off with `{% trans %}` and `{% endtrans %}` tags. You can't have any Jinja block control structures in these tags, but you can have some HTML markup and some basic Jinja variable-printing logic. See the [Jinja Documentation](https://jinja.palletsprojects.com/en/2.11.x/templates/#i18n-in-templates) for what's possible.
+
+If you make changes to these strings, or want to add or update a translation, you'll need to do some extra steps to manage the locale files. These steps require the [Babel](http://babel.pocoo.org/) (`pybabel`) commandline utility. To install it:
+
+```sh
+sudo pip3 install Babel
 ```
-dactyl_build
+
+You don't need Babel to build and view the site otherwise.
+
+
+### Add a language
+
+This repo has English (en) and Japanese (ja) locales set up already. To add a language (do this from the repo top dir):
+
+```sh
+$ pybabel init -l ja -i ./locale/messages.pot -o ./locale/ja/LC_MESSAGES/messages.po
 ```
 
-Dactyl also provides link checking (the `dactyl_link_checker` script) and style checking (`dactyl_style_checker`), which you can run from the project root directory.
+Instead of `ja` (in two places in the above line!!) use the locale code for the language you plan to add. There's no exhaustive, definitive list, but [this list of locale codes](https://www.science.co.il/language/Locale-codes.php) is a good starting place.
 
-The list of which files are built, and metadata about those files, is in the `dactyl-config.yml` file. The `tool/` folder also contains the templates and style-checker rules used by Dactyl. For information on our conventions, see [Config Formatting](#config-formatting).
+This creates a "PO" file (`./locale/ja/LC_MESSAGES/messages.po`) with empty translations for the strings in the templates, based on the "PO Template" file (`./locale/messages.pot`).
 
+To actually add translations for strings, you need to edit the new PO file for this translation. You can edit the PO file file with a text editor, or use a more advanced tool if you're a pro. Don't change the `msgid` values, _do_ change the `msgstr` values.
 
-Dactyl Setup
-------------
+When you're done translating, [compile the PO files](#compile-strings).
 
-Dactyl uses Python 3 and a number of modules. First, make sure you have Python 3 installed in your local operating system, then use [PIP](https://pip.pypa.io/en/stable/) to install the dependencies:
+### Update Strings
 
-`pip3 install dactyl`
+If there are new or updated `{% trans %}` tags in the templates, first use this command to extract them:
 
-
-Contributing
-------------
-
-The Developer Portal welcomes outside contributions, especially to the documentation contents. If you have any corrections, improvements, or expansions of the portal, please contribute pull requests to the **master** branch.
-
-Contributions become copyright Ripple and are provided under the MIT [LICENSE](LICENSE).
-
-
-Config Formatting
------------------
-
-The templates in this repository use metadata from the `dactyl-config.yml` file to generate a hierarchy of pages when navigating the generated site. To generate the appropriate navigation, you must include the proper fields in the page definitions. The following example shows a page with all fields provided:
-
-```
--   md: concept-authorized-trust-lines.md
-    funnel: Docs
-    doc_type: Concepts
-    category: Payment System
-    subcategory: Accounts
-    targets:
-        - local
+```sh
+$ pybabel extract -F ./locale/babel.cfg -o ./locale/messages.pot ./
 ```
 
-Navigation uses the fields `funnel`, `doc_type`, `category`, and `subcategory`, in that order (from broadest to most specific). At each level, the first page to have a new value is the parent or landing of that level. (For example, the parent of the "Accounts" subcategory should have the `subcategory: Accounts` field and must appear before any of its children.) For landing pages, omit the lower level fields. (For example, the "Concepts" doc_type landing should have a `doc_type` field but not a `category` field.)
+Then, update _every_ language's `.po` files with the list of strings, as follows:
 
-**Warning:** If you make a typo in one of these fields, your page may not show up in navigation or may appear in the wrong place.
+```sh
+$ pybabel update -l ja -d ./locale/ -i ./locale/messages.pot
+```
 
-By convention, parent pages should have the same names as the hierarchy for which they are parents. (For example, the landing page for the `Payment System` category should be named `Payment System`.) The name of `md`-sourced files is automatically determined by the header in the first line of the file.
+The above example is for Japanese (`-l ja`). **Repeat for each language code.**
 
-For pages that don't have markdown source content, leave out the `md` line and instead provide the following fields:
+Now edit the PO files (for example, `locale/ja/LC_MESSAGES/messages.po`) to add translations for each newly-added string. Again, **repeat for each language.**
 
-| `name` | Human-readable page name. (Plain text only) |
-| `html` | Output filename for the page. Should end in `.html` and be unique within the target. |
+If you only want to change an existing translation for a given string that hasn't changed in the original, you can skip straight to editing the PO files without running any `update` or `extract` commands.
+
+After you've edited all the PO files, be sure to [compile them](#compile-strings).
+
+### Compile Strings
+
+Whether you added a language, added new strings, or tweaked an existing translation, you must compile the PO files (text) to MO files (binary) to get Dactyl to use them.
+
+To compile all PO files:
+
+```sh
+$ pybabel compile -f -d ./locale/
+```
+
+If you added a new language for the first time, you need to make sure its target definition (in the `dactyl-config.yml` file) has the MO file in the `locale_file` field.
+
+After that, next time you build the site using Dactyl it should pull the updated translations!

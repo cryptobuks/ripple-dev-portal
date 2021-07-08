@@ -1,5 +1,13 @@
+---
+html: account_info.html
+parent: account-methods.html
+blurb: Get basic data about an account.
+labels:
+  - Accounts
+  - XRP
+---
 # account_info
-[[Source]<br>](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/AccountInfo.cpp "Source")
+[[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/AccountInfo.cpp "Source")
 
 The `account_info` command retrieves information about an account, its activity, and its XRP balance. All information retrieved is relative to a particular version of the ledger.
 
@@ -11,11 +19,11 @@ An example of an account_info request:
 
 *WebSocket*
 
-```
+```json
 {
   "id": 2,
   "command": "account_info",
-  "account": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59",
+  "account": "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
   "strict": true,
   "ledger_index": "current",
   "queue": true
@@ -24,7 +32,7 @@ An example of an account_info request:
 
 *JSON-RPC*
 
-```
+```json
 {
     "method": "account_info",
     "params": [
@@ -40,9 +48,9 @@ An example of an account_info request:
 
 *Commandline*
 
-```
+```sh
 #Syntax: account_info account [ledger_index|ledger_hash] [strict]
-rippled account_info r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 true
+rippled account_info rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn validated strict
 ```
 
 <!-- MULTICODE_BLOCK_END -->
@@ -54,11 +62,11 @@ The request contains the following parameters:
 | `Field`        | Type                       | Description                    |
 |:---------------|:---------------------------|:-------------------------------|
 | `account`      | String                     | A unique identifier for the account, most commonly the account's [Address][]. |
-| `strict`       | Boolean                    | (Optional, defaults to False) If set to True, then the `account` field only accepts a public key or XRP Ledger address. |
 | `ledger_hash`  | String                     | _(Optional)_ A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
-| `ledger_index` | String or Unsigned Integer | _(Optional)_ The sequence number of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
-| `queue`        | Boolean                    | _(Optional)_ If `true`, and the [FeeEscalation amendment](known-amendments.html#feeescalation) is enabled, also returns stats about queued transactions associated with this account. Can only be used when querying for the data from the current open ledger. [New in: rippled 0.33.0][] |
-| `signer_lists` | Boolean                    | _(Optional)_ If `true`, and the [MultiSign amendment](known-amendments.html#multisign) is enabled, also returns any [SignerList objects](signerlist.html) associated with this account. [New in: rippled 0.31.0][] |
+| `ledger_index` | String or Unsigned Integer | _(Optional)_ The [ledger index][] of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
+| `queue`        | Boolean                    | _(Optional)_ If `true`, and the [FeeEscalation amendment][] is enabled, also returns stats about queued transactions associated with this account. Can only be used when querying for the data from the current open ledger. [New in: rippled 0.33.0][] Not available from servers in [Reporting Mode][]. |
+| `signer_lists` | Boolean                    | _(Optional)_ If `true`, and the [MultiSign amendment][] is enabled, also returns any [SignerList objects](signerlist.html) associated with this account. [New in: rippled 0.31.0][] |
+| `strict`       | Boolean                    | _(Optional)_ If `true`, then the `account` field only accepts a public key or XRP Ledger address. Otherwise, `account` can be a secret or passphrase (not recommended). The default is `false`. |
 
 The following fields are deprecated and should not be provided: `ident`, `ledger`.
 
@@ -70,7 +78,7 @@ An example of a successful response:
 
 *WebSocket*
 
-```
+```json
 {
     "id": 5,
     "status": "success",
@@ -120,7 +128,7 @@ An example of a successful response:
 
 *JSON-RPC*
 
-```
+```json
 {
     "result": {
         "account_data": {
@@ -166,6 +174,31 @@ An example of a successful response:
 }
 ```
 
+*Commandline*
+
+```json
+{
+   "result" : {
+      "account_data" : {
+         "Account" : "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
+         "Balance" : "9986",
+         "Flags" : 1114112,
+         "LedgerEntryType" : "AccountRoot",
+         "OwnerCount" : 0,
+         "PreviousTxnID" : "0705FE3F52057924C288296EF0EBF668E0C1A3646FBA8FAF9B73DCC0A797B4B2",
+         "PreviousTxnLgrSeq" : 51948740,
+         "RegularKey" : "rhLkGGNZdjSpnHJw4XAFw1Jy7PD8TqxoET",
+         "Sequence" : 192220,
+         "index" : "92FA6A9FC8EA6018D5D16532D7795C91BFB0831355BDFDA177E86C8BF997985F"
+      },
+      "ledger_hash" : "8169428EDF7F046F817CE44F5F1DF23AD9FAEFFA2CBA7645C3254D66AA79B46E",
+      "ledger_index" : 56843712,
+      "status" : "success",
+      "validated" : true
+   }
+}
+```
+
 <!-- MULTICODE_BLOCK_END -->
 
 The response follows the [standard format][], with the result containing the requested account, its data, and a ledger to which it applies, as the following fields:
@@ -173,10 +206,10 @@ The response follows the [standard format][], with the result containing the req
 | `Field`                | Type    | Description                               |
 |:-----------------------|:--------|:------------------------------------------|
 | `account_data`         | Object  | The [AccountRoot ledger object](accountroot.html) with this account's information, as stored in the ledger. |
-| `signer_lists`         | Array   | (Omitted unless the request specified `signer_lists` and at least one SignerList is associated with the account.) Array of [SignerList ledger objects](signerlist.html) associated with this account for [Multi-Signing](multi-signing.html). Since an account can own at most one SignerList, this array must have exactly one member if it is present. [New in: rippled 0.31.0][] |
-| `ledger_current_index` | Integer | (Omitted if `ledger_index` is provided instead) The sequence number of the most-current ledger, which was used when retrieving this information. The information does not contain any changes from ledgers newer than this one. |
-| `ledger_index`         | Integer | (Omitted if `ledger_current_index` is provided instead) The sequence number of the ledger used when retrieving this information. The information does not contain any changes from ledgers newer than this one. |
-| `queue_data`           | Object  | (Omitted unless `queue` specified as `true` and querying the current open ledger.) Information about [queued transactions](transaction-cost.html#queued-transactions) sent by this account. This information describes the state of the local `rippled` server, which may be different from other servers in the consensus network. Some fields may be omitted because the values are calculated "lazily" by the queuing mechanism. |
+| `signer_lists`         | Array   | _(Omitted unless the request specified `signer_lists` and at least one SignerList is associated with the account.)_ Array of [SignerList ledger objects](signerlist.html) associated with this account for [Multi-Signing](multi-signing.html). Since an account can own at most one SignerList, this array must have exactly one member if it is present. [New in: rippled 0.31.0][] |
+| `ledger_current_index` | Integer | _(Omitted if `ledger_index` is provided instead)_ The [ledger index][] of the current in-progress ledger, which was used when retrieving this information. |
+| `ledger_index`         | Integer | _(Omitted if `ledger_current_index` is provided instead)_ The [ledger index][] of the ledger version used when retrieving this information. The information does not contain any changes from ledger versions newer than this one. |
+| `queue_data`           | Object  | _(Omitted unless `queue` specified as `true` and querying the current open ledger.)_ Information about [queued transactions](transaction-cost.html#queued-transactions) sent by this account. This information describes the state of the local `rippled` server, which may be different from other servers in the [peer-to-peer XRP Ledger network](consensus-network.html). Some fields may be omitted because the values are calculated "lazily" by the queuing mechanism. |
 | `validated`            | Boolean | True if this data is from a validated ledger version; if omitted or set to false, this data is not final. [New in: rippled 0.26.0][] |
 
 The `queue_data` parameter, if present, contains the following fields:

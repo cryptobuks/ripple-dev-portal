@@ -1,177 +1,177 @@
+---
+html: peer-protocol.html
+parent: the-rippled-server.html
+blurb: The peer protocol specifies the language rippled servers speak to each other.
+labels:
+  - Core Server
+  - Blockchain
+---
 # Peer Protocol
 
-Servers in the XRP Ledger communicate to each other using the XRP Ledger peer protocol, also known as RTXP. Peer servers connect via HTTPS and then do an [HTTP upgrade](https://tools.ietf.org/html/rfc7230#section-6.7) to switch to RTXP. (For more information, see the [Overlay Network](https://github.com/ripple/rippled/blob/906ef761bab95f80b0a7e0cab3b4c594b226cf57/src/ripple/overlay/README.md#handshake) article in the [`rippled` repository](https://github.com/ripple/rippled).)
+Servers in the XRP Ledger communicate to each other using the XRP Ledger peer protocol, also known as RTXP.
 
-## Configuring the Peer Protocol
+The peer protocol is the main mode of communication between servers in the XRP Ledger. All information about the behavior, progress, and connectivity of the XRP Ledger passes through the peer protocol. Examples of peer-to-peer communications include all of the following:
 
-To participate in the XRP Ledger, `rippled` servers connects to arbitrary peers using the peer protocol. (All such peers are treated as untrusted, unless they are [clustered](clustering.html) with the current server.)
+- Requesting a connection to other servers in the peer-to-peer network, or advertising that connection slots are available.
+- Sharing candidate transactions with the rest of the network.
+- Requesting ledger data from historical ledgers, or providing that data.
+- Proposing a set of transactions for consensus, or sharing the calculated outcome of applying a consensus transaction set.
 
-Ideally, the server should be able to send _and_ receive connections on the peer port. You should forward the port used for the peer protocol through your firewall to the `rippled` server. The [default `rippled` configuration file](https://github.com/ripple/rippled/blob/master/cfg/rippled-example.cfg) listens for incoming peer protocol connections on port 51235 on all network interfaces. You can change the port used by editing the appropriate stanza in your `rippled.cfg` file.
+To establish a peer-to-peer connection, one server connects to another via HTTPS and requests an [HTTP upgrade](https://tools.ietf.org/html/rfc7230#section-6.7) to switch to RTXP. (For more information, see the [Overlay Network](https://github.com/ripple/rippled/blob/906ef761bab95f80b0a7e0cab3b4c594b226cf57/src/ripple/overlay/README.md#handshake) article in the [`rippled` repository](https://github.com/ripple/rippled).)
+
+## Peer Discovery
+
+The XRP Ledger uses a "gossip" protocol to help find servers find others to connect to in the XRP Ledger network. Whenever a server starts up, it reconnects to any other peers it previously connected to. As a fallback, it uses the [hardcoded public hubs](https://github.com/ripple/rippled/blob/fa57859477441b60914e6239382c6fba286a0c26/src/ripple/overlay/impl/OverlayImpl.cpp#L518-L525). After a server successfully connects to a peer, it asks that peer for the contact information (generally, IP address and port) of other XRP Ledger servers that may also be seeking peers. The server can then connect to those servers, and ask them for the contact information of yet more XRP Ledger servers to peer with. Through this process, the server establishes enough peer connections that it can remain reliably connected to the rest of the network even if it loses a connection to any single peer.
+
+Typically, a server needs to connect to a public hub only once, for a short amount of time, to find other peers. After doing so, the server may or may not remain connected to the hub, depending on how stable its network connection is, how busy the hub is, and how many other high-quality peers the server finds. The server saves the addresses of these other peers so it can try reconnecting directly to those peers later, after a network outage or a restart.
+
+The [peers method][] shows a list of peers your server is currently connected to.
+
+For certain high-value servers (such as important [validators](rippled-server-modes.html#rippled-server-modes)) you may prefer not to have your server connect to untrusted peers through the peer discovery process. In this case, you can configure your server to use [private peers](#private-peers) only.
+
+
+## Peer Protocol Port
+
+To participate in the XRP Ledger, `rippled` servers connect to arbitrary peers using the peer protocol. (All peers are treated as untrusted, unless they are [clustered](clustering.html) with the current server.)
+
+Ideally, the server should be able to send _and_ receive connections on the peer port. You should [forward the port used for the peer protocol through your firewall](forward-ports-for-peering.html) to the `rippled` server.
+
+IANA [has assigned port **2459**](https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml?search=2459) for the XRP Ledger peer protocol, but for compatibility with legacy systems, the [default `rippled` config file](https://github.com/ripple/rippled/blob/master/cfg/rippled-example.cfg) listens for incoming peer protocol connections on **port 51235** on all network interfaces. If you run a server, you can configure which port(s) your server listens on using the `rippled.cfg` file.
 
 Example:
 
 ```
 [port_peer]
-port = 51235
+port = 2459
 ip = 0.0.0.0
 protocol = peer
 ```
 
-## Peer Crawler
+The peer protocol port also serves [special peer port methods](peer-port-methods.html).
 
-The Peer Crawler asks a `rippled` server to report information about the other `rippled` servers it is connected to as peers. The [`peers` command](peers.html) in the [WebSocket and JSON-RPC APIs](get-started-with-the-rippled-api.html) also returns a similar, more comprehensive set of information, but requires [administrative access](admin-rippled-methods.html) to the server. The Peer Crawler response is available to other servers on a non-privileged basis through the Peer Protocol (RTXP) port.
+## Node Key Pair
 
-#### Request Format
+When a server first starts up, it generates a _node key pair_ to use to identify itself in peer protocol communications. The server uses its key to sign all its peer protocol communications. This makes it possible to reliably identify and verify the integrity of messages from another server in the peer-to-peer network even if that server's messages are being relayed by untrusted peers.
 
-To request the Peer Crawler information, make the following HTTP request:
+The node key pair is saved in the database and reused when the server restarts. If you delete the server's databases, it creates a new node key pair, effectively coming online with a different identity. To reuse the same key pair even if the databases are deleted, you can configure the server with a `[node_seed]` stanza. To generate a value suitable for use in the `[node_seed]` stanza, use the [validation_create method][].
 
-* **Protocol:** https
-* **HTTP Method:** GET
-* **Host:** (any `rippled` server, by hostname or IP address)
-* **Port:** (port number where the `rippled` server uses the Peer Protocol, typically 51235)
-* **Path:** `/crawl`
-* **Notes:** Most `rippled` servers use a self-signed certificate to respond to the request. By default, most tools (including web browsers) flag or block such responses for being untrusted. You must ignore the certificate checking (for example, if using cURL, add the `--insecure` flag) to display a response from those servers.
+The node key pair also identifies other servers for purposes of [clustering](clustering.html) or [reserving peer slots](#fixed-peers-and-peer-reservations). If you have a cluster of servers, you should configure each server in the cluster with a unique `[node_seed]` setting. For more information on setting up a cluster, see [Cluster `rippled` Servers](cluster-rippled-servers.html).
 
-#### Response Format
 
-The response has the status code **200 OK** and a JSON object in the message body.
+## Fixed Peers and Peer Reservations
 
-The JSON object has the following fields:
+Normally, a `rippled` server attempts to maintain a healthy number of peers, and automatically connects to untrusted peers up to a maximum number. You can configure a `rippled` server to remain connected to specific peer servers in several ways:
 
-| `Field`          | Value | Description                                       |
-|:-----------------|:------|:--------------------------------------------------|
-| `overlay.active` | Array | Array of Peer Objects, where each member is a peer that is connected to this server. |
+- Use **Fixed Peers** to remain always connected to specific other peers based on their IP addresses. This only works if the peers have fixed IP addresses. Use the `[ips_fixed]` config stanza to configure fixed peers. This is a necessary part of [clustering](clustering.html) or [private peers](#private-peers). Fixed peers are defined in the config file, so changes only apply after restarting the server. Fixed peers are most useful for keeping servers connected if those servers are run by the same person or organization.
+- Use **Peer Reservations** to prioritize specific peers. If your server has a peer reservation for a specific peer, then your server always accepts connection requests from that peer even if your server is already at its maximum number of connected peers. (This can cause your server to go _over_ the maximum number of peers.) You identify a reserved peer by its [node key pair](#node-key-pair), so you can do this even for peers with variable IP addresses. Peer reservations are configured through admin commands and saved in the server databases, so they can be adjusted while the server is online and are saved across restarts. Peer reservations are most useful for connecting servers run by different people or organizations. [New in: rippled 1.4.0][]
 
-Each member of the `active` array is a Peer Object with the following fields:
+In the following cases, a `rippled` server does not connect to untrusted peers:
 
-| `Field`      | Value                    | Description                        |
-|:-------------|:-------------------------|:-----------------------------------|
-| `ip`         | String (IPv4 Address)    | The IP address of this connected peer. |
-| `port`       | String (Number)          | The port number on the peer server that serves RTXP. Typically 51235. |
-| `public_key` | String (Base-64 Encoded) | The public key of the ECDSA key pair used by this peer to sign RTXP messages. (This is the same data as the `pubkey_node` reported in the peer server's [`server_info` command](server_info.html).) |
-| `type`       | String                   | The value `in` or `out`, indicating whether the TCP connection to the peer is incoming or outgoing. |
-| `uptime`     | Number                   | The number of seconds the server has been has been connected to this peer. |
-| `version`    | String                   | The `rippled` version number the peer reports to be using. |
+- If the server is configured as a [private peer](#private-peers), it connects _only_ to its fixed peers.
+- If the server is running in [stand-alone mode][] it does not connect to _any_ peers.
 
-#### Example
-
-Request:
-
-<!-- MULTICODE_BLOCK_START -->
-
-*HTTP*
-
-```
-GET https://s1.ripple.com:51235/crawl
-```
-
-*cURL*
-
-```
-curl -k https://s1.ripple.com:51235/crawl
-```
-
-<!-- MULTICODE_BLOCK_END -->
-
-Response:
-
-```json
-200 OK
-{
-    "overlay": {
-        "active": [{
-            "ip": "208.43.252.243",
-            "port": "51235",
-            "public_key": "A2GayQNaj7qbqLFiCFW2UXtAnEPghP/KWVqix2gUa6dM",
-            "type": "out",
-            "uptime": 107926,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "184.172.237.226",
-            "port": "51235",
-            "public_key": "Asv/wKq/dqMWbP2M4eR+QvkuojYMLRXhKhIPnW40bsaF",
-            "type": "out",
-            "uptime": 247376,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "54.186.73.52",
-            "port": "51235",
-            "public_key": "AjikFnq0P2XybCyREr2KPiqXqJteqwPwVRVbVK+93+3o",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "169.53.155.59",
-            "port": "51235",
-            "public_key": "AyIcVhAhOGnP0vtfCt+HKUrx9B2fDvP/4XUkOtVQ37g/",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.31.1"
-        }, {
-            "ip": "169.53.155.44",
-            "port": "51235",
-            "public_key": "AuVZszWXgMgM8YuTVhQsGE9OciEeBD8aMVe1mFid3n63",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.32.0-b12"
-        }, {
-            "ip": "184.173.45.39",
-            "port": "51235",
-            "public_key": "Ao2GbGbp2QYQ2B4S9ckCtON7CsZdXqdK5Yon4x7qmWFm",
-            "type": "out",
-            "uptime": 63336,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "169.53.155.34",
-            "port": "51235",
-            "public_key": "A3inNJsIQzO7z7SS7uB9DyvN0wsiS9it/RGY/kNx6KEG",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "169.53.155.45",
-            "port": "51235",
-            "public_key": "AglUUjwXTC2kUlK41WjDs2eAVN0SnlMpzYA9lEgB0UGP",
-            "type": "out",
-            "uptime": 65443,
-            "version": "rippled-0.31.0-rc1"
-        }, {
-            "ip": "99.110.49.91",
-            "port": "51301",
-            "public_key": "AuQDH0o+4fpl2n+pR5U0Y4FTj0oGr4iEKe0MObPcSYj9",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.32.0-b9"
-        }, {
-            "ip": "169.53.155.36",
-            "port": "51235",
-            "public_key": "AsR4xub7MLg2Zl5Fwd/n7dTz7mhbBoSyCc/v9bnubrVy",
-            "type": "out",
-            "uptime": 328776,
-            "version": "rippled-0.31.0-rc1"
-        }]
-    }
-}
-```
 
 ## Private Peers
 
-<!--{# TODO: unify with the very similar "Public-Facing Server" section of rippled-setup and probably move to a tutorial #}-->
+You can configure a `rippled` server to act as a "private" server to keep its IP address hidden from the general public. This can be a useful precaution against denial of service attacks and intrusion attempts on important `rippled` servers such as trusted validators. To participate in the peer-to-peer network, a private server must be configured to connect to at least one non-private server, which relays its messages to the rest of the network.
 
-You can use the `[peer_private]` stanza of the `rippled` config file to request that peer servers do not report your IP address in the Peer Crawler response. Servers you do not control can be modified not to respect this setting. However, you can use this to hide the IP addresses of `rippled` servers you control that _only_ connect to peers you control (using `[ips_fixed]` and a firewall). In this way, you can use public rippled servers you control as proxies for your private rippled servers.
+**Caution:** If you configure a private server without any [fixed peers](#fixed-peers-and-peer-reservations), the server cannot connect to the network, so it cannot know network state, broadcast transactions, or participate in the consensus process.
 
-To protect an important [validating server](rippled-server-modes.html), Ripple recommends configuring one or more public tracking servers to act as proxies, while the validating server is protected by a firewall and only connects to the public tracking servers.
+Configuring a server as a private server has several effects:
 
-<!--{# TODO: network diagram of private peers #}-->
+- The server does not make outgoing connections to other servers in the peer-to-peer network unless it has been explicitly configured to connect to those servers.
+- The server does not accept incoming connections from other servers unless it has been explicitly configured to accept connections from those servers.
+- The server asks its direct peers not to reveal its IP address in untrusted communications, including the [peer crawler API response](peer-crawler.html). This does not affect trusted communications such as the [peers admin method][peers method].
 
-Example configuration:
+    Validators always ask their peers to hide the validators' IP addresses, regardless of the private server settings. This helps protect validators from being overloaded by denial of service attacks. [New in: rippled 1.2.1][]
 
-```
-# Configuration on a private server that only connects through
-# a second rippled server at IP address 10.1.10.55
-[ips_fixed]
-10.1.10.55
+    **Caution:** It is possible to modify a server's source code so that it ignores this request and shares its immediate peers' IP addresses anyway. You should configure your private server to connect only to servers that you know are not modified in this way.
 
-[peer_private]
-1
-```
+### Pros and Cons of Peering Configurations
+
+To be part of the XRP Ledger, a `rippled` server must be connected to the rest of the open peer-to-peer network. Roughly speaking, there are three categories of configurations for how a `rippled` server connects to the network:
+
+- Using **discovered peers**. The server connects to any untrusted servers it finds and stays connected as long as those servers behave appropriately. (For example, they don't request too much data, their network connections are stable, and they appear to be following the same [network](parallel-networks.html).) This is the default.
+- As a **private server using proxies** run by the same person or organization. The proxies are stock `rippled` servers (also connected to discovered peers) that maintain a fixed peering connection with the private server.
+- As a **private server using public hubs**. This is similar to using proxies, but it relies on specific third parties.
+
+The pros and cons of each configuration are as follows:
+
+
+<table>
+<thead><tr>
+<th>Configuration</th> <th>Pros</th> <th>Cons</th>
+</tr></thead>
+<tbody>
+<tr><th>Discovered Peers</th>
+  <td><ul>
+    <li><p>Simplest configuration, with a low maintenance burden.</p></li>
+    <li><p>Creates the opportunity for a lot of direct peer connections. Having more direct peers comes with several benefits. Your server can <a href="ledger-history.html#fetching-history">fetch history</a> from multiple peers in parallel, both when syncing and when backfilling history. Since not all peers maintain full history, having access to more peers can also provide access to a wider range of historical data.</p></li>
+    <li><p>Lowers the possibility of disconnecting from the network because your server can replace disconnected peers with new ones.</p></li>
+  </ul></td>
+  <td><ul>
+    <li><p>Doesn't allow you to select your server's peers, which means that you have no idea whether your peers may decide to act maliciously. Although `rippled` servers are designed to protect against malicious peers, there is always a risk that malicious peers could exploit software flaws to affect your server.</p></li>
+    <li><p>Your server's peers may disconnect or change often.</p></li>
+  </ul></td>
+</tr>
+<tr><th>Private Server Using Proxies</th>
+  <td><ul>
+    <li><p>Most secure and reliable configuration when implemented effectively.</p></li>
+    <li><p>As reliable and as redundant as you make it.</p></li>
+    <li><p>Can optimize the private server's performance with <a href="clustering.html">clustering</a>.</p></li>
+    <li><p>Enables you to create as many direct peer connections as you want. Your private server can <a href="ledger-history.html#fetching-history">fetch history</a> from multiple peers in parallel. Since you run the peers, you also control how much ledger history each peer keeps.</p></li>
+  </ul></td>
+  <td><ul>
+    <li><p>Higher maintenance burden and cost from running multiple servers.</p></li>
+    <li><p>Does not completely eliminate the possibility of peer connection outages. No matter how many proxies you run, if they all exist on the same server rack, then one network or power outage can affect all of them.</p></li>
+  </ul></td>
+</tr>
+<tr><th>Private Server Using Public Hubs</th>
+  <td><ul>
+    <li><p>Low maintenance burden with a small amount of configuration.</p></li>
+    <li><p>Provides access to safe connections to the network.</p></li>
+    <li><p>Compared to connecting using proxies, may be less likely to cause your private server to disconnect from the network due to a simultaneous peer outage.</p></li>
+  </ul></td>
+  <td><ul>
+    <li><p>Depends on high-reputation third parties to remain reliable.</p></li>
+    <li>
+      <p>May cause your server to become disconnected from the network if the public hubs you rely on are too busy. Due to the nature of public hubs, they are the most popular and may not be able to keep a steady connection open to everyone.</p>
+      <p>To help avoid this issue, use more public hubs; the more the better. It can also help to use non-default hubs, which are less likely to be busy.</p>
+    </li>
+  </ul></td>
+</tr>
+</tbody>
+</table>
+
+### Configuring a Private Server
+
+To configure your server as a private server, set the `[peer_private]` setting to `1` in the config file. For detailed instructions, see [Configure a Private Server](configure-a-private-server.html).
+
+
+## See Also
+
+- **Concepts:**
+    - [Consensus](consensus.html)
+    - [Parallel Networks](parallel-networks.html)
+- **Tutorials:**
+    - [Cluster rippled Servers](cluster-rippled-servers.html)
+    - [Configure a Private Server](configure-a-private-server.html)
+    - [Configure the Peer Crawler](configure-the-peer-crawler.html)
+    - [Forward Ports for Peering](forward-ports-for-peering.html)
+    - [Manually Connect to a Specific Peer](manually-connect-to-a-specific-peer.html)
+    - [Set Maximum Number of Peers](set-max-number-of-peers.html)
+    - [Use a Peer Reservation](use-a-peer-reservation.html)
+- **References:**
+    - [peers method][]
+    - [peer_reservations_add method][]
+    - [peer_reservations_del method][]
+    - [peer_reservations_list method][]
+    - [connect method][]
+    - [fetch_info method][]
+    - [Peer Crawler](peer-crawler.html)
+
+
+<!--{# common link defs #}-->
+{% include '_snippets/rippled-api-links.md' %}			
+{% include '_snippets/tx-type-links.md' %}			
+{% include '_snippets/rippled_versions.md' %}

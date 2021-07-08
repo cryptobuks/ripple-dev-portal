@@ -1,10 +1,17 @@
+---
+html: build-run-rippled-ubuntu.html
+parent: install-rippled.html
+blurb: Compile rippled yourself on Ubuntu Linux.
+labels:
+  - Core Server
+---
 # Build and Run rippled on Ubuntu
 
 `rippled` is the core peer-to-peer server that manages the XRP Ledger. A `rippled` server can connect to a network of peers, relay cryptographically signed transactions, and maintain a local copy of the complete shared global ledger.
 
 For an overview of `rippled`, see [Operating rippled Servers](install-rippled.html).
 
-Use these instructions to build a `rippled` executable from source version 1.1.0 or higher on Ubuntu Linux 16.04 or higher. These instructions were tested on Ubuntu 16.04 LTS.
+Use these instructions to build a `rippled` executable from source. These instructions were tested on Ubuntu 18.04 LTS.
 
 For information about building `rippled` for other platforms, see [Builds](https://github.com/ripple/rippled/tree/develop/Builds) in the `rippled` GitHub repository.
 
@@ -15,7 +22,7 @@ Before you compile or install `rippled`, you must meet the [System Requirements]
 
 ## 1. Build `rippled`
 
-These instructions use Ubuntu's APT (Advanced Packaging Tool) to install the software prerequisites you need to build and run `rippled`.
+These instructions use Ubuntu's APT (Advanced Packaging Tool) to install `rippled`'s build dependencies.
 
 1. Update the list of packages that are available for `apt-get` to install or upgrade.
 
@@ -27,25 +34,38 @@ These instructions use Ubuntu's APT (Advanced Packaging Tool) to install the sof
 
 3. Install dependencies.
 
-        sudo apt-get -y install git cmake pkg-config protobuf-compiler libprotobuf-dev libssl-dev wget
+        sudo apt-get -y install git pkg-config protobuf-compiler libprotobuf-dev libssl-dev wget build-essential
 
-4. Compile Boost.
+4. Install CMake.
 
-    Version 1.1.0 of `rippled` requires Boost version 1.67.0 exactly. Because Boost version 1.67.0 isn't available in the Ubuntu 16.04 software repositories, you must compile it yourself.
+    Version 1.7.2 of `rippled` requires CMake 3.9.0 or higher. For the purposes of this tutorial, we used CMake 3.13.3.
 
-    If you have previously built Boost 1.67.0 for `rippled` and configured the `BOOST_ROOT` environment variable, you can skip these steps.
+    If you have previously installed CMake 3.9.0 or higher, you can skip these steps.
 
-      1. Download Boost 1.67.0.
+    To install CMake 3.13.3:
 
-              wget https://dl.bintray.com/boostorg/release/1.67.0/source/boost_1_67_0.tar.gz
+        wget https://github.com/Kitware/CMake/releases/download/v3.13.3/cmake-3.13.3-Linux-x86_64.sh
+        sudo sh cmake-3.13.3-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
 
-      2. Extract `boost_1_67_0.tar.gz`.
+    Use `cmake --version` to verify that the installation worked.
 
-              tar xvzf boost_1_67_0.tar.gz
+5. Compile Boost.
 
-      3. Change to the new `boost_1_67_0` directory.
+    Version 1.7.2 of `rippled` requires the Boost library and is compatible with Boost versions 1.70.0 to 1.75.0. The Ubuntu 18.04 (or 20.04) software repositories don't have a compatible Boost version, so you must compile it yourself. The following examples use Boost 1.75.0.
 
-              cd boost_1_67_0
+    If you have previously built Boost 1.75.0 for `rippled` and configured the `BOOST_ROOT` environment variable, you can skip these steps.
+
+      1. Download Boost 1.75.0.
+
+	      wget https://boostorg.jfrog.io/artifactory/main/release/1.75.0/source/boost_1_75_0.tar.gz
+
+      2. Extract `boost_1_75_0.tar.gz`.
+
+              tar xvzf boost_1_75_0.tar.gz
+
+      3. Change to the new `boost_1_75_0` directory.
+
+              cd boost_1_75_0
 
       4. Prepare the Boost.Build system for use.
 
@@ -57,37 +77,29 @@ These instructions use Ubuntu's APT (Advanced Packaging Tool) to install the sof
 
           **Tip:** This example uses 4 processes to build in parallel. The best number of processes to use depends on how many CPU cores your hardware has available. You can use `cat /proc/cpuinfo` to get information about your hardware's processor.
 
-      6. Set the environment variable `BOOST_ROOT` to point to the new `boost_1_67_0` directory. It's best to put this environment variable in your `.profile`, or equivalent, file for your shell so it's automatically set when you log in. Add the following line to the file:
+      6. Set the environment variable `BOOST_ROOT` to point to the new `boost_1_75_0` directory. It's best to put this environment variable in your `.profile`, or equivalent, file for your shell so it's automatically set when you log in. Add the following line to the file:
 
-              export BOOST_ROOT=/home/ubuntu/boost_1_67_0
+              export BOOST_ROOT=/home/my_user/boost_1_75_0
 
       7. Source your updated `.profile` file. For example:
 
               source ~/.profile
 
-5. From a working directory, get the `rippled` source code. The `master` branch has the latest released version.
+6. From a working directory, get the `rippled` source code. The `master` branch has the latest released version.
 
-        cd ~
         git clone https://github.com/ripple/rippled.git
         cd rippled
         git checkout master
 
-6. Check the commit log to be sure you're compiling the version you intend to. The most recent commit should be signed by a well-known Ripple developer and should set the version number to the latest released version. For example:
+7. Check the commit log to be sure you're compiling the right code. The most recent commit should be signed by a well-known Ripple developer and should set the version number to the latest released version. The [release announcements for `rippled`](https://xrpl.org/blog/label/rippled-release-notes.html) generally show the exact commit to expect for that release.
 
-        $ git log -1
+    $ git log -1
 
-        commit 3e22a1e9e8f2de450eded6ca4c2db6411e329b2a
-        Author: Nik Bougalis <nikb@bougalis.net>
-        Date:   Wed Sep 5 18:34:43 2018 -0700
-
-            Set version to 1.1.0
-
-
-7. If you previously built, or (more importantly) tried and failed to build `rippled`, you should delete the `my_build/` directory (or whatever you named it) to start clean before moving on to the next step. Otherwise, you may get unexpected behavior, like a `rippled` executable that crashes due to a segmentation fault (segfault).
+8. If you previously built, or (more importantly) tried and failed to build `rippled`, you should delete the `my_build/` directory (or whatever you named it) to start clean before moving on to the next step. Otherwise, you may get unexpected behavior, like a `rippled` executable that crashes due to a segmentation fault (segfault). <!-- SPELLING_IGNORE: segfault -->
 
     If this is your first time building `rippled` 1.0.0 or higher, you won't have a `my_build/` directory and can move on to the next step.
 
-8. Use CMake to build a `rippled` binary executable from source code. The result will be a `rippled` binary executable in the `my_build` directory.
+9. Use CMake to build a `rippled` binary executable from source code. The result will be a `rippled` binary executable in the `my_build` directory.
 
       1. Generate the build system. Builds should be performed in a directory that is separate from the source tree root. In this example, we'll use a `my_build` directory that is a subdirectory of `rippled`.
 
@@ -97,13 +109,11 @@ These instructions use Ubuntu's APT (Advanced Packaging Tool) to install the sof
 
           **Tip:** The default build includes debugging symbols, which can be useful for development but are inefficient in production. To build `rippled` for use on production servers, add the `-DCMAKE_BUILD_TYPE=Release` flag when running the `cmake` command.
 
-      2. Build the `rippled` binary executable. Replace `<number of parallel jobs>` with the number of jobs to run in parallel. Choose this value based on the number of CPU cores you want to use for building.
+      2. Build the `rippled` binary executable. This may take about 30 minutes, depending on your hardware specs.
 
-              cmake --build . -- -j 4
+              cmake --build .
 
-          **Tip:** This example uses 4 processes to build in parallel. The best number of processes to use depends on how many CPU cores your hardware has available. You can use `cat /proc/cpuinfo` to get information about your hardware's processor.
-
-9. _(Optional)_ Run `rippled` unit tests. If there are no test failures, you can be fairly certain that your `rippled` executable compiled correctly.
+10. _(Optional)_ Run `rippled` unit tests. If there are no test failures, you can be fairly certain that your `rippled` executable compiled correctly.
 
         ./rippled -u
 
@@ -129,14 +139,14 @@ Complete the following configurations that are required for `rippled` to start u
 
         cp cfg/validators-example.txt ~/.config/ripple/validators.txt
 
-    **Warning:** Ripple has designed a [decentralization plan](https://ripple.com/dev-blog/decentralization-strategy-update/) with maximum safety in mind. During the transition, you *should not* modify the `validators.txt` file except as recommended by Ripple. Even minor modifications to your validator settings could cause your server to diverge from the rest of the network and report out of date, incomplete, or inaccurate data. Acting on such data can cause you to lose money.
+    **Warning:** The `validators.txt` file contains settings that determine how your server declares a ledger to be validated. If you are not careful, changes to this file could cause your server to diverge from the rest of the network and report out of date, incomplete, or inaccurate data. Acting on such data can cause you to lose money.
 
 
 ## 3. Run `rippled`
 
-To run your stock `rippled` server from the executable you built, using the configurations you defined:
-```
-cd my_build
+To run your `rippled` server from the executable you built:
+
+```sh
 ./rippled
 ```
 
@@ -145,7 +155,7 @@ cd my_build
 
 Once you've run `rippled`, here are excerpts of what you can expect to see in your terminal.
 
-```
+```text
 Loading: "/home/ubuntu/.config/ripple/rippled.cfg"
 Watchdog: Launching child 1
 2018-Jun-06 00:51:35.094331139 JobQueue:NFO Auto-tuning to 4 validation/transaction/proposal threads.
@@ -198,6 +208,30 @@ Watchdog: Launching child 1
 
 * For information about communicating with your `rippled` server using the `rippled` API, see the [`rippled` API reference](rippled-api.html).
 
-* As a development best practice, you may want to build a `rippled` `.deb` file. For more information, see _Ubuntu Packaging Guide_: [Packaging New Software](http://packaging.ubuntu.com/html/packaging-new-software.html).
+* As a development best practice, you may want to build a `rippled` `.deb` package. You can use the CMake build's deb package target to build a `deb` package directly from the source tree. The build machine must have [Docker installed](https://docs.docker.com/install/#supported-platforms). This process may take more than an hour to complete. To build the `deb` package:
 
-* You may also want to install a `systemd` unit. For more information, see [systemd for Upstart Users](https://wiki.ubuntu.com/SystemdForUpstartUsers). You can use the [official `rippled` system unit file](https://github.com/ripple/rippled-package-builder/blob/staging/rpm-builder/rippled.service) or modify it to suit your needs.
+        mkdir -p build/pkg && cd build/pkg
+        cmake -Dpackages_only=ON ../..
+        cmake --build . --target dpkg
+
+* You may also want to install a `systemd` unit. For more information, see [systemd for Upstart Users](https://wiki.ubuntu.com/SystemdForUpstartUsers). You can use the [official `rippled` system unit file](https://github.com/ripple/rippled/blob/master/Builds/containers/shared/rippled.service) or modify it to suit your needs.
+
+## See Also
+
+- **Concepts:**
+    - [The `rippled` Server](the-rippled-server.html)
+    - [Introduction to Consensus](intro-to-consensus.html)
+- **Tutorials:**
+    - [Configure rippled](configure-rippled.html)
+    - [Troubleshoot rippled](troubleshoot-the-rippled-server.html)
+    - [Get Started with the rippled API](get-started-using-http-websocket-apis.html)
+- **References:**
+    - [rippled API Reference](rippled-api.html)
+        - [`rippled` Commandline Usage](commandline-usage.html)
+        - [server_info method][]
+
+
+<!--{# common link defs #}-->
+{% include '_snippets/rippled-api-links.md' %}
+{% include '_snippets/tx-type-links.md' %}
+{% include '_snippets/rippled_versions.md' %}
