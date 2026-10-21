@@ -1,0 +1,320 @@
+---
+seo:
+  description: Single asset vaults aggregate assets from multiple depositors and make them available to other on-chain protocols.
+labels:
+  - Single Asset Vault 
+status: not_enabled
+---
+
+# Single Asset Vaults
+
+A single asset vault is an XRP Ledger primitive that aggregates assets from multiple depositors and makes them available to other on-chain protocols, such as the Lending Protocol. A vault asset can be [XRP](../../introduction/what-is-xrp.md), a [trust line token](../tokens/fungible-tokens/index.md), or an [MPT (Multi-Purpose Token)](../tokens/fungible-tokens/multi-purpose-tokens.md).
+
+A Vault Owner account manages the vault and can create, update, or delete it as needed. When creating a vault, the Vault Owner can also specify whether shares are transferable or non-transferable. Non-transferable shares cannot be transferred to any other account, and can only be redeemed.
+
+{% amendment-disclaimer name="SingleAssetVault" /%}
+{% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}
+
+## Public vs. Private Vaults
+
+A vault can be **public** or **private**, depending on the required level of access control.
+
+In a public vault, anyone can deposit or redeem liquidity as long as they hold sufficient shares. In contrast, a private vault restricts access, allowing only depositors with the necessary [Credentials](../../concepts/decentralized-storage/credentials.md), managed through [Permissioned Domains](./decentralized-exchange/permissioned-domains.md), to deposit assets.
+
+{% admonition type="warning" name="Warning" %}
+If a depositor's credentials expire, they can no longer deposit assets in a private vault, but can always redeem their existing shares.
+{% /admonition %}
+
+To prevent the Vault Owner from locking funds away, any shareholder in a private vault can redeem their shares for assets.
+
+Choosing between a public or private vault depends on your use case. For example, if depositor identity verification is required, use a private vault and issue credentials only to verified accounts.  
+
+## Closed-Ended vs Open-Ended Vaults
+
+The [LendingProtocolV1_1 amendment][] introduces a new _closed-ended_ vault to single asset vaults. Unlike an _open-ended_ vault, which allows depositors to deposit and withdraw at any time, a closed-ended vault has a defined lifecycle:
+
+1. **Subscription**: The fundraising window. Depositors can deposit and withdraw assets freely.
+2. **Investment**: The lockup period. Assets in the vault are now fixed and can be deployed in loans. Deposits and withdrawals are blocked during this time.
+3. **Redemption**: The wind down. Loans have matured and been repaid, no new loans can be created, and depositors can withdraw their share of the proceeds.
+
+The move from one stage to the next happens automatically at set dates that are chosen when the vault is created and can't be changed afterwards. Since the schedule is fixed and public, everyone involved knows when the fundraising window closes, how long their assets are committed, and when they can expect to be repaid.
+
+`LendingProtocolV1_1` restricts all loans to closed-ended vaults only. The following table outlines which transactions are permitted for open-ended vaults and the three phases of closed-ended vaults:
+
+| Transaction     | Open-ended | Subscription | Investment | Redemption |
+| --------------- | :--------: | :----------: | :--------: | :--------: |
+| `VaultDeposit`  | ✅         | ✅           | ❌         | ❌         |
+| `VaultWithdraw` | ✅         | ✅           | ❌         | ✅         |
+| `VaultClawback` | ✅         | ✅           | ✅         | ✅         |
+| `LoanBrokerSet` | ❌         | ✅           | ✅         | ✅         |
+| `LoanSet`       | ✅         | ❌           | ✅         | ❌         |
+| `LoanPay`       | ✅         | ✅           | ✅         | ✅         |
+| `LoanManage`    | ✅         | ✅           | ✅         | ✅         |
+| `LoanDelete`    | ✅         | ✅           | ✅         | ✅         |
+
+{% admonition type="info" name="Note" %}
+`LoanBrokerSet` is restricted on open-ended vaults. The other loan-related transactions are intentionally enabled so you can manage any loans that are created after `LendingProtocol` is enabled and before `LendingProtocolV1_1` adds the loan broker restriction.
+{% /admonition %}
+
+## Cash-Basis Accounting
+
+The [LendingProtocolV1_1 amendment][] changes how a vault recognizes interest income from the loans it funds.
+
+Before the amendment, the Lending Protocol used an _instant interest recognition_ model: the moment a loan was originated, the full interest the borrower was scheduled to pay over the life of the loan was recognized as vault income. The vault's accounting reflected money it hadn't received yet, and that recognition had to be unwound if the borrower stopped paying.
+
+With the amendment, new vaults use _cash-basis_ accounting instead and interest is accounted for only when a payment actually delivers it. Functionally, this means:
+
+- Vault share prices are tracked against realized income from interest actually paid. A vault's `AssetsTotal` doesn't rise the moment a loan is written with instant interest recognition, so a vault's shares aren't marked up on scheduled income.
+- Losses show as smaller values, since it only accounts for outstanding principal amount. Instant interest recognition included lost income from interest added to the principal loss amount.
+- Loan brokers can potentially issue more loans against cash-basis vaults, since their `DebtTotal` and `DebtMaximum` values only account for realized amounts, not including all scheduled income from interest.
+
+### Which Model a Vault Uses
+
+You can't choose which accounting model to use when creating a vault. The status of the `LendingProtocolV1_1` amendment determines the model:
+
+- If not enabled, vaults use instant interest recognition.
+- If enabled, vaults use cash-basis.
+
+{% admonition type="info" name="Note" %}
+Vaults created with instant interest recognition accounting remain so permanently, even after the amendment activates.
+{% /admonition %}
+
+## Vault Share Distribution and Redemption
+
+Depositors can deposit assets to receive shares, which represent their proportional ownership of the vault, or redeem shares for assets.
+
+[{% inline-svg file="../../img/single-asset-vault-img.svg" /%}](../../img/single-asset-vault-img.svg "Diagram: an example of an asset being deposited into the vault and shares being redeemed.")
+
+Since the XRP Ledger is an account-based blockchain, all assets must be held by an account. A `Vault` ledger entry cannot hold assets directly, so a [pseudo-account](../accounts/pseudo-accounts.md) is created to hold assets on its behalf. This stand-alone account cannot receive funds or send transactions, and exists solely to store assets and issue shares.
+
+Each share is represented on-chain as an MPT, issued by the vault's pseudo-account. Since MPTs can only exist as whole number units, the vault uses a `Scale` setting to convert fractional asset amounts into whole number shares.
+
+The scale behavior varies based on the type of asset held by the vault:
+
+- **XRP**: Uses a fixed scale that aligns with XRP's native structure, where one share represents one drop.
+- **Trust Line Token**: Allows configurable precision (default preserves 6 decimal places).
+- **MPT**: Uses a 1-to-1 relationship between MPT units and shares.
+
+Depending on the connected protocol, vault shares may be yield-bearing, meaning shareholders could redeem shares for more or less liquidity than they originally deposited. This is because the total asset balance in the vault can grow or shrink over time, affecting the value of each share. However, the vault asset (e.g., USDC, XRP) does not generate yield on its own.
+
+The value of each share depends on the total assets in the vault:
+
+- If the vault earns yield over time, shares represent a larger claim, allowing depositors to redeem them for more assets.
+- If the vault incurs losses, shares hold less value, resulting in lower redemptions.
+
+A vault could generate yield through mechanisms like lending or staking, with yield paid in the same asset deposited. The specific logic for this depends on how the connected on-chain protocol generates yield. For example, if a vault is used by a lending protocol, it could earn yield from interest paid by borrowers.
+
+### Exchange Algorithm
+
+A single asset vault uses an **exchange algorithm** to define how assets convert into shares during deposits and how shares convert back into assets during redemptions.
+
+A vault's total value can fluctuate due to factors like _unrealized losses_, which impact the exchange rate for deposits and redemptions. To ensure fairness, the algorithm adjusts the exchange rate dynamically, so depositors receive shares or redeem them for assets at a rate that accurately reflects the vault’s true value.
+
+#### Unrealized Loss
+
+To prevent depositors from exploiting potential losses by redeeming shares early and shifting the full loss onto the remaining depositors, the vault tracks unrealized losses (or paper loss) using the `LossUnrealized` attribute in the `Vault` ledger entry.
+
+Because the unrealized loss temporarily decreases the vault's value, a malicious depositor may take advantage of this by depositing assets at a lowered price and redeeming shares once the price increases.
+
+For example, consider a vault with a total value of $1.0m and total shares of 1.0m. Let's assume the unrealized loss for the vault is $900k:
+
+1. The new exchange rate is calculated as:
+
+    ```js
+    // ExchangeRate = (AssetsTotal - LossUnrealized) / OutstandingAmount
+    exchangeRate = (1,000,000 - 900,000) / 1,000,000
+    ```
+
+    The exchange rate value is now **0.1**.
+
+2. After the unrealized loss is cleared, the new effective exchange rate would be:
+
+    ```js
+    // ExchangeRate = AssetsTotal / OutstandingAmount
+    exchangeRate = 1,000,000 / 1,000,000
+    ```
+
+    The exchange rate is now **1.0**.
+
+A depositor could deposit $100k assets at a 0.1 exchange rate and get 1.0m shares. Once the unrealized loss is cleared, their shares would be worth $1.0m.
+
+To mitigate this, the vault uses separate exchange rates for deposits and redemptions.
+
+#### Exchange Rates
+
+A single asset vault uses **two distinct exchange rates**:
+
+- **Deposit Exchange Rate**: Protects new depositors from prior losses and ensures fair share allocation.
+- **Withdrawal Exchange Rate**: Ensures all shareholders share losses proportionally. Whether redeeming shares or withdrawing assets, the vault always calculates payouts using the actual current value (total assets minus losses), so depositors get their fair share of what's actually in the vault.
+  - **Redemptions**: The vault burns shares so the depositor can receive proportional assets.
+  - **Withdrawals**: The vault determines the shares to burn based on the requested asset amount.
+
+These exchange rates ensure fairness and prevent manipulation, maintaining the integrity of deposits and redemptions.
+
+To understand how the exchange rates are applied, here are the key variables used in the calculations:
+
+- `Γ_assets`: The total balance of assets held within the vault.
+- `Γ_shares`: The total number of shares currently issued by the vault.
+- `Δ_assets`: The amount of assets being deposited, withdrawn, or redeemed.
+- `Δ_shares`: The number of shares being issued or burned.
+- `l`: The vault's total unrealized loss.
+- `σ`: The scaling factor (σ = 10<sup>Scale</sup>) used to convert fractional assets into whole number shares.
+
+{% tabs %}
+  {% tab label="Deposit" %}
+    The vault computes the number of shares a depositor will receive as follows:
+
+    - **Initial Deposit (Empty Vault)**: For the first deposit into an empty vault, shares are calculated using the scaling factor to properly represent fractional assets as whole numbers.
+
+      ```js
+      Δ_shares = Δ_assets * σ // σ = 10^Scale
+      ```
+
+    - **Subsequent Deposits**: For all other deposits, shares are calculated proportionally. The resulting share value is rounded **down** to the nearest whole number.
+
+      ```js
+      Δ_shares = (Δ_assets * Γ_shares) / Γ_assets
+      ```
+    Because the share amount is rounded down, the actual assets taken from the depositor are recalculated. This ensures the depositor isn't overcharged and that new shares are valued against the vault's true value, accounting for any unrealized loss:
+
+    ```js
+    Δ_assets = (Δ_shares * (Γ_assets - l)) / Γ_shares
+    ```
+
+    After a successful deposit, the _total assets_ and _total shares_ values are updated like so:
+
+    ```js
+    Γ_assets = Γ_assets + Δ_assets // New balance of assets in the vault.
+    Γ_shares = Γ_shares + Δ_shares // New share balance in the vault.
+    ```
+
+    The recorded deposit is rounded down to the same representable precision. If this leaves the depositor's balance unchanged, the deposit fails instead. {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%}
+
+  {% /tab %}
+
+  {% tab label="Redeem" %}
+  The vault computes the number of assets returned by burning shares as follows:
+
+  ```js
+  Δ_assets = (Δ_shares * (Γ_assets - l)) / Γ_shares
+  ```
+
+  After a successful redemption, the _total assets_ and _total shares_ values are updated like so:
+
+  ```js
+  Γ_assets = Γ_assets - Δ_assets // New balance of assets in the vault.
+  Γ_shares = Γ_shares - Δ_shares // New share balance in the vault.
+  ```
+
+  {% /tab %}
+
+  {% tab label="Withdraw" %}
+  When a depositor requests a specific asset amount, the vault uses a two-step process to determine the final payout:
+
+  1. The requested asset amount (`Δ_assets_requested`) is converted into shares.
+
+      ```js
+      Δ_shares = (Δ_assets_requested * Γ_shares) / (Γ_assets - l)
+      ```
+
+      The calculated share amount is rounded down, so the payout never exceeds the requested amount. {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%}
+
+  2. The rounded number of shares is used to calculate the final asset payout (`Δ_assets_out`), using the same logic as a redemption.
+
+      ```js
+      Δ_assets_out = (Δ_shares * (Γ_assets - l)) / Γ_shares
+      ```
+
+  The final payout is rounded down, leaving any remainder in the vault. If this rounding reduces the payout to zero, the transaction fails. The only exception is a final withdrawal redeeming all remaining shares, which can succeed with a zero payout. {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%}
+
+  Due to rounding in step 1, the final payout may differ slightly from the requested amount.
+
+  After a successful withdrawal, the _total asset_ and _total share_ values are updated like so:
+
+  ```js
+  Γ_assets = Γ_assets - Δ_assets_out // New balance of assets in the vault.
+  Γ_shares = Γ_shares - Δ_shares     // New share balance in the vault.
+  ```
+
+  {% /tab %}
+{% /tabs %}
+
+### Can a Depositor Transfer Shares to Another Account?
+
+Vault shares are a first-class asset, meaning that they can be transferred and used in other on-ledger protocols that support MPTs. However, the payee (or the receiver) must have permission to hold both the shares and the underlying asset.
+
+For example, if a private vault holds USDC, the destination account must belong to the vault’s Permissioned Domain and have permission to hold USDC. Any compliance mechanisms applied to USDC also apply to the shares. If the USDC issuer freezes the payee’s trust line, the payee cannot receive shares representing USDC.
+
+{% admonition type="info" name="Note" %}
+It is important to remember that a vault must be **configured** to allow share transfers, or this will not be possible.
+{% /admonition %}
+
+A depositor can transfer vault shares to another account by making a [Payment](../../references/protocol/transactions/types/payment) transaction. Nothing changes in the way the payment transaction is submitted for transferring vault shares. However, there are new failure scenarios to watch out for if the transaction fails:
+
+- The vault is private and the payee lacks credentials in the vault's permissioned domain.
+- The vault shares are configured as non-transferable.
+- There is a global freeze (trust line tokens) or lock (MPTs) on the underlying asset.
+- The underlying asset is an MPT and is locked for the payer, payee, or vault pseudo-account.
+- The underlying asset is a trust line token and the trust line is frozen between the issuer and the payer, payee, or vault pseudo-account.
+
+If the transfer succeeds and the payee already holds vault shares, their balance increases. Otherwise, a new MPT entry is created for their account.
+
+## Compliance
+
+### Frozen Assets
+
+The issuer of a vault asset can enact a [freeze](./fungible-tokens/freezes) for trust line tokens or [lock an MPT](./fungible-tokens/deep-freeze#how-does-mpt-freezelock-behavior-differ-from-iou). When a vault asset is frozen:
+
+1. Withdrawals can only be made to the asset’s issuer.
+2. The asset cannot be deposited into the vault.
+3. Its corresponding shares also cannot be transferred.
+
+### Clawback
+
+An asset issuer can perform a [Clawback](../../use-cases/tokenization/stablecoin-issuer#clawback) on vault assets by forcing redemption of shares held by an account. This exchanges the holder's shares for the underlying assets, which are sent directly to the issuer. This mechanism allows asset issuers to recover their issued assets from vault depositors when necessary for fraud prevention or regulatory compliance.
+
+A fixed-amount clawback is rounded down the same way as a withdrawal, so it never recovers more than the requested amount. {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%}
+
+## Why Use a Single Asset Vault?
+
+With a single asset vault you don't have to manage liquidity at the protocol level. Instead, you can use the vault to handle deposits, redemptions, and asset tracking separately.
+
+Vaults handle asset-to-share conversion, ensure accurate pricing, and eliminate the need to add custom logic to calculate exchange rates or account for unrealized losses.
+
+Depending on the connected on-chain protocol, vaults can be applied to various use cases, such as:
+
+- Lending markets
+- Aggregators
+- Yield-bearing tokens
+- Asset management
+
+The only supported use cases right now are _asset management_ and [_lending markets_](./lending-protocol.md).
+
+## Security Audit
+
+Single Asset Vaults was independently audited by Halborn (February–March 2025), which uncovered several issues that were addressed during the engagement. See the full [audit report](https://www.halborn.com/audits/ripple/ripple---single-asset-vault---smart-contract-assessment-d39437).
+
+Multiple `fixCleanup` amendments released after the audit (`fixCleanup3_1_3` through `fixCleanup3_4_0`) made further correctness, precision, and rounding fixes to Vault behavior; see the [Known Amendments](https://xrpl.org/resources/known-amendments) page for details on each.
+
+## See Also
+
+- **Concepts:**
+    - [Credentials](../../concepts/decentralized-storage/credentials.md)
+    - [Lending Protocol](./lending-protocol.md)
+    - [Permissioned Domains](../tokens/decentralized-exchange/permissioned-domains.md)
+    - [Pseudo-Accounts](../accounts/pseudo-accounts.md)
+- **Tutorials:**
+    - [Create a Single Asset Vault](../../tutorials/defi/lending/use-single-asset-vaults/create-a-single-asset-vault.md)
+    - [Deposit into a Vault](../../tutorials/defi/lending/use-single-asset-vaults/deposit-into-a-vault.md)
+    - [Withdraw from a Vault](../../tutorials/defi/lending/use-single-asset-vaults/withdraw-from-a-vault.md)
+- **References:**
+    - [Vault entry][]
+    - [VaultClawback transaction][]
+    - [VaultCreate transaction][]
+    - [VaultDelete transaction][]
+    - [VaultDeposit transaction][]
+    - [VaultSet transaction][]
+    - [VaultWithdraw transaction][]
+    - [vault_info method][]
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}

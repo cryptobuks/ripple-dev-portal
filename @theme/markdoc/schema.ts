@@ -1,0 +1,326 @@
+import { Schema, Tag } from '@markdoc/markdoc';
+import type { MarkdocTagSchema } from '@redocly/theme/markdoc/tags/types';
+import { sourceLinkForLlms } from '../components/SourceLink';
+import { ResposiveGraphicForLlms } from '../components/ResponsiveGraphic'
+import { amendmentsTableForLlms, amendmentDisclaimerForLlms, obsoleteAmendmentsTableForLlms } from '../components/Amendments';
+
+export const childPages: Schema & { tagName: string } = {
+  tagName: 'child-pages',
+  render: 'ChildPages',
+  selfClosing: true,
+};
+
+export const repoLink: Schema & { tagName: string } = {
+    tagName: 'repo-link',
+    attributes: {
+      path: {
+        type: 'String',
+        required: true,
+      },
+      github_fork: {
+        type: 'String',
+        required: false,
+      },
+      github_branch: {
+        type: 'String',
+        required: false,
+      },
+    },
+    transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        attributes["github_fork"] = attributes["github_fork"] || config.variables.env.PUBLIC_GITHUB_FORK;
+        attributes["github_branch"] = attributes["github_branch"] || config.variables.env.PUBLIC_GITHUB_BRANCH;
+        const children = node.transformChildren(config);
+        return new Tag(this.render, attributes, children);
+    },
+    render: 'RepoLink',
+};
+
+export const sourceLink: MarkdocTagSchema & { tagName: string } = {
+    tagName: 'source-link',
+    selfClosing: true,
+    attributes: {
+      path: {
+        type: 'String',
+        required: true,
+      },
+      name: {
+        type: 'String',
+        required: false,
+      },
+    },
+    transform(node, config) {
+        const attributes = node.transformAttributes(config);
+        attributes["xrpld_release"] = config.variables.env.PUBLIC_XRPLD_RELEASE;
+        return new Tag(this.render, attributes);
+    },
+    render: 'SourceLink',
+    renderForLlms: sourceLinkForLlms,
+};
+
+export const codePageName: Schema & { tagName: string } = {
+  tagName: 'code-page-name',
+  attributes: {
+    name: {
+      type: 'String',
+      required: false,
+    },
+  },
+  transform(node, config) {
+    const attributes = node.transformAttributes(config);
+    attributes["name"] = config.variables.frontmatter.seo.title;
+    return new Tag(this.render, attributes);
+  },
+  render: 'CodePageName',
+  selfClosing: true,
+};
+
+export const interactiveBlock: Schema & { tagName: string } = {
+  tagName: 'interactive-block',
+  attributes: {
+    label: {
+      type: 'String',
+      required: true,
+    },
+    steps: {
+      type: 'Array',
+      required: true,
+    },
+    network: {
+      type: 'Object',
+      required: false,
+      default: {
+        name: "Testnet",
+        websocket: "wss://s.altnet.rippletest.net:51233",
+        explorer: "https://testnet.xrpl.org",
+        faucet: "https://faucet.altnet.rippletest.net/accounts",
+      }
+    }
+  },
+  transform(node, config) {
+    const attributes = node.transformAttributes(config);
+    const children = replaceHtmlAttributeValuesVariables(node.transformChildren(config), config.variables.env);
+    return new Tag(this.render, attributes, children);
+  },
+  render: 'InteractiveBlock',
+};
+
+function replaceHtmlAttributeValuesVariables(nodes, variables) {
+  for (const n of nodes) {
+    if (n.attributes) {
+      for (const attribName of Object.keys(n.attributes)) {
+        const v = n.attributes[attribName];
+        if (typeof v !== 'string') continue;
+        n.attributes[attribName] = v.replace(/{%\s*\$env.([\w_\d]+)\s*%}/g, (_, name) => {
+          return variables[name];
+        });
+      }
+    }
+    if (n.children) {
+      replaceHtmlAttributeValuesVariables(n.children, variables);
+    }
+  }
+
+  return nodes;
+}
+
+export const xrpLoader: Schema & { tagName: string } = {
+  tagName: 'loading-icon',
+  attributes: {
+    message: {
+      type: 'String',
+      required: false,
+      default: "...",
+    },
+  },
+  render: 'XRPLoader',
+  selfClosing: true,
+};
+
+export const badge: Schema & { tagName: string } = {
+  tagName: 'badge',
+  attributes: {
+    color: {
+      type: 'String',
+      required: false,
+      default: ""
+    },
+    href: {
+      type: 'String',
+      required: false
+    },
+    date: { // Not displayed, but useful for knowing how old an 'updated' badge is
+      type: 'String',
+      required: false
+    }
+  },
+  render: 'Badge'
+};
+
+export const notEnabled: Schema & { tagName: string } = {
+  tagName: 'not-enabled',
+  render: 'NotEnabled',
+  selfClosing: true,
+};
+
+export const xrplCard: Schema & { tagName: string } = {
+  tagName: 'xrpl-card',
+  attributes: {
+    title: {
+      type: 'String',
+      required: true
+    },
+    href: {
+      type: 'String',
+      required: true
+    },
+    body: {
+      type: 'String',
+      required: false
+    },
+    image: {
+      type: 'String',
+      required: false
+    },
+    imageAlt: {
+      type: 'String',
+      required: false
+    },
+    external: { // Not actually implemented (yet)
+      type: 'Boolean',
+      required: false,
+      default: false
+    }
+  },
+  render: 'XRPLCard',
+  selfClosing: true
+}
+
+export const cardGrid: Schema & { tagName: string } = {
+  tagName: 'card-grid',
+  attributes: {
+    layout: {
+      type: 'String',
+      required: false,
+      default: '3xN'
+    }
+  },
+  render: 'CardGrid'
+}
+
+export const tryIt: Schema &  { tagName: string } = {
+  tagName: 'try-it',
+  attributes: {
+    method: {
+      type: 'String',
+      required: true
+    },
+    server: {
+      type: 'String',
+      required: false,
+      default: ""
+    }
+  },
+  render: 'TryIt',
+  selfClosing: true
+}
+
+export const txExample: Schema &  { tagName: string } = {
+  tagName: 'tx-example',
+  attributes: {
+    txid: {
+      type: 'String',
+      required: true
+    },
+    server: {
+      type: 'String',
+      required: false,
+      default: ""
+    }
+  },
+  render: 'TxExample',
+  selfClosing: true
+}
+
+export const amendmentsTable: MarkdocTagSchema & { tagName: string } = {
+  tagName: 'amendments-table',
+  render: 'AmendmentsTable',
+  selfClosing: true,
+  renderForLlms: amendmentsTableForLlms,
+}
+
+export const obsoleteAmendmentsTable: MarkdocTagSchema & { tagName: string } = {
+  tagName: 'obsolete-amendments-table',
+  render: 'ObsoleteAmendmentsTable',
+  selfClosing: true,
+  renderForLlms: obsoleteAmendmentsTableForLlms,
+}
+
+export const amendmentDisclaimer: MarkdocTagSchema &  { tagName: string } = {
+  tagName: 'amendment-disclaimer',
+  attributes: {
+    name: {
+      type: 'String',
+      required: true
+    },
+    compact: {
+      type: 'Boolean',
+      required: false,
+      default: false
+    },
+    statusOnly: {
+      type: 'Boolean',
+      required: false,
+      default: false
+    },
+    mode: {
+      type: 'String',
+      required: false,
+      default: '' // empty string for "Requires ... / Added by ..."
+    }
+  },
+  render: 'AmendmentDisclaimer',
+  renderForLlms: amendmentDisclaimerForLlms,
+  selfClosing: true
+}
+
+export const txCategory: Schema & { tagName: string } = {
+  tagName: 'tx-category',
+  attributes: {
+    name: {
+      type: 'String',
+      required: true
+    }
+  },
+  render: 'TxCategory',
+  selfClosing: true,
+};
+
+export const txIconLegend: Schema & { tagName: string } = {
+  tagName: 'tx-icon-legend',
+  render: 'TxIconLegend',
+  selfClosing: true,
+};
+
+export const responsiveGraphic: Schema & { tagName: string } = {
+  tagName: 'responsive-graphic',
+  attributes: {
+    alt: {
+      type: 'String',
+      required: true
+    },
+    desktop: {
+      type: 'String',
+      required: true,
+      resolver: 'link'
+    },
+    mobile: {
+      type: 'String',
+      required: true,
+      resolver: 'link'
+    }
+  },
+  render: 'ResponsiveGraphic',
+  renderForLlms: ResposiveGraphicForLlms,
+  selfClosing: true,
+};

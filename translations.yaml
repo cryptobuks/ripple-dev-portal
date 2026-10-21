@@ -1,0 +1,14 @@
+# Samples for @l10n/[lang]/translations.yaml
+# page.previousButton: "Previous page"
+# page.nextButton: "Next page"
+# page.lastUpdated.timeago: Last updated
+# markdown.editPage.text: Edit
+# toc.header: On this page
+# search.label: "Search docs"
+# search.navbar.label: Search
+# search.recent: Recent searches
+# search.keys.navigate: "to navigate"
+# search.keys.select: "to select"
+# search.keys.exit: "to exit"
+# feedback.settings.label: Was this helpful?
+# footer.copyrightText: © 2025 XRP Ledger. Open Source.

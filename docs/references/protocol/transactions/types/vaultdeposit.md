@@ -1,0 +1,105 @@
+---
+seo:
+    description: Deposits a specified number of assets into a vault in exchange for shares.
+labels:
+    - Transactions
+    - Single Asset Vault
+    - Lending Protocol
+requiredAmendment: SingleAssetVault
+status: not_enabled
+txIcon: send
+---
+
+# VaultDeposit
+
+{% source-link path="src/libxrpl/tx/transactors/vault/VaultDeposit.cpp" /%}
+
+Deposits a specified number of assets into a vault in exchange for shares.
+
+For private vaults, the depositor must be authorized to interact with the vault’s shares and have [Credentials](../../../../concepts/decentralized-storage/credentials.md) in the [Permissioned Domain](../../../../concepts/tokens/decentralized-exchange/permissioned-domains.md) of the share.
+
+Public vaults require no authorization, and anyone can deposit as long as they meet the asset type requirement and have sufficient funds.
+
+{% admonition type="warning" name="Warning" %}
+A depositor cannot deposit assets into the vault if:
+
+- The asset is frozen for the depositor.
+- The trust line between the pseudo-account and the issuer is frozen, or the `MPToken` is locked.
+- The vault is private and the depositor's credentials have expired.
+{% /admonition %}
+
+If successful, the transaction moves the assets from the depositor's account to the vault's pseudo-account, issues the corresponding vault shares, and updates the vault’s balance.
+
+{% amendment-disclaimer name="SingleAssetVault" /%}
+{% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}
+
+## Example {% $frontmatter.seo.title %} JSON
+
+```json
+{
+  "TransactionType": "VaultDeposit",
+  "Account": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX",
+  "Fee": "12",
+  "Flags": 0,
+  "LastLedgerSequence": 7108682,
+  "Sequence": 8,
+  "VaultID": "77D6234D074E505024D39C04C3F262997B773719AB29ACFA83119E4210328776",
+  "Amount" : {
+    "currency" : "TST",
+    "issuer" : "rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd",
+    "value" : "2.5"
+  }
+}
+```
+
+## {% $frontmatter.seo.title %} Fields
+
+In addition to the [common fields](../../../protocol/transactions/common-fields#transaction-common-fields), {% code-page-name /%} transactions use the following fields:
+
+| Field Name              | JSON Type           | [Internal Type][] | Required? | Description         |
+| :-----------------------| :------------------ | :---------------- | :-------- | :-------------------|
+| `VaultID`               | String              | Hash256           | Yes       | The unique identifier of the vault to which the asset is deposited. |
+| `Amount`                | [Currency Amount][] | Amount            | Yes       | The asset and quantity to be deposited into the vault.|
+
+The deposited asset must match the vault’s designated asset for the transaction to succeed. Depending on the asset type, the following changes occur:
+
+- **XRP**: The vault’s pseudo-account balance increases, and the depositor’s balance decreases.
+- **Trust line token**: The [trust line](../../../../concepts/tokens/fungible-tokens/trust-line-tokens.md#structure) balance between the vault's pseudo-account and the asset issuer is adjusted.
+- **MPT**: The `MPToken.MPTAmount` of both the depositor and the vault's pseudo-account is updated.
+
+The deposit amount is rounded down to match the vault's `AssetsTotal` precision, so the vault's total and available balances change by a representable amount. {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%}
+
+## {% $frontmatter.seo.title %} Flags
+
+There are no flags defined for {% code-page-name /%} transactions.
+
+## Transfer Fees
+
+A single asset vault does not apply the [transfer fee](../../../../concepts/tokens/fungible-tokens/transfer-fees) to {% code-page-name /%} transactions. Additionally, whenever a protocol moves assets from or to a vault, the transfer fee isn't charged.
+
+## Error Cases
+
+Besides errors that can occur for all transactions, {% code-page-name /%} transactions can result in the following [transaction result codes](../../../protocol/transactions/transaction-results/index.md):
+
+| Error Code              | Description                        |
+| :---------------------- | :----------------------------------|
+| `tecEXPIRED`            | The vault is closed-ended and in its _Investment_ or _Redemption_ phase. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `tecFROZEN`             | The vault asset is frozen globally for the depositor, or for the vault's pseudo-account. Both regular and deep freezes cause this error. {% amendment-disclaimer name="fixCleanup3_3_0" mode="updated" /%} |
+| `tecINSUFFICIENT_FUNDS` | The depositor does not have sufficient funds to make a deposit. |
+| `tecLIMIT_EXCEEDED`     | Adding the provided `Amount` to the `AssetsTotal` exceeds the `AssetsMaximum` value. |
+| `tecLOCKED`             | The MPT vault asset is locked globally for the depositor, or for the vault's pseudo-account. {% amendment-disclaimer name="fixCleanup3_3_0" mode="updated" /%} |
+| `tecNO_AUTH`            | Either the vault is private and the depositing account does not have credentials in the share's Permissioned Domain, or the asset is a non-transferable MPT. |
+| `tecNO_ENTRY`           | The `Vault` object with the provided `VaultID` does not exist on the ledger. |
+| `tecOBJECT_NOT_FOUND`   | A ledger entry specified in the transaction does not exist. |
+| `tecPATH_DRY`           | Converting the deposit into shares overflowed the largest number the protocol can represent. This usually means the vault's `Scale` is high and the `Amount` is large. |
+| `tecPRECISION_LOSS`     | The deposit rounds to nothing, either at the vault's scale, at the depositor's trust line scale, or when converted into shares. {% amendment-disclaimer name="fixCleanup3_2_0" mode="updated" /%} {% amendment-disclaimer name="fixCleanup3_4_0" mode="updated" /%} |
+| `tecWRONG_ASSET`        | The asset of the vault does not match the asset being deposited. |
+| `temBAD_AMOUNT`         | The `Amount` field of the transaction is invalid. |
+| `temDISABLED`           | The [SingleAssetVault amendment][] is not enabled.  |
+| `temMALFORMED`          | The transaction was not validly formatted. For example, if the `VaultID` is not provided.  |
+
+## See Also
+
+- [Vault entry][]
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}

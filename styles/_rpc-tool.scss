@@ -1,0 +1,73 @@
+// Styles for the legacy XRP Ledger RPC Tool. Minimally maintained.
+@import '../node_modules/react18-json-view/src/style';
+
+.json-view {
+  font-family: var(--code-block-font-family);
+  padding: 1em;
+  background: $gray-800;
+  overflow: hidden;
+  color: $gray-100 !important;
+  font-size: 14px;
+  letter-spacing: 0;
+
+  svg {
+    height: 11px !important;
+    color: $gray-100;
+  }
+}
+
+.jv-button {
+  color: $orange-500 !important;
+  font-size: 14px;
+}
+
+.jv-indent {
+  border-left: 1px solid $gray-600;
+  margin: 4px;
+}
+
+/* stylelint-disable selector-class-pattern -- react18-json-view uses these */
+.json-view--boolean {
+  color: $magenta-300 !important;
+}
+
+.json-view--pair {
+  margin: 4px;
+}
+
+.json-view--property {
+  color: $gray-100 !important;
+}
+
+.json-view--null,
+.json-view--undefined {
+  display: inline-block;
+  padding: 1px 2px;
+  border-radius: 3px;
+  background-color: $gray-600;
+  color: $gray-100 !important;
+  font-size: 11px;
+}
+
+.json-view--number {
+  color: $green-200 !important;
+}
+
+.json-view--string {
+  color: $orange-500 !important;
+}
+
+/* stylelint-enable selector-class-pattern */
+
+.rpc-tool {
+  .nav-link {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 6px 9px;
+  }
+}

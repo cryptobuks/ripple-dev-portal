@@ -1,0 +1,162 @@
+---
+seo:
+    description: A Vault object defines the state of a tokenized vault.
+labels:
+  - Vault
+  - Single Asset Vault
+status: not_enabled
+---
+
+# Vault
+[[Source]](https://github.com/XRPLF/rippled/blob/a5d238e7d4fa6ef2b539b759d58744d0a1c33c0c/include/xrpl/protocol/detail/ledger_entries.macro#L478-L496 "Source")
+
+A {% code-page-name /%} object defines the state of a tokenized vault. It contains key details such as available assets, shares, total value, and other relevant information. You can create a {% code-page-name /%} object with the [VaultCreate](../../transactions/types/vaultcreate.md) transaction.
+
+The {% code-page-name /%} object is tracked in an [Owner Directory](../../../protocol/ledger-data/ledger-entry-types/directorynode) owned by the Vault Owner account.
+Additionally, to facilitate `Vault` object lookup, the object is tracked in the owner directory of the vault's [pseudo-account](../../../../concepts/accounts/pseudo-accounts.md).
+
+{% amendment-disclaimer name="SingleAssetVault" /%}
+{% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}
+
+## Example Vault JSON
+
+```json
+{
+  "LedgerEntryType": "Vault",
+  "Account": "rwCNM7SeUHTajEBQDiNqxDG8p1Mreizw85",
+  "Asset": {
+      "currency": "USD",
+      "issuer": "rXJSJiZMxaLuH3kQBUV5DLipnYtrE6iVb"
+  },
+  "AssetsAvailable": "0",
+  "AssetsMaximum": "1000000",
+  "AssetsTotal": "0",
+  "Data": "5661756C74206D65746164617461",
+  "Flags": 0,
+  "LEVersion": 1,
+  "LossUnrealized": "0",
+  "Owner": "rNGHoQwNG753zyfDrib4qDvvswbrtmV8Es",
+  "OwnerNode": "0",
+  "RedemptionDate": 883008000,
+  "Scale": 6,
+  "Sequence": 200370,
+  "ShareMPTID": "0000000169F415C9F1AB6796AB9224CE635818AFD74F8175",
+  "SubscriptionDate": 851472000,
+  "VaultKind": 1,
+  "WithdrawalPolicy": 1
+}
+```
+
+## {% $frontmatter.seo.title %} Fields
+
+In addition to the [common ledger entry fields](../../../protocol/ledger-data/common-fields), {% code-page-name /%} entries have the following fields:
+
+| Name                | JSON Type     | [Internal Type][] | Required? | Description      |
+| :------------------ | :------------ | :---------------- | :-------- | -----------------|
+| `Account`           | String        | AccountID         | Yes       | The address of the vault's pseudo-account. |
+| `Asset`             | Object        | Issue             | Yes       | The asset of the vault. The vault supports XRP, trust line tokens, and MPTs. |
+| `AssetsTotal`       | String        | Number            | Yes       | The total value of the vault. Calculated as: `assets available + assets on loan`.<ul><li>_Cash-basis vaults_: Potential interest from scheduled, unpaid loans **doesn't** count toward the total. {% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}</li><li>_Instant interest recognition vaults_: Potential interest from scheduled, unpaid loans **does** count toward the total.</li></ul> |
+| `AssetsAvailable`   | String        | Number            | Yes       | The amount of assets available for loans and withdrawals. |
+| `AssetsMaximum`     | String        | Number            | No        | The maximum amount of assets that can be deposited into the vault. Set to `0` for no cap. |
+| `Data`              | String        | Blob              | No        | Arbitrary metadata, in hex format, about the vault. Limited to 256 bytes. See [Data Field Format](#data-field-format) for more information. |
+| `LEVersion`         | Number        | UInt8             | No        | Indicates what type of accounting the vault uses. `1` indicates the vault uses cash-basis accounting. If this field is omitted, the vault uses instant interest recognition accounting. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `LossUnrealized`    | String        | Number            | Yes       | The potential loss amount that is not yet realized, expressed as the vault's asset. Only a protocol connected to the vault can modify this attribute.<ul><li>_Cash-basis vaults_: Unrealized losses from interest **aren't** included in this value. {% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}</li><li>_Instant interest recognition vaults_: Unrealized losses from interest **are** included in this value.</li></ul> |
+| `OwnerNode`         | String        | UInt64            | Yes       | Identifies the page where this item is referenced in the owner's directory. |
+| `Owner`             | String        | AccountID         | Yes       | The account address of the Vault Owner. |
+| `PreviousTxnID`     | String        | Hash256           | Yes       | Identifies the transaction ID that most recently modified this object. |
+| `RedemptionDate`    | Number        | UInt32            | No        | _(Closed-ended vaults only)_ The time, in [seconds since the Ripple Epoch][], when the vault's investment period ends and depositors can redeem their shares. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `PreviousTxnLgrSeq` | Number        | UInt32            | Yes       | The sequence of the ledger that contains the transaction that most recently modified this object. |
+| `Scale`             | Number        | UInt8             | No        | Specifies decimal precision for share calculations. Assets are multiplied by 10<sup>Scale</sup > to convert fractional amounts into whole number shares. For example, with a `Scale` of `6`, depositing 20.3 units creates 20,300,000 shares (20.3 × 10<sup>Scale</sup >). For **trust line tokens** this can be configured at vault creation, and valid values are between 0-18, with the default being `6`. For **XRP** and **MPTs**, this is fixed at `0`. See [Scaling Factor](#scaling-factor) for more information. |
+| `Sequence`          | Number        | UInt32            | Yes       | The transaction sequence number that created the vault. |
+| `ShareMPTID`        | String        | UInt192           | Yes       | The identifier of the share [MPTokenIssuance](mptokenissuance.md) object. The `Vault` entry doesn't store a total share count; the `OutstandingAmount` field of the share issuance is the vault's total outstanding shares. |
+| `SubscriptionDate`  | Number        | UInt32            | No        | _(Closed-ended vaults only)_ The time, in [seconds since the Ripple Epoch][], when the vault's subscription window closes and its investment period begins. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `VaultKind`         | Number        | UInt8             | No        | Indicates the kind of vault. `1` is a closed-ended vault. If this field is omitted, it's an open-ended vault. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `WithdrawalPolicy`  | Number        | UInt8             | Yes       | Indicates the withdrawal strategy used by the vault. |
+
+{% admonition type="info" name="Note" %}
+`LEVersion` is set by the [VaultCreate transaction][], but the value is determined by if the [LendingProtocolV1_1 amendment][] is enabled.
+{% /admonition %}
+
+### Data Field Format
+
+While any data structure is allowed in the `Data` field, the following format is recommended:
+
+| Field Name | Key | Type   | Description                                                                                |
+| ---------- | --- | ------ | ------------------------------------------------------------------------------------------ |
+| Name       | n   | String | Human-readable name of the vault. Should clearly reflect the vault's strategy or mandate.  |
+| Website    | w   | String | Website associated with the vault. Omit protocol (`https://`) and `www` to conserve space. |
+
+To fit within the 256-byte limit, vault metadata should use the _compressed_ JSON keys.
+
+Following this format helps XRPL explorers and other tools parse and display vault information in a standardized way, improving discoverability and user experience.
+
+#### Example JSON
+
+For a vault named "LATAM Fund II" with website "examplefund.com":
+
+```json
+{
+  "n": "LATAM Fund II",
+  "w": "examplefund.com"
+}
+```
+
+1. Remove any whitespace from the JSON:
+
+    `{"n":"LATAM Fund II","w":"examplefund.com"}`
+
+2. Hex-encode the JSON. For example:
+
+    ```sh
+    # Using xxd (macOS/Linux)
+    echo -n '{"n":"LATAM Fund II","w":"examplefund.com"}' | xxd -p | tr -d '\n'
+    ```
+
+    You should see this result: `7b226e223a224c4154414d2046756e64204949222c2277223a226578616d706c6566756e642e636f6d227d`
+
+### Scaling Factor
+
+The **`Scale`** field enables the vault to accurately represent fractional asset values using integer-only MPT shares, which prevents the loss of value from decimal truncation. It defines a scaling factor, calculated as 10<sup>Scale</sup>, that converts a decimal asset amount into a corresponding whole number of shares.
+
+The scaling factor behavior varies by asset type:
+
+- **Trust line token**: When a vault holds a trust line token, the `Scale` is configurable by the Vault Owner when creating the vault. The value can range from **0** to a maximum of **18**, with a default of **6**. This flexibility allows issuers to set a level of precision appropriate for their specific token.
+
+- **XRP**: When a vault holds XRP, the `Scale` is fixed at **0**. This aligns with XRP's native structure, where one share represents one drop, and one XRP equals 1,000,000 drops. Therefore, a deposit of 10 XRP to an empty vault will result in the issuance of 10,000,000 shares.
+
+- **MPT**: When a vault holds an MPT, its `Scale` is fixed at **0**. This creates a 1-to-1 relationship between deposited MPT units and the shares issued. For example, depositing 10 MPTs to an empty vault issues 10 shares. The value of a single MPT is determined at the issuer's discretion.
+  
+  {% admonition type="warning" name="Warning" %}
+  If an MPT is set to represent a large value, the vault owner and the depositor must be cautious. Since only whole MPT units are used in calculations, any value that is not a multiple of a single MPT's value may be lost due to rounding during a transaction.
+  {% /admonition %}
+
+## {% $frontmatter.seo.title %} Flags
+
+{% code-page-name /%}  entries can have the following flags:
+
+| Flag Name         | Flag Value   | Description                 |
+| :---------------- | :----------- | :---------------------------|
+| `lsfVaultPrivate` | `0x00010000` | If set, indicates that the vault is private. This flag can only be set when _creating_ the vault. |
+
+## Vault ID Format
+
+The ID of a {% code-page-name /%} entry is the [SHA-512Half][] of the following values, concatenated in order:
+
+- The {% code-page-name /%} space key `0x0056` (capital V).
+- The [AccountID](../../../protocol/binary-format/#accountid-fields) of the account submitting the transaction (for example, the vault owner).
+- The transaction `Sequence` number. If the transaction used a [Ticket](../../../../concepts/accounts/tickets), use the `TicketSequence` value.
+
+## See Also
+
+**API Methods**:
+  - [vault_info method][]
+
+**Transactions**:
+  - [VaultClawback transaction][]
+  - [VaultCreate transaction][]
+  - [VaultDelete transaction][]
+  - [VaultDeposit transaction][]
+  - [VaultSet transaction][]
+  - [VaultWithdraw transaction][]
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}

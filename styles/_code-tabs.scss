@@ -1,0 +1,247 @@
+$code-bg: $gray-800;
+$code-padding: 2rem;
+
+// Code Tabs -------------------------------------------------------------------
+
+pre {
+  color: $white;
+  background-color: $code-bg;
+  word-wrap: normal;
+  padding: $code-padding;
+  border-radius: 4px;
+  code {
+    white-space: pre;
+    color: $white;
+    background-color: $code-bg;
+  }
+}
+
+.multicode {
+  padding: 0;
+  z-index: 1;
+  position: relative;
+
+  pre {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    clear: both;
+
+    code {
+      overflow: auto;
+      max-height: 24em;
+      border-radius: 0 4px 4px 4px;
+      display: block;
+      padding: $code-padding;
+
+      &.expanded {
+        overflow: visible;
+        max-height: none;
+        position: absolute;
+        min-width: 100%; // don't shrink horizontally when expanded
+      }
+    }
+  }
+
+  ul { // code tabs
+    margin: 0 !important;
+    padding: 0;
+
+    li {
+      display: block;
+      float: left;
+      list-style-type: none;
+      margin-right: 0px;
+      margin-left: 0px;
+      border: 0;
+      clear: none;
+    }
+  }
+
+  a { // clickable part of the tabs
+    text-decoration: none;
+    color: $white;
+    background-color: transparent;
+    padding: .75rem 2rem;
+    margin: 0;
+    border-radius: 4px 4px 0 0;
+
+    &.current {
+      background-color: $code-bg;
+    }
+    &:hover {
+      text-decoration: none;
+      background-color: $code-bg;
+      color: $primary;
+      padding-bottom: 0.625rem;
+    }
+  }
+
+  .btn { // expand/collapse, copy-to-clipboard, etc.
+    z-index: 10;
+  }
+
+  .codetabs {
+    position: relative;
+    z-index: 10;
+  }
+}
+
+.clipboard-btn {
+  z-index: 10;
+  margin-right: 10px;
+}
+
+
+// Syntax highlighting via Codehilite ------------------------------------------
+
+.codehilite {
+  background: $code-bg;
+  color: $white;
+
+  .c, // comment
+  .ch, // comment, hashbang
+  .cm, // comment, multiline
+  .cp, // comment, preproc
+  .cpf, // comment, preproc file
+  .c1, // comment, single
+  .cs // comment, special
+  {
+    color: $gray-500;
+  }
+
+  .err { // error
+
+  }
+  .esc { // escape
+
+  }
+  .g, // generic
+  .gd, // generic, deleted
+  .ge, // generic, emphasis
+  .gr, // generic, error
+  .gh, // generic, heading
+  .gi, // generic, inserted
+  .go, // generic, output
+  .gp, // generic, prompt
+  .gs, // generic, strong
+  .gu, // generic, underline / subheading
+  .gt // generic, traceback
+  {
+
+  }
+  .k, // keyword
+  .kc, // keyword, constant
+  .kd, // keyword, declaration
+  .kn, // keyword, namespace
+  .kp, // keyword, pseudo
+  .kr, // keyword, reserved
+  .kt // keyword, type
+  {
+    color: $orange-500;
+  }
+  .l, // literal
+  .ld // literal, date
+  {
+
+  }
+  .m, // literal, number
+  .mb, // number, bin
+  .mh, // number, hex
+  .mi, // number, integer
+  .mo, // number, oct
+  .il // number, integer, long
+  {
+    color: $blue-500;
+  }
+  .n, // name
+  .na, // name, attribute
+  .nb, // name, builtin
+  .nc, // name, class
+  .nd, // name, decorator
+  .ne, // name, exception
+  .nf, // name, function
+  .ni,  // name, entity
+  .nl, // name, label
+  .nn, // name, namespace
+  .nt, // name, tag
+  .nv, // name, variable
+  .nx, // name, other
+  .bp, // name, builtin, pseudo
+  .fm, // name, function, magic
+  .py // name, property
+  {
+    color: $white;
+  }
+  .o, // operator
+  .ow // operator, word
+  {
+
+  }
+  .p { // punctuation
+    color: $gray-200;
+  }
+  .s, // literal, string
+  .s1, // string, single
+  .s2, // string, double
+  .sa, // string, affix
+  .sb, // string, backtick
+  .sc, // string, char
+  .dl, // string, delimiter
+  .sd, // string, docstring
+  .se, // string, escape
+  .sh, // string, heredoc
+  .si, // string, interpol
+  .sr, // string, regex
+  .ss, // string, symbol
+  .sx // string, other
+  {
+    color: $green-200;
+  }
+
+  .vc, // variable, class
+  .vg, // variable, global
+  .vi, // variable, instance
+  .vm // variable, magic
+  {
+
+  }
+
+
+  .w { // whitespace
+
+  }
+
+  .x { // "other"
+
+  }
+}
+
+.codehilite {
+  background: transparent;
+  position: relative;
+
+  .btn-group {
+    top: 1rem;
+    right: 1rem;
+    position: absolute;
+
+    .multicode & {
+      top: 70px;
+      right: 20px;
+    }
+  }
+}
+
+
+// CodeMirror (editable code blocks) -------------------------------------------
+// Have to nest due to the order Redocly loads in the styles
+#redocly_root {
+  // folded code ellipsis
+  .cm-foldPlaceholder {
+    background-color: $code-bg;
+    border: none;
+    font-size: 18px;
+  }
+}

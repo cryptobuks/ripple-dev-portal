@@ -1,0 +1,67 @@
+---
+seo:
+    description: Deletes an existing Vault object from the ledger.
+labels:
+    - Transactions
+    - Single Asset Vault
+    - Lending Protocol
+requiredAmendment: SingleAssetVault
+status: not_enabled
+txIcon: cancel
+---
+
+# VaultDelete
+
+{% source-link path="src/libxrpl/tx/transactors/vault/VaultDelete.cpp" /%}
+
+Permanently deletes an existing `Vault` object from the ledger, removes all associated ledger entries, and frees up the reserve requirement for the Vault Owner.
+
+Only the Vault Owner can initiate this transaction, and the vault must be completely empty before deletion.
+
+{% amendment-disclaimer name="SingleAssetVault" /%}
+{% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}
+
+## Example {% $frontmatter.seo.title %} JSON
+
+```json
+{
+  "TransactionType": "VaultDelete",
+  "Account": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX",
+  "Fee": "12",
+  "Flags": 0,
+  "LastLedgerSequence": 7108682,
+  "Sequence": 8,
+  "VaultID": "77D6234D074E505024D39C04C3F262997B773719AB29ACFA83119E4210328776"
+}
+```
+
+## {% $frontmatter.seo.title %}  Fields
+
+In addition to the [common fields](https://xrpl.org/docs/references/protocol/transactions/common-fields#transaction-common-fields), {% code-page-name /%} transactions use the following fields:
+
+| Field Name         | JSON Type | [Internal Type][] | Required? | Description  |
+| :----------------- | :-------- | :---------------- | :-------- | :------------|
+| `MemoData`         | String    | Blob              | No        | A data field to record why the vault was deleted, as hexadecimal. Limited to 256 bytes. {% amendment-disclaimer name="LendingProtocolV1_1" /%} |
+| `VaultID`          | String    | Hash256           | Yes       | The unique identifier of the vault that needs to be deleted. |
+
+## {% $frontmatter.seo.title %} Flags
+
+There are no flags defined for {% code-page-name /%} transactions.
+
+## Error Cases
+
+Besides errors that can occur for all transactions, VaultCreate transactions can result in the following [transaction result codes](../../../protocol/transactions/transaction-results/index.md):
+
+| Error Code                | Description                        |
+| :------------------------ | :----------------------------------|
+| `tecNO_ENTRY`             | The `Vault` object with the provided `VaultID` does not exist on the ledger. |
+| `tecNO_PERMISSION`        | The account submitting the transaction doesn't own the vault. |
+| `tecHAS_OBLIGATIONS`      | The vault still holds assets or has outstanding shares, so it can't be deleted. |
+| `temDISABLED`             | <li>The [SingleAssetVault amendment][] isn't enabled.</li><li>`MemoData` is present and the [LendingProtocolV1_1 amendment][] isn't enabled.</li> |
+| `temMALFORMED`            | <li>`VaultID` is zero.</li><li>`MemoData` is present but empty, or longer than 256 bytes. {% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}</li> |
+
+## See Also
+
+- [Vault entry][]
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}

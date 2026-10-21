@@ -1,0 +1,152 @@
+/* Content text styling (applies mostly to Markdown-generated content)------- */
+
+[data-component-name="Markdown/Markdown"] article {
+  padding-bottom: 50px;
+  border-bottom: 1px solid $gray-400;
+
+  p code,
+  table code,
+  li > code {
+    background-color: $green-500;
+    color: $green-100;
+  }
+
+  // Content links that don't carry .xrpl-link: raw HTML <a> in a .md file,
+  // and tag components like {% child-pages %} that render their own <a>
+  // (see ChildPages.tsx). Matches MarkdownLink's neutral (black) treatment.
+  //
+  // The exclusions are components that paint their own anchors. .bds-btn is
+  // there for the same reason as .btn, which it replaces: an anchor Button
+  // inside Markdown ({% try-it %} renders one) would otherwise be repainted as
+  // a content link — black label, underline, in every state. Button.scss §5
+  // out-specifies Bootstrap, but this rule scores (0,4,3) and wins, so the
+  // component cannot defend itself here. Excluding it is the fix; raising §5's
+  // specificity to outrank a page rule would just start an arms race.
+  a:not(.xrpl-link):not(.btn):not(.bds-btn) {
+    @include xrpl-link-colors(neutral);
+    @include xrpl-link-underline;
+    @include xrpl-link-focus(on-theme);
+    border-radius: 2px; // matches .xrpl-link's own geometry, so the focus outline's corners aren't square here while rounded everywhere else
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-top: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+
+    &:first-child {
+      margin-top: 0;
+      line-height: 1.2;
+    }
+  }
+
+  h2, h2.md {
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  h3, h3.md {
+    font-size: 2.125rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  h6 {
+    font-size: 1rem;
+    margin-top: 1rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  /* Some list items contain <p> tags, some don't. These styles make sure both
+   kinds are spaced consistently. */
+  > ul, > ol, .children-display {
+    li {
+      margin: 6px;
+      margin-top: 24px;
+    }
+    li:first-child {
+      margin-top: 16px;
+    }
+    li p {
+      margin: 0;
+    }
+  }
+  [data-component-name="Markdoc/Tabs/Tabs"] li {
+    margin: 0;
+  }
+
+  // "Source" links float right
+  a[title="Source"],
+  a[title="ソース"] {
+    float: right;
+    padding-left: 20px;
+  }
+
+  // source-link component right-aligned
+  .source-link {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  // Make "invisible" headers take up no space either, so we can use them
+  // to add additional anchors (e.g. for translated pages)
+  h1.invisible,
+  h2.invisible,
+  h3.invisible,
+  h4.invisible,
+  h5.invisible,
+  h6.invisible {
+    font-size: 0;
+    line-height: 0;
+    margin: 0;
+
+    .hover_anchor {
+      display: none;
+    }
+  }
+
+  .shield {
+    // {% badge ... %} (shields.io) components in md
+    display: inline-block !important;
+    vertical-align: middle;
+  }
+}
+
+.blurb a {
+  text-decoration: underline;
+}
+
+// Hover anchors ---------------
+.hover_anchor {
+  visibility: hidden;
+  padding-left: 1rem;
+  font-size: 1.25rem;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  &:hover .hover_anchor {
+    visibility: visible;
+    text-decoration: none;
+  }
+}

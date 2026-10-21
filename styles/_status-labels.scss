@@ -1,0 +1,423 @@
+/* Status labels ("DEV" etc) for non-enabled features ----------------------- */
+
+.status {
+  cursor: help;
+  padding: 1px 2px;
+  font-weight: normal;
+  text-indent: 0;
+}
+.status.not_enabled {
+  /* flask icon for "not yet enabled" features */
+  color: $warning;
+}
+.status.removed {
+  /* trash icon for removed features */
+  color: $danger;
+}
+
+/* "Topic by Label" browsing ------------------------------------------------ */
+
+.labels-wrap {
+  ul::before {
+    content: "\f02c";
+    font-family: FontAwesome;
+    font-size: 1.5rem;
+  }
+  .list-inline-item {
+    margin-top: 0.5rem;
+  }
+}
+.pg-category {
+  color: $gray-400;
+
+  &::after {
+    content: "\f105"; /* fontawesome angle-right */
+    font-family: FontAwesome;
+    padding-left: 5px;
+  }
+}
+
+.label {
+  border-radius: 100px;
+  border-width: 0;
+  padding: .5rem 1rem;
+  font-weight: bold;
+  text-decoration: none !important;
+  text-align: center;
+  white-space: nowrap;
+
+  .badge-pill {
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    margin-left: 0.5rem;
+    font-weight: 400;
+    line-height: 23px;
+    font-size: 16px;
+    padding: 0;
+    margin-top: -2px;
+  }
+
+  // default, uncolored labels (gray)
+  background-color: $gray-900;
+  color: $gray-300;
+
+  html.light & {
+    background-color: $gray-200;
+    color: $gray-800;
+    .badge-pill {
+      color: $gray-200;
+      background-color: $gray-800;
+    }
+    &:hover {
+      background-color: $gray-300;
+      color: $gray-900;
+      .badge-pill {
+        color: $gray-300;
+        background-color: $gray-900;
+      }
+    }
+  }
+
+  .badge-pill {
+    color: $gray-900;
+    background-color: $gray-300;
+  }
+
+  &:hover {
+    color: $gray-200;
+    background-color: $gray-800;
+
+    .badge-pill {
+      color: $gray-800;
+      background-color: $gray-200;
+    }
+  }
+
+  @mixin chip-indigo {
+    background-color: $blue-purple-500;
+    color: $blue-purple-200;
+    .badge-pill {
+      color: $blue-purple-500;
+      background-color: $blue-purple-200;
+    }
+    &:hover {
+      background-color: $blue-purple-400;
+      color: $blue-purple-200;
+      .badge-pill {
+        color: $blue-purple-400;
+        background-color: $blue-purple-200;
+      }
+    }
+
+    html.light & {
+      background-color: $blue-purple-200;
+      color: $blue-purple-500;
+      .badge-pill {
+        color: $blue-purple-200;
+        background-color: $blue-purple-500;
+      }
+      &:hover {
+        background-color: $blue-purple-300;
+        color: $blue-purple-500;
+        .badge-pill {
+          color: $blue-purple-300;
+          background-color: $blue-purple-500;
+        }
+      }
+    }
+  }
+
+  @mixin chip-green {
+    background-color: $green-500;
+    color: $green-100;
+    .badge-pill {
+      background-color: $green-200;
+      color: $green-500;
+    }
+    &:hover {
+      background-color: $green-400;
+      color: $green-100;
+      .badge-pill {
+        background-color: $green-100;
+        color: $green-400;
+      }
+    }
+
+    html.light & {
+      background-color: $green-100;
+      color: $green-500;
+      .badge-pill {
+        color: $green-100;
+        background-color: $green-500;
+      }
+      &:hover {
+        background-color: $green-200;
+        color: $black;
+        .badge-pill {
+          color: $green-200;
+          background-color: $black;
+        }
+      }
+    }
+  }
+
+  @mixin chip-purple {
+    background-color: $red-purple-900;
+    color: $red-purple-300;
+    .badge-pill {
+      background-color: $red-purple-300;
+      color: $red-purple-900;
+    }
+    &:hover {
+      background-color: $red-purple-800;
+      color: $red-purple-200;
+      .badge-pill {
+        background-color: $red-purple-200;
+        color: $red-purple-800;
+      }
+    }
+
+    html.light & {
+      background-color: $red-purple-200;
+      color: $red-purple-800;
+      .badge-pill {
+        color: $red-purple-200;
+        background-color: $red-purple-800;
+      }
+      &:hover {
+        background-color: $red-purple-300;
+        color: $red-purple-900;
+        .badge-pill {
+          color: $red-purple-300;
+          background-color: $red-purple-900;
+        }
+      }
+    }
+  }
+
+  @mixin chip-yellow {
+    background-color: $yellow-600;
+    color: $white;
+    .badge-pill {
+      background-color: $yellow-600;
+      color: $yellow-500;
+    }
+    &:hover {
+      background-color: $yellow-500;
+      color: $white;
+      .badge-pill {
+        background-color: $yellow-200;
+        color: $yellow-400;
+      }
+    }
+
+    html.light & {
+      background-color: $yellow-100;
+      color: $yellow-600;
+      .badge-pill {
+        color: $yellow-200;
+        background-color: $yellow-500;
+      }
+      &:hover {
+        background-color: $yellow-200;
+        color: $yellow-600;
+        .badge-pill {
+          color: $yellow-300;
+          background-color: $yellow-500;
+        }
+      }
+    }
+  }
+
+  @mixin chip-blue {
+    background-color: $blue-500;
+    color: $blue-100;
+    .badge-pill {
+      background-color: $blue-300;
+      color: $blue-500;
+    }
+    &:hover {
+      background-color: $blue-400;
+      color: $blue-100;
+      .badge-pill {
+        background-color: $blue-200;
+        color: $blue-400;
+      }
+    }
+
+    html.light & {
+      background-color: $blue-100;
+      color: $blue-500;
+      .badge-pill {
+        color: $blue-200;
+        background-color: $blue-400;
+      }
+      &:hover {
+        background-color: $blue-200;
+        color: $blue-500;
+        .badge-pill {
+          color: $blue-300;
+          background-color: $blue-500;
+        }
+      }
+    }
+  }
+
+  @mixin chip-orange {
+    background-color: $orange-900;
+    color: $orange-300;
+    .badge-pill {
+      background-color: $orange-300;
+      color: $orange-900;
+    }
+    &:hover {
+      background-color: $orange-800;
+      color: $orange-200;
+      .badge-pill {
+        background-color: $orange-200;
+        color: $orange-800;
+      }
+    }
+
+    html.light & {
+      background-color: $orange-200;
+      color: $orange-800;
+      .badge-pill {
+        color: $orange-200;
+        background-color: $orange-800;
+      }
+      &:hover {
+        background-color: $orange-300;
+        color: $orange-900;
+        .badge-pill {
+          color: $orange-300;
+          background-color: $orange-900;
+        }
+      }
+    }
+  }
+
+  @mixin chip-magenta {
+    background-color: $magenta-500;
+    color: $white;
+    .badge-pill {
+      background-color: $magenta-300;
+      color: $magenta-500;
+    }
+    &:hover {
+      background-color: $magenta-400;
+      color: $white;
+      .badge-pill {
+        background-color: $magenta-200;
+        color: $magenta-400;
+      }
+    }
+
+    html.light & {
+      background-color: $magenta-100;
+      color: $orange-800;
+      .badge-pill {
+        color: $magenta-200;
+        background-color: $magenta-400;
+      }
+      &:hover {
+        background-color: $magenta-200;
+        color: $magenta-500;
+        .badge-pill {
+          color: $magenta-300;
+          background-color: $magenta-500;
+        }
+      }
+    }
+  }
+
+  &.label-accounts,
+  &.label-payment-channels,
+  &.label-amm,
+  &.label-アカウント,
+  &.label-payment-channel,
+  &.label-use-infrastructure,
+  &.label-use-security,
+  &.blog-category-development,
+  &.chip-indigo {
+    @include chip-indigo;
+  }
+
+  &.label-blockchain,
+  &.label-xrp,
+  &.label-ブロックチェーン,
+  &.label-non-fungible-tokens-nfts,
+  &.label-use-nfts,
+  &.blog-category-release_notes,
+  &.blog-category-features,
+  &.chip-green {
+    @include chip-green;
+  }
+
+  &.label-checks,
+  &.label-core-server,
+  &.label-コアサーバ,
+  &.label-use-interoperability,
+  &.label-use-web_monetization,
+  &.blog-category-gateway_bulletins,
+  &.chip-purple  {
+    @include chip-purple;
+  }
+
+  &.label-cross-currency,
+  &.label-security,
+  &.label-クロスカレンシー,
+  &.label-セキュリティ,
+  &.label-use-gaming,
+  &.label-use-defi,
+  &.blog-category-amendments,
+  &.chip-yellow {
+    @include chip-yellow;
+  }
+
+  &.label-decentralized-exchange,
+  &.label-smart-contracts,
+  &.label-transaction-sending,
+  &.label-分散型取引所,
+  &.label-スマートコントラクト,
+  &.label-トランザクション送信,
+  &.label-use-developer_tooling,
+  &.label-use-payments,
+  &.blog-category-developer_reflections,
+  &.blog-category-case_study,
+  &.chip-blue {
+    @include chip-blue;
+  }
+
+  &.label-escrow,
+  &.label-tokens,
+  &.label-development,
+  &.label-トークン,
+  &.label-開発,
+  &.label-use-wallet,
+  &.label-use-sustainability,
+  &.blog-category-advisories,
+  &.blog-category-security,
+  &.chip-orange {
+    @include chip-orange;
+  }
+
+  &.label-fees,
+  &.label-payments,
+  &.label-data-retention,
+  &.label-手数料,
+  &.label-支払い,
+  &.label-データ保持,
+  &.label-use-exchanges,
+  &.label-use-custody,
+  &.chip-magenta {
+    @include chip-magenta;
+  }
+}
+
+.tag-cloud {
+  .list-inline-item {
+    margin-top: 1.5rem;
+  }
+}

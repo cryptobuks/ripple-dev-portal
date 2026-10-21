@@ -1,0 +1,1863 @@
+# Docs redirects for moved pages -----------------------------------------------
+/docs/concepts/tokens/fungible-tokens/deep-freeze:
+    to: /docs/concepts/tokens/fungible-tokens/freezes/
+# (not associated with a major reorg)
+/docs/tutorials/compliance-features/create-permissioned-domains-in-javascript:
+    to: /docs/tutorials/compliance-features/manage-permissioned-domains/
+/docs/tutorials/defi/dex/trade-with-auction-slot-in-javascript/:
+    to: /docs/tutorials/defi/dex/use-amm-auction-slot-for-lower-fees/
+/resources/contribute-documentation/tutorial-structure/:
+    to: /resources/contribute-documentation/tutorial-guidelines/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/use-an-escrow-as-a-smart-contract:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+/docs/references/protocol/transactions/pseudo-transaction-types/pseudo-transaction-types/:
+    to: /docs/references/protocol/transactions/pseudo-transaction-types/
+/docs/concepts/tokens/transfer-fees/:
+    to: /docs/concepts/tokens/fungible-tokens/transfer-fees/
+/docs/infrastructure/configuration/data-retention/configure-history-sharding/:
+    to: /docs/infrastructure/configuration/data-retention/
+/docs/infrastructure/configuration/data-retention/history-sharding/:
+    to: /docs/infrastructure/configuration/data-retention/
+/docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/node_to_shard/:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+/docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/crawl_shards/:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+/docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/download_shard/:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+/docs/infrastructure/installation/rippled-1-3-migration-instructions/:
+    to: /docs/infrastructure/installation/
+/docs/infrastructure/installation/update-rippled-manually-on-centos-rhel/:
+    to: /docs/infrastructure/installation/update-xrpld-manually-on-rhel/
+/docs/infrastructure/installation/install-rippled-on-centos-rhel-with-yum/:
+    to: /docs/infrastructure/installation/install-xrpld-on-rhel/
+/docs/concepts/xrpl-sidechains/price-oracles/:
+    to: /docs/concepts/decentralized-storage/price-oracles/
+/docs/concepts/accounts/decentralized-identifiers/:
+    to: /docs/concepts/decentralized-storage/decentralized-identifiers/
+/docs/tutorials/javascript/trade-on-ledger/:
+    to: /docs/tutorials/defi/dex/trade-in-the-decentralized-exchange/
+/docs/tutorials/javascript/trade-on-ledger/earn-passive-income-as-a-liquidity-provider:
+    to: /docs/tutorials/defi/dex/add-assets-to-amm-in-javascript/
+/docs/tutorials/javascript/trade-on-ledger/use-amm-auction-slot-for-lower-fees:
+    to: /docs/tutorials/defi/dex/trade-with-auction-slot-in-javascript/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/look-up-checks-by-recipient:
+    to: /docs/tutorials/payments/look-up-checks/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/look-up-checks-by-sender:
+    to: /docs/tutorials/payments/look-up-checks/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/use-checks:
+    to: /docs/tutorials/
+/docs/references/http-websocket-apis/public-api-methods/clio-server:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-methods
+/docs/references/protocol/transactions/transaction-results/transaction-results:
+    to: /docs/references/protocol/transactions/transaction-results
+
+# Docs redirects for Tutorials IAv4: -------------------------------------------
+
+/docs/tutorials/python/build-apps/credential-issuing-service/:
+    to: /docs/tutorials/sample-apps/credential-issuing-service-in-python/
+/docs/tutorials/python/build-apps/build-a-desktop-wallet-in-python/:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-python/
+/docs/tutorials/python/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-python/
+/docs/tutorials/python/send-payments/send-and-cash-checks/:
+    to: /docs/tutorials/payments/send-a-check/
+/docs/tutorials/python/send-payments/create-time-based-escrows/:
+    to: /docs/tutorials/payments/send-a-timed-escrow/
+/docs/tutorials/python/send-payments/create-trust-line-send-currency/:
+    to: /docs/tutorials/payments/create-trust-line-send-currency-in-python/
+/docs/tutorials/python/send-payments/create-accounts-send-xrp/:
+    to: /docs/tutorials/payments/send-xrp/
+/docs/tutorials/python/send-payments/create-conditional-escrows/:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+/docs/tutorials/python/nfts/assign-an-authorized-minter/:
+    to: /docs/tutorials/tokens/nfts/assign-an-authorized-minter-py/
+/docs/tutorials/python/nfts/broker-an-nft-sale/:
+    to: /docs/tutorials/tokens/nfts/broker-an-nft-sale-py/
+/docs/tutorials/python/nfts/mint-and-burn-nfts/:
+    to: /docs/tutorials/tokens/nfts/mint-and-burn-nfts-py/
+/docs/tutorials/python/nfts/batch-mint-nfts/:
+    to: /docs/tutorials/tokens/nfts/batch-mint-nfts-py/
+/docs/tutorials/python/nfts/transfer-nfts/:
+    to: /docs/tutorials/tokens/nfts/transfer-nfts-py/
+/docs/tutorials/python/compliance/verify-credential/:
+    to: /docs/tutorials/compliance-features/verify-credentials/
+/docs/tutorials/javascript/build-apps/build-a-desktop-wallet-in-javascript/:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-javascript/
+/docs/tutorials/javascript/build-apps/build-a-browser-wallet-in-javascript/:
+    to: /docs/tutorials/sample-apps/build-a-browser-wallet-in-javascript/
+/docs/tutorials/javascript/send-payments/sending-mpts/:
+    to: /docs/tutorials/payments/send-an-mpt/
+/docs/tutorials/tokens/mpts/sending-mpts-in-javascript/:
+    to: /docs/tutorials/payments/send-an-mpt/
+/docs/tutorials/tokens/mpts/send-an-mpt/:
+    to: /docs/tutorials/payments/send-an-mpt/
+/docs/tutorials/javascript/send-payments/create-offers/:
+    to: /docs/tutorials/defi/dex/trade-in-the-decentralized-exchange/
+/docs/tutorials/javascript/compliance/create-permissioned-domains/:
+    to: /docs/tutorials/compliance-features/create-permissioned-domains-in-javascript/
+/docs/tutorials/javascript/amm/add-assets-to-amm/:
+    to: /docs/tutorials/defi/dex/add-assets-to-amm-in-javascript/
+/docs/tutorials/javascript/amm/trade-with-auction-slot/:
+    to: /docs/tutorials/defi/dex/trade-with-auction-slot-in-javascript/
+/docs/tutorials/javascript/amm/create-an-amm/:
+    to: /docs/tutorials/defi/dex/create-an-automated-market-maker/
+/docs/tutorials/how-tos/send-xrp/:
+    to: /docs/tutorials/payments/send-xrp/
+/docs/tutorials/how-tos/testing-devnet-features/:
+    to: /docs/tutorials/advanced-developer-topics/protocol-development/testing-devnet-features/
+/docs/tutorials/how-tos/use-tokens/enact-global-freeze/:
+    to: /docs/tutorials/tokens/fungible-tokens/enact-global-freeze/
+/docs/tutorials/how-tos/use-tokens/freeze-a-trust-line/:
+    to: /docs/tutorials/tokens/fungible-tokens/freeze-a-trust-line/
+/docs/tutorials/how-tos/use-tokens/issue-a-multi-purpose-token/:
+    to: /docs/tutorials/tokens/mpts/issue-a-multi-purpose-token/
+/docs/tutorials/how-tos/use-tokens/issue-a-fungible-token/:
+    to: /docs/tutorials/tokens/fungible-tokens/issue-a-fungible-token/
+/docs/tutorials/how-tos/use-tokens/enable-no-freeze/:
+    to: /docs/tutorials/tokens/fungible-tokens/enable-no-freeze/
+/docs/tutorials/how-tos/use-tokens/trade-in-the-decentralized-exchange/:
+    to: /docs/tutorials/defi/dex/trade-in-the-decentralized-exchange/
+/docs/tutorials/how-tos/use-tokens/create-an-automated-market-maker/:
+    to: /docs/tutorials/defi/dex/create-an-automated-market-maker/
+/docs/tutorials/how-tos/use-xrpl-sidechains/submit-cross-chain-transaction/:
+    to: /docs/tutorials/programmability/submit-cross-chain-transaction/
+/docs/tutorials/how-tos/use-xrpl-sidechains/set-up-xrp-xrp-bridge/:
+    to: /docs/tutorials/programmability/set-up-xrp-xrp-bridge/
+/docs/tutorials/how-tos/use-xrpl-sidechains/set-up-iou-iou-bridge/:
+    to: /docs/tutorials/programmability/set-up-iou-iou-bridge/
+/docs/tutorials/how-tos/manage-account-settings/disable-master-key-pair/:
+    to: /docs/tutorials/best-practices/key-management/disable-master-key-pair/
+/docs/tutorials/how-tos/manage-account-settings/send-a-multi-signed-transaction/:
+    to: /docs/tutorials/best-practices/key-management/send-a-multi-signed-transaction/
+/docs/tutorials/how-tos/manage-account-settings/offline-account-setup/:
+    to: /docs/tutorials/best-practices/key-management/offline-account-setup/
+/docs/tutorials/how-tos/manage-account-settings/assign-a-regular-key-pair/:
+    to: /docs/tutorials/best-practices/key-management/assign-a-regular-key-pair/
+/docs/tutorials/how-tos/manage-account-settings/set-up-multi-signing/:
+    to: /docs/tutorials/best-practices/key-management/set-up-multi-signing/
+/docs/tutorials/how-tos/manage-account-settings/change-or-remove-a-regular-key-pair/:
+    to: /docs/tutorials/best-practices/key-management/remove-a-regular-key-pair/
+/docs/tutorials/how-tos/manage-account-settings/use-tickets/:
+    to: /docs/tutorials/best-practices/transaction-sending/use-tickets/
+/docs/tutorials/how-tos/manage-account-settings/require-destination-tags/:
+    to: /docs/tutorials/compliance-features/require-destination-tags/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/cancel-an-expired-escrow/:
+    to: /docs/tutorials/payments/cancel-an-expired-escrow/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/send-a-conditional-escrow/:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/send-a-timed-escrow/:
+    to: /docs/tutorials/payments/send-a-timed-escrow/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/look-up-escrows/:
+    to: /docs/tutorials/payments/look-up-escrows/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/send-a-check/:
+    to: /docs/tutorials/payments/send-a-check/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/cash-a-check-for-an-exact-amount/:
+    to: /docs/tutorials/payments/cash-a-check-for-an-exact-amount/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/cancel-a-check/:
+    to: /docs/tutorials/payments/cancel-a-check/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/cash-a-check-for-a-flexible-amount/:
+    to: /docs/tutorials/payments/cash-a-check-for-a-flexible-amount/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/look-up-checks/:
+    to: /docs/tutorials/payments/look-up-checks/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-payment-channels/open-a-payment-channel-to-enable-an-inter-exchange-network/:
+    to: /docs/tutorials/payments/use-payment-channels/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/manage-a-loan/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/manage-a-loan/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/claw-back-cover/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/claw-back-cover/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/create-a-loan-broker/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/create-a-loan-broker/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/deposit-and-withdraw-cover/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/deposit-and-withdraw-cover/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/pay-off-a-loan/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/pay-off-a-loan/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/create-a-loan/:
+    to: /docs/tutorials/defi/lending/use-the-lending-protocol/create-a-loan/
+/docs/tutorials/how-tos/set-up-lending/use-single-asset-vaults/withdraw-from-a-vault/:
+    to: /docs/tutorials/defi/lending/use-single-asset-vaults/withdraw-from-a-vault/
+/docs/tutorials/how-tos/set-up-lending/use-single-asset-vaults/create-a-single-asset-vault/:
+    to: /docs/tutorials/defi/lending/use-single-asset-vaults/create-a-single-asset-vault/
+/docs/tutorials/how-tos/set-up-lending/use-single-asset-vaults/deposit-into-a-vault/:
+    to: /docs/tutorials/defi/lending/use-single-asset-vaults/deposit-into-a-vault/
+/docs/tutorials/how-tos/use-batch-transactions/send-a-multi-account-batch-transaction/:
+    to: /docs/tutorials/best-practices/transaction-sending/send-a-multi-account-batch-transaction/
+/docs/tutorials/how-tos/use-batch-transactions/send-a-single-account-batch-transaction/:
+    to: /docs/tutorials/best-practices/transaction-sending/send-a-single-account-batch-transaction/
+/docs/tutorials/http-websocket-apis/build-apps/monitor-incoming-payments-with-websocket/:
+    to: /docs/tutorials/advanced-developer-topics/client-library-development/monitor-incoming-payments-with-websocket/
+/docs/tutorials/php/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-php/
+/docs/tutorials/javascript/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-javascript/
+/docs/tutorials/go/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-go/
+/docs/tutorials/java/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-java/
+/docs/tutorials/http-websocket-apis/build-apps/get-started/:
+    to: /docs/tutorials/get-started/get-started-http-websocket-apis/
+/docs/tutorials/javascript/build-apps/credential-issuing-service/:
+    to: /docs/tutorials/sample-apps/credential-issuing-service-in-javascript/
+/docs/tutorials/javascript/send-payments/send-and-cash-checks/:
+    to: /docs/tutorials/payments/send-a-check/
+/docs/tutorials/javascript/send-payments/create-time-based-escrows/:
+    to: /docs/tutorials/payments/send-a-timed-escrow/
+/docs/tutorials/javascript/send-payments/create-trust-line-send-currency/:
+    to: /docs/tutorials/payments/create-trust-line-send-currency-in-javascript/
+/docs/tutorials/javascript/send-payments/create-accounts-send-xrp/:
+    to: /docs/tutorials/payments/send-xrp/
+/docs/tutorials/javascript/send-payments/create-conditional-escrows/:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+/docs/tutorials/javascript/nfts/assign-an-authorized-minter/:
+    to: /docs/tutorials/tokens/nfts/assign-an-authorized-minter-js/
+/docs/tutorials/javascript/nfts/broker-an-nft-sale/:
+    to: /docs/tutorials/tokens/nfts/broker-an-nft-sale-js/
+/docs/tutorials/javascript/nfts/mint-and-burn-nfts/:
+    to: /docs/tutorials/tokens/nfts/mint-and-burn-nfts-js/
+/docs/tutorials/javascript/nfts/batch-mint-nfts/:
+    to: /docs/tutorials/tokens/nfts/batch-mint-nfts-js/
+/docs/tutorials/javascript/nfts/transfer-nfts/:
+    to: /docs/tutorials/tokens/nfts/transfer-nfts-js/
+/docs/tutorials/javascript/compliance/verify-credential/:
+    to: /docs/tutorials/compliance-features/verify-credentials/
+/docs/tutorials/python/:
+    to: /docs/tutorials/
+/docs/tutorials/python/build-apps/:
+    to: /docs/tutorials/
+/docs/tutorials/python/send-payments/:
+    to: /docs/tutorials/
+/docs/tutorials/python/nfts/:
+    to: /docs/tutorials/
+/docs/tutorials/python/compliance/:
+    to: /docs/tutorials/
+/docs/tutorials/php/:
+    to: /docs/tutorials/
+/docs/tutorials/php/build-apps/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/build-apps/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/send-payments/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/nfts/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/compliance/:
+    to: /docs/tutorials/
+/docs/tutorials/javascript/amm/:
+    to: /docs/tutorials/
+/docs/tutorials/go/:
+    to: /docs/tutorials/
+/docs/tutorials/go/build-apps/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-tokens/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-xrpl-sidechains/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/manage-account-settings/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-specialized-payment-types/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-escrows/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-checks/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-specialized-payment-types/use-payment-channels/:
+    to: /docs/tutorials/payments/use-payment-channels/
+/docs/tutorials/how-tos/set-up-lending/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/set-up-lending/use-the-lending-protocol/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/set-up-lending/use-single-asset-vaults/:
+    to: /docs/tutorials/
+/docs/tutorials/how-tos/use-batch-transactions/:
+    to: /docs/tutorials/
+/docs/tutorials/java/:
+    to: /docs/tutorials/
+/docs/tutorials/java/build-apps/:
+    to: /docs/tutorials/
+/docs/tutorials/http-websocket-apis/:
+    to: /docs/tutorials/
+/docs/tutorials/http-websocket-apis/build-apps/:
+    to: /docs/tutorials/
+
+# Redirects from pre-Redocly .html URLs ----------------------------------------
+xrp-ledger-rpc-tool.html:
+    to: /resources/dev-tools/rpc-tool
+xrp-ledger-toml-checker.html:
+    to: /resources/dev-tools/xrp-ledger-toml-checker
+domain-verification-checker.html:
+    to: /resources/dev-tools/domain-verifier
+websocket-api-tool.html:
+    to: /resources/dev-tools/websocket-api-tool
+xrp-testnet-faucet.html:
+    to: /resources/dev-tools/xrp-faucets
+xrp-test-net-faucet.html:
+    to: /resources/dev-tools/xrp-faucets
+/resources/xrp-faucets:
+    to: /resources/dev-tools/xrp-faucets
+tx-sender.html:
+    to: /resources/dev-tools/tx-sender
+index.html:
+    to: /
+uses.html:
+    to: /about/uses
+docs.html:
+    to: /docs/
+tutorials.html:
+    to: /docs/tutorials/
+xrp-ledger-overview.html:
+    to: /about/
+xrp-overview.html:
+    to: /about/xrp
+overview.html:
+    to: /about/
+history.html:
+    to: /about/history
+impact.html:
+    to: /about/impact
+carbon-calculator.html:
+    to: /about/impact
+contribute.html:
+    to: /community
+events.html:
+    to: /community/events
+ambassadors.html:
+    to: https://ripple.com/impact/ubri/
+community/ambassadors:
+    to: https://ripple.com/impact/ubri/
+developer-funding.html:
+    to: /community/developer-funding
+code-samples.html:
+    to: /resources/code-samples
+dev-tools.html:
+    to: /resources/dev-tools/
+dev-tools-dev-tools.html:
+    to: /resources/dev-tools/
+validator-domain-verifier.html:
+    to: /resources/dev-tools/domain-verifier/
+docs-index.html:
+    to: /docs/
+explore.html:
+    to: /about/
+wallet.html:
+    to: /about/xrp
+exchanges.html:
+    to: /about/xrp
+businesses.html:
+    to: /about/uses
+ripple-txt-validator.html:
+    to: /resources/dev-tools/xrp-ledger-toml-checker
+production-readiness.html:
+    to: /docs/tutorials
+get-started.html:
+    to: /docs/tutorials
+run-rippled-as-a-wallet-server.html:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-stock-server
+faq:
+    to: /about/faq
+faq.html:
+    to: /about/faq
+privacy-policy.html:
+    to: /about/privacy-policy
+privacy-policy/:
+    to: /about/privacy-policy
+technical-faq.html:
+    to: /about/faq
+introduction.html:
+    to: /docs/introduction/
+what-is-the-xrp-ledger.html:
+    to: /docs/introduction/what-is-the-xrp-ledger
+what-is-xrp.html:
+    to: /docs/introduction/what-is-xrp
+xrp.html:
+    to: /docs/introduction/what-is-xrp
+crypto-wallets.html:
+    to: /docs/introduction/crypto-wallets
+txn-and-requests.html:
+    to: /docs/introduction/transactions-and-requests
+software-ecosystem.html:
+    to: /docs/introduction/software-ecosystem
+use-cases.html:
+    to: /docs/use-cases/
+payments-uc.html:
+    to: /docs/use-cases/payments/
+peer-to-peer-payments-uc.html:
+    to: /docs/use-cases/payments/peer-to-peer-payments-uc
+restricting-deposits-uc.html:
+    to: /docs/use-cases/payments/restricting-deposits-uc
+escrow-uc.html:
+    to: /docs/use-cases/payments/smart-contracts-uc
+tokenization.html:
+    to: /docs/use-cases/tokenization/
+stablecoin-issuer.html:
+    to: /docs/use-cases/tokenization/stablecoin-issuer
+nft-mkt-overview.html:
+    to: /docs/use-cases/tokenization/nft-mkt-overview
+nftoken-marketplace.html:
+    to: /docs/use-cases/tokenization/nftoken-marketplace
+authorized-minter.html:
+    to: /docs/use-cases/tokenization/authorized-minter
+digital-artist.html:
+    to: /docs/use-cases/tokenization/digital-artist
+docs/use-cases/tokenization/real-world-assets.html:
+    to: /docs/use-cases/tokenization
+docs/use-cases/tokenization/real-world-assets:
+    to: /docs/use-cases/tokenization    
+defi-uc.html:
+    to: /docs/use-cases/defi/
+algorithmic-trading.html:
+    to: /docs/use-cases/defi/algorithmic-trading
+list-xrp-as-an-exchange.html:
+    to: /docs/use-cases/defi/list-xrp-as-an-exchange
+concepts.html:
+    to: /docs/concepts/
+networks-and-servers.html:
+    to: /docs/concepts/networks-and-servers/
+xrpl-servers.html:
+    to: /docs/concepts/networks-and-servers/
+rippled-server-modes.html:
+    to: /docs/concepts/networks-and-servers/xrpld-server-modes
+clustering.html:
+    to: /docs/concepts/networks-and-servers/clustering
+ledger-history.html:
+    to: /docs/concepts/networks-and-servers/ledger-history
+peer-protocol.html:
+    to: /docs/concepts/networks-and-servers/peer-protocol
+transaction-censorship-detection.html:
+    to: /docs/concepts/networks-and-servers/transaction-censorship-detection
+parallel-networks.html:
+    to: /docs/concepts/networks-and-servers/parallel-networks
+amendments.html:
+    to: /docs/concepts/networks-and-servers/amendments
+the-clio-server.html:
+    to: /docs/concepts/networks-and-servers/the-clio-server
+consensus.html:
+    to: /docs/concepts/consensus-protocol/
+consensus-structure.html:
+    to: /docs/concepts/consensus-protocol/consensus-structure
+consensus-principles-and-rules.html:
+    to: /docs/concepts/consensus-protocol/consensus-principles-and-rules
+consensus-protections.html:
+    to: /docs/concepts/consensus-protocol/consensus-protections
+invariant-checking.html:
+    to: /docs/concepts/consensus-protocol/invariant-checking
+fee-voting.html:
+    to: /docs/concepts/consensus-protocol/fee-voting
+negative-unl.html:
+    to: /docs/concepts/consensus-protocol/negative-unl
+consensus-research.html:
+    to: /docs/concepts/consensus-protocol/consensus-research
+ledgers.html:
+    to: /docs/concepts/ledgers/
+ledger-structure.html:
+    to: /docs/concepts/ledgers/ledger-structure
+open-closed-validated-ledgers.html:
+    to: /docs/concepts/ledgers/open-closed-validated-ledgers
+ledger-close-times.html:
+    to: /docs/concepts/ledgers/ledger-close-times
+transactions.html:
+    to: /docs/concepts/transactions/
+fees.html:
+    to: /docs/concepts/transactions/fees
+reliable-transaction-submission.html:
+    to: /docs/concepts/transactions/reliable-transaction-submission
+secure-signing.html:
+    to: /docs/concepts/transactions/secure-signing
+source-and-destination-tags.html:
+    to: /docs/concepts/transactions/source-and-destination-tags
+transaction-cost.html:
+    to: /docs/concepts/transactions/transaction-cost
+transaction-queue.html:
+    to: /docs/concepts/transactions/transaction-queue
+finality-of-results.html:
+    to: /docs/concepts/transactions/finality-of-results/
+look-up-transaction-results.html:
+    to: /docs/concepts/transactions/finality-of-results/look-up-transaction-results
+transaction-malleability.html:
+    to: /docs/concepts/transactions/finality-of-results/transaction-malleability
+canceling-a-transaction.html:
+    to: /docs/concepts/transactions/finality-of-results/canceling-a-transaction
+payment-types.html:
+    to: /docs/concepts/payment-types/
+direct-xrp-payments.html:
+    to: /docs/concepts/payment-types/direct-xrp-payments
+cross-currency-payments.html:
+    to: /docs/concepts/payment-types/cross-currency-payments
+checks.html:
+    to: /docs/concepts/payment-types/checks
+escrow.html:
+    to: /docs/concepts/payment-types/escrow
+partial-payments.html:
+    to: /docs/concepts/payment-types/partial-payments
+payment-channels.html:
+    to: /docs/concepts/payment-types/payment-channels
+robustly-monitoring-for-payments.html:
+    to: /docs/concepts/payment-types/robustly-monitoring-for-payments
+sending-payments-to-customers.html:
+    to: /docs/concepts/payment-types/sending-payments-to-customers
+bouncing-payments.html:
+    to: /docs/concepts/payment-types/bouncing-payments
+tokens.html:
+    to: /docs/concepts/tokens/
+trust-lines-and-issuing.html:
+    to: /docs/concepts/tokens/fungible-tokens/
+authorized-trust-lines.html:
+    to: /docs/concepts/tokens/fungible-tokens/authorized-trust-lines
+stablecoins.html:
+    to: /docs/concepts/tokens/fungible-tokens/stablecoins/
+stablecoin-settings.html:
+    to: /docs/concepts/tokens/fungible-tokens/stablecoins/settings
+stablecoin-configuration.html:
+    to: /docs/concepts/tokens/fungible-tokens/stablecoins/configuration
+stablecoin-precautions.html:
+    to: /docs/concepts/tokens/fungible-tokens/stablecoins/precautions
+stablecoin-compliance-guidelines.html:
+    to: /docs/concepts/tokens/fungible-tokens/stablecoins/compliance-guidelines
+clawing-back-tokens.html:
+    to: /docs/concepts/tokens/fungible-tokens/clawing-back-tokens
+freezes.html:
+    to: /docs/concepts/tokens/fungible-tokens/freezes
+common-misconceptions-about-freezes.html:
+    to: /docs/concepts/tokens/fungible-tokens/common-misconceptions-about-freezes
+paths.html:
+    to: /docs/concepts/tokens/fungible-tokens/paths
+rippling.html:
+    to: /docs/concepts/tokens/fungible-tokens/rippling
+non-fungible-tokens.html:
+    to: /docs/concepts/tokens/nfts/
+nft-storage.html:
+    to: /docs/concepts/tokens/nfts/payload-storage
+non-fungible-token-transfers.html:
+    to: /docs/concepts/tokens/nfts/trading
+nft-reserve-requirements.html:
+    to: /docs/concepts/tokens/nfts/reserve-requirements
+nftoken-batch-minting.html:
+    to: /docs/concepts/tokens/nfts/batch-minting
+nftoken-authorized-minting.html:
+    to: /docs/concepts/tokens/nfts/authorizing-another-minter
+nftoken-auctions.html:
+    to: /docs/concepts/tokens/nfts/running-an-nft-auction
+nft-collections.html:
+    to: /docs/concepts/tokens/nfts/collections
+nft-fixed-supply.html:
+    to: /docs/concepts/tokens/nfts/guaranteeing-a-fixed-supply
+nft-apis.html:
+    to: /docs/concepts/tokens/nfts/nft-apis
+transfer-fees.html:
+    to: /docs/concepts/tokens/transfer-fees
+demurrage.html:
+    to: /docs/concepts/tokens/fungible-tokens/demurrage
+decentralized-exchange.html:
+    to: /docs/concepts/tokens/decentralized-exchange/
+offers.html:
+    to: /docs/concepts/tokens/decentralized-exchange/offers
+autobridging.html:
+    to: /docs/concepts/tokens/decentralized-exchange/autobridging
+ticksize.html:
+    to: /docs/concepts/tokens/decentralized-exchange/ticksize
+automated-market-makers.html:
+    to: /docs/concepts/tokens/decentralized-exchange/automated-market-makers
+accounts.html:
+    to: /docs/concepts/accounts/
+account-types.html:
+    to: /docs/concepts/accounts/account-types
+deleting-accounts.html:
+    to: /docs/concepts/accounts/deleting-accounts
+reserves.html:
+    to: /docs/concepts/accounts/reserves
+addresses.html:
+    to: /docs/concepts/accounts/addresses
+cryptographic-keys.html:
+    to: /docs/concepts/accounts/cryptographic-keys
+multi-signing.html:
+    to: /docs/concepts/accounts/multi-signing
+depositauth.html:
+    to: /docs/concepts/accounts/depositauth
+tickets.html:
+    to: /docs/concepts/accounts/tickets
+decentralized-identifiers.html:
+    to: /docs/concepts/accounts/decentralized-identifiers
+intro-to-consensus.html:
+    to: /docs/concepts/consensus-protocol/
+set-up-secure-signing.html:
+    to: /docs/concepts/transactions/secure-signing
+transaction-basics.html:
+    to: /docs/concepts/transactions/
+become-an-xrp-ledger-gateway.html:
+    to: /docs/use-cases/tokenization/stablecoin-issuer
+consensus-network.html:
+    to: /docs/concepts/consensus-protocol/
+complex-payment-types.html:
+    to: /docs/concepts/payment-types/
+about-canceling-a-transaction.html:
+    to: /docs/concepts/transactions/finality-of-results/canceling-a-transaction
+issuing-and-operational-addresses.html:
+    to: /docs/concepts/accounts/account-types
+issued-currencies.html:
+    to: /docs/concepts/tokens/
+issued-currencies-overview.html:
+    to: /docs/concepts/tokens/
+federated-sidechains.html:
+    to: /docs/concepts/xrpl-sidechains/cross-chain-bridges
+xrpl-interoperability.html:
+    to: /docs/concepts/xrpl-sidechains/cross-chain-bridges
+intro-to-evm-sidechain.html:
+    to: https://docs.xrplevm.org/docs/evm-sidechain/intro-to-evm-sidechain/
+the-rippled-server.html:
+    to: /docs/concepts/networks-and-servers/
+nft-concepts.html:
+    to: /docs/concepts/tokens/nfts/
+nft-conceptual-overview.html:
+    to: /docs/concepts/tokens/nfts/
+xrpl-sidechains.html:
+    to: /docs/concepts/xrpl-sidechains/
+cross-chain-bridges.html:
+    to: /docs/concepts/xrpl-sidechains/cross-chain-bridges
+witness-servers.html:
+    to: /docs/concepts/xrpl-sidechains/witness-servers
+public-servers.html:
+    to: /docs/tutorials/public-servers
+python.html:
+    to: /docs/tutorials/
+get-started-using-python.html:
+    to: /docs/tutorials/get-started/get-started-python/
+docs/tutorials/python/get-started/:
+    to: /docs/tutorials/get-started/get-started-python/
+modular-tutorials-in-python.html:
+    to: /docs/tutorials/
+send-payments-using-python.html:
+    to: /docs/tutorials/
+py-create-accounts-send-xrp.html:
+    to: /docs/tutorials/payments/send-xrp/
+py-create-trustline-send-currency.html:
+    to: /docs/tutorials/payments/create-trust-line-send-currency-in-python/
+py-create-time-based-escrows.html:
+    to: /docs/tutorials/payments/send-a-timed-escrow/
+py-mint-and-burn-nfts.html:
+    to: /docs/tutorials/tokens/nfts/mint-and-burn-nfts-py/
+py-transfer-nfts.html:
+    to: /docs/tutorials/tokens/nfts/transfer-nfts-py/
+py-broker-sale.html:
+    to: /docs/tutorials/tokens/nfts/broker-an-nft-sale-py
+py-authorize-minter.html:
+    to: /docs/tutorials/tokens/nfts/assign-an-authorized-minter-py
+py-batch-minting.html:
+    to: /docs/tutorials/tokens/nfts/batch-mint-nfts-py
+build-a-desktop-wallet-in-python.html:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-python/
+javascript.html:
+    to: /docs/tutorials/
+get-started-using-javascript.html:
+    to: /docs/tutorials/get-started/get-started-javascript/
+docs/tutorials/javascript/get-started:
+    to: docs/tutorials/javascript/build-apps/get-started/
+docs/tutorials/javascript/get-started/:
+    to: docs/tutorials/javascript/build-apps/get-started/
+get-started-using-node-js.html:
+    to: /docs/tutorials/get-started/get-started-javascript/
+get-started-with-rippleapi-for-javascript.html:
+    to: /docs/tutorials/get-started/get-started-javascript/
+modular-tutorials-in-javascript.html:
+    to: /docs/tutorials/
+send-payments-using-javascript.html:
+    to: /docs/tutorials/
+create-accounts-send-xrp-using-javascript.html:
+    to: /docs/tutorials/payments/send-xrp/
+create-trustline-send-currency-using-javascript.html:
+    to: /docs/tutorials/payments/create-trust-line-send-currency-in-javascript
+create-time-based-escrows-using-javascript.html:
+    to: /docs/tutorials/payments/send-a-timed-escrow/
+create-conditional-escrows-using-javascript.html:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+nfts-using-javascript.html:
+    to: /docs/tutorials/
+nfts-using-python.html:
+    to: /docs/tutorials/
+mint-and-burn-nfts-using-javascript.html:
+    to: /docs/tutorials/tokens/nfts/mint-and-burn-nfts-js/
+transfer-nfts-using-javascript.html:
+    to: /docs/tutorials/tokens/nfts/transfer-nfts-js/
+broker-an-nft-sale-using-javascript.html:
+    to: /docs/tutorials/tokens/nfts/broker-an-nft-sale-js/
+assign-an-authorized-minter-using-javascript.html:
+    to: /docs/tutorials/tokens/nfts/assign-an-authorized-minter-js/
+batch-mint-nfts-using-javascript.html:
+    to: /docs/tutorials/tokens/nfts/batch-mint-nfts-js/
+build-a-browser-wallet-in-javascript.html:
+    to: /docs/tutorials/sample-apps/build-a-browser-wallet-in-javascript/
+build-a-browser-wallet-using-javascript.html:
+    to: /docs/tutorials/sample-apps/build-a-browser-wallet-in-javascript/
+docs/tutorials/javascript/build-a-browser-wallet-in-javascript:
+    to: docs/tutorials/javascript/build-apps/build-a-browser-wallet-in-javascript/
+docs/tutorials/javascript/build-a-browser-wallet-in-javascript/:
+    to: docs/tutorials/javascript/build-apps/build-a-browser-wallet-in-javascript/
+build-a-desktop-wallet-in-javascript.html:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-javascript/
+docs/tutorials/javascript/build-a-desktop-wallet-in-javascript:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-javascript/
+docs/tutorials/javascript/build-a-desktop-wallet-in-javascript/:
+    to: /docs/tutorials/sample-apps/build-a-desktop-wallet-in-javascript/
+java.html:
+    to: /docs/tutorials/
+get-started-using-java.html:
+    to: /docs/tutorials/get-started/get-started-java/
+docs/tutorials/java/get-started:
+    to: /docs/tutorials/get-started/get-started-java/
+docs/tutorials/java/get-started/:
+    to: /docs/tutorials/get-started/get-started-java/
+php.html:
+    to: /docs/tutorials/
+get-started-using-php.html:
+    to: /docs/tutorials/get-started/get-started-php/
+http-websocket-apis-tutorials.html:
+    to: /docs/tutorials/
+get-started-with-the-rippled-api.html:
+    to: /docs/tutorials/get-started/get-started-http-websocket-apis/
+get-started-using-http-websocket-apis.html:
+    to: /docs/tutorials/get-started/get-started-http-websocket-apis/
+docs/tutorials/http-websocket-apis/get-started:
+    to: /docs/tutorials/get-started/get-started-http-websocket-apis/
+docs/tutorials/http-websocket-apis/get-started/:
+    to: /docs/tutorials/get-started/get-started-http-websocket-apis/
+monitor-incoming-payments-with-websocket.html:
+    to: /docs/tutorials/advanced-developer-topics/client-library-development/monitor-incoming-payments-with-websocket/
+tasks.html:
+    to: /docs/tutorials/
+manage-account-settings.html:
+    to: /docs/tutorials/
+assign-a-regular-key-pair.html:
+    to: /docs/tutorials/best-practices/key-management/assign-a-regular-key-pair/
+change-or-remove-a-regular-key-pair.html:
+    to: /docs/tutorials/best-practices/key-management/remove-a-regular-key-pair/
+disable-master-key-pair.html:
+    to: /docs/tutorials/best-practices/key-management/disable-master-key-pair/
+set-up-multi-signing.html:
+    to: /docs/tutorials/best-practices/key-management/set-up-multi-signing/
+send-a-multi-signed-transaction.html:
+    to: /docs/tutorials/best-practices/key-management/send-a-multi-signed-transaction/
+require-destination-tags.html:
+    to: /docs/tutorials/compliance-features/require-destination-tags/
+offline-account-setup.html:
+    to: /docs/tutorials/best-practices/key-management/offline-account-setup/
+use-tickets.html:
+    to: /docs/tutorials/best-practices/transaction-sending/use-tickets/
+send-xrp.html:
+    to: /docs/tutorials/payments/send-xrp/
+use-specialized-payment-types.html:
+    to: /docs/tutorials/
+use-complex-payment-types.html:
+    to: /docs/tutorials/
+use-escrows.html:
+    to: /docs/tutorials/
+send-a-time-held-escrow.html:
+    to: /docs/tutorials/payments/send-a-timed-escrow
+send-a-conditionally-held-escrow.html:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+cancel-an-expired-escrow.html:
+    to: /docs/tutorials/payments/cancel-an-expired-escrow/
+look-up-escrows.html:
+    to: /docs/tutorials/payments/look-up-escrows/
+use-an-escrow-as-a-smart-contract.html:
+    to: /docs/tutorials/payments/send-a-conditional-escrow/
+use-payment-channels.html:
+    to: /docs/tutorials/payments/use-payment-channels/
+open-a-payment-channel-to-enable-an-inter-exchange-network.html:
+    to: /docs/tutorials/payments/use-payment-channels
+use-checks.html:
+    to: /docs/tutorials/how-tos/use-specialized-payment-types/use-checks/use-checks
+send-a-check.html:
+    to: /docs/tutorials/payments/send-a-check/
+cash-a-check-for-an-exact-amount.html:
+    to: /docs/tutorials/payments/cash-a-check-for-an-exact-amount/
+cash-a-check-for-a-flexible-amount.html:
+    to: /docs/tutorials/payments/cash-a-check-for-a-flexible-amount/
+cancel-a-check.html:
+    to: /docs/tutorials/payments/cancel-a-check/
+look-up-checks-by-sender.html:
+    to: /docs/tutorials/how-tos/use-specialized-payment-types/use-checks/look-up-checks-by-sender
+look-up-checks-by-recipient.html:
+    to: /docs/tutorials/how-tos/use-specialized-payment-types/use-checks/look-up-checks-by-recipient
+use-tokens.html:
+    to: /docs/tutorials/
+issue-a-fungible-token.html:
+    to: /docs/tutorials/tokens/fungible-tokens/issue-a-fungible-token/
+trade-in-the-decentralized-exchange.html:
+    to: /docs/tutorials/defi/dex/trade-in-the-decentralized-exchange/
+enable-no-freeze.html:
+    to: /docs/tutorials/tokens/fungible-tokens/enable-no-freeze/
+enact-global-freeze.html:
+    to: /docs/tutorials/tokens/fungible-tokens/enact-global-freeze/
+freeze-a-trust-line.html:
+    to: /docs/tutorials/tokens/fungible-tokens/freeze-a-trust-line/
+create-an-automated-market-maker.html:
+    to: /docs/tutorials/defi/dex/create-an-automated-market-maker/
+use-simple-xrp-payments.html:
+    to: /docs/tutorials/payments/send-xrp/
+cancel-or-skip-a-transaction.html:
+    to: /docs/concepts/transactions/finality-of-results/canceling-a-transaction
+evm-sidechains.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/intro-to-evm-sidechain/
+get-started-evm-sidechain.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/get-started-evm-sidechain/
+connect-metamask-to-xrpl-evm-sidechain.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/connect-metamask-to-xrpl-evm-sidechain/
+join-evm-sidechain-devnet.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/join-evm-sidechain-devnet/
+evm-sidechain-validator-security.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/evm-sidechain-validator-security/
+evm-sidechain-run-a-validator-node.html:
+    to: https://opensource.ripple.com/docs/evm-sidechain/evm-sidechain-run-a-validator-node/
+use-xrpl-sidechains.html:
+    to: /docs/tutorials/
+set-up-xrp-xrp-bridge.html:
+    to: /docs/tutorials/programmability/set-up-xrp-xrp-bridge/
+set-up-iou-iou-bridge.html:
+    to: /docs/tutorials/programmability/set-up-iou-iou-bridge/
+submit-cross-chain-transactions.html:
+    to: /docs/tutorials/programmability/submit-cross-chain-transaction/
+references.html:
+    to: /docs/references/
+protocol-reference.html:
+    to: /docs/references/protocol/
+basic-data-types.html:
+    to: /docs/references/protocol/data-types/basic-data-types
+base58-encodings.html:
+    to: /docs/references/protocol/data-types/base58-encodings
+currency-formats.html:
+    to: /docs/references/protocol/data-types/currency-formats
+nftoken.html:
+    to: /docs/references/protocol/data-types/nftoken
+ledger-data-formats.html:
+    to: /docs/references/protocol/ledger-data/
+ledger-header.html:
+    to: /docs/references/protocol/ledger-data/ledger-header
+ledger-entry-common-fields.html:
+    to: /docs/references/protocol/ledger-data/common-fields
+ledger-entry-types.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/
+ledger-object-types.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/
+ledger-object-ids.html:
+    to: /docs/references/protocol/ledger-data/common-fields
+accountroot.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/accountroot
+amendments-object.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/amendments
+amm.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/amm
+bridge.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/bridge
+check.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/check
+depositpreauth-object.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/depositpreauth
+did.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/did
+directorynode.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/directorynode
+escrow-object.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/escrow
+feesettings.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/feesettings
+ledgerhashes.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/ledgerhashes
+negativeunl.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/negativeunl
+nftokenoffer.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/nftokenoffer
+nftokenpage.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/nftokenpage
+offer.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/offer
+paychannel.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/paychannel
+ripplestate.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/ripplestate
+signerlist.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/signerlist
+ticket.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/ticket
+xchainownedclaimid.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/xchainownedclaimid
+xchainownedcreateaccountclaimid.html:
+    to: /docs/references/protocol/ledger-data/ledger-entry-types/xchainownedcreateaccountclaimid
+transaction-formats.html:
+    to: /docs/references/protocol/transactions/
+transaction-common-fields.html:
+    to: /docs/references/protocol/transactions/common-fields
+transaction-types.html:
+    to: /docs/references/protocol/transactions/types/
+accountset.html:
+    to: /docs/references/protocol/transactions/types/accountset
+accountdelete.html:
+    to: /docs/references/protocol/transactions/types/accountdelete
+ammbid.html:
+    to: /docs/references/protocol/transactions/types/ammbid
+ammcreate.html:
+    to: /docs/references/protocol/transactions/types/ammcreate
+ammdelete.html:
+    to: /docs/references/protocol/transactions/types/ammdelete
+ammdeposit.html:
+    to: /docs/references/protocol/transactions/types/ammdeposit
+ammvote.html:
+    to: /docs/references/protocol/transactions/types/ammvote
+ammwithdraw.html:
+    to: /docs/references/protocol/transactions/types/ammwithdraw
+checkcancel.html:
+    to: /docs/references/protocol/transactions/types/checkcancel
+checkcash.html:
+    to: /docs/references/protocol/transactions/types/checkcash
+checkcreate.html:
+    to: /docs/references/protocol/transactions/types/checkcreate
+clawback.html:
+    to: /docs/references/protocol/transactions/types/clawback
+depositpreauth.html:
+    to: /docs/references/protocol/transactions/types/depositpreauth
+diddelete.html:
+    to: /docs/references/protocol/transactions/types/diddelete
+didset.html:
+    to: /docs/references/protocol/transactions/types/didset
+escrowcancel.html:
+    to: /docs/references/protocol/transactions/types/escrowcancel
+escrowcreate.html:
+    to: /docs/references/protocol/transactions/types/escrowcreate
+escrowfinish.html:
+    to: /docs/references/protocol/transactions/types/escrowfinish
+nftokenacceptoffer.html:
+    to: /docs/references/protocol/transactions/types/nftokenacceptoffer
+nftokenburn.html:
+    to: /docs/references/protocol/transactions/types/nftokenburn
+nftokencanceloffer.html:
+    to: /docs/references/protocol/transactions/types/nftokencanceloffer
+nftokencreateoffer.html:
+    to: /docs/references/protocol/transactions/types/nftokencreateoffer
+nftokenmint.html:
+    to: /docs/references/protocol/transactions/types/nftokenmint
+offercancel.html:
+    to: /docs/references/protocol/transactions/types/offercancel
+offercreate.html:
+    to: /docs/references/protocol/transactions/types/offercreate
+payment.html:
+    to: /docs/references/protocol/transactions/types/payment
+paymentchannelclaim.html:
+    to: /docs/references/protocol/transactions/types/paymentchannelclaim
+paymentchannelcreate.html:
+    to: /docs/references/protocol/transactions/types/paymentchannelcreate
+paymentchannelfund.html:
+    to: /docs/references/protocol/transactions/types/paymentchannelfund
+setregularkey.html:
+    to: /docs/references/protocol/transactions/types/setregularkey
+signerlistset.html:
+    to: /docs/references/protocol/transactions/types/signerlistset
+ticketcreate.html:
+    to: /docs/references/protocol/transactions/types/ticketcreate
+trustset.html:
+    to: /docs/references/protocol/transactions/types/trustset
+xchainaccountcreatecommit.html:
+    to: /docs/references/protocol/transactions/types/xchainaccountcreatecommit
+xchainaddaccountcreateattestation.html:
+    to: /docs/references/protocol/transactions/types/xchainaddaccountcreateattestation
+xchainaddclaimattestation.html:
+    to: /docs/references/protocol/transactions/types/xchainaddclaimattestation
+xchainclaim.html:
+    to: /docs/references/protocol/transactions/types/xchainclaim
+xchaincommit.html:
+    to: /docs/references/protocol/transactions/types/xchaincommit
+xchaincreatebridge.html:
+    to: /docs/references/protocol/transactions/types/xchaincreatebridge
+xchaincreateclaimid.html:
+    to: /docs/references/protocol/transactions/types/xchaincreateclaimid
+xchainmodifybridge.html:
+    to: /docs/references/protocol/transactions/types/xchainmodifybridge
+pseudo-transaction-types.html:
+    to: /docs/references/protocol/transactions/pseudo-transaction-types/pseudo-transaction-types
+enableamendment.html:
+    to: /docs/references/protocol/transactions/pseudo-transaction-types/enableamendment
+setfee.html:
+    to: /docs/references/protocol/transactions/pseudo-transaction-types/setfee
+unlmodify.html:
+    to: /docs/references/protocol/transactions/pseudo-transaction-types/unlmodify
+transaction-results.html:
+    to: /docs/references/protocol/transactions/transaction-results/transaction-results
+tec-codes.html:
+    to: /docs/references/protocol/transactions/transaction-results/tec-codes
+tef-codes.html:
+    to: /docs/references/protocol/transactions/transaction-results/tef-codes
+tel-codes.html:
+    to: /docs/references/protocol/transactions/transaction-results/tel-codes
+tem-codes.html:
+    to: /docs/references/protocol/transactions/transaction-results/tem-codes
+ter-codes.html:
+    to: /docs/references/protocol/transactions/transaction-results/ter-codes
+tes-success.html:
+    to: /docs/references/protocol/transactions/transaction-results/tes-success
+transaction-metadata.html:
+    to: /docs/references/protocol/transactions/metadata
+modifying-the-ledger.html:
+    to: /docs/references/protocol/transactions/
+serialization.html:
+    to: /docs/references/protocol/binary-format
+client-libraries.html:
+    to: /docs/references/client-libraries
+rippleapi-reference.html:
+    to: https://js.xrpl.org/
+xrpljs2-migration-guide.html:
+    to: /docs/references/xrpljs2-migration-guide
+http-websocket-apis.html:
+    to: /docs/references/http-websocket-apis/
+rippled-api.html:
+    to: /docs/references/http-websocket-apis/
+api-conventions.html:
+    to: /docs/references/http-websocket-apis/api-conventions/
+request-formatting.html:
+    to: /docs/references/http-websocket-apis/api-conventions/request-formatting
+response-formatting.html:
+    to: /docs/references/http-websocket-apis/api-conventions/response-formatting
+error-formatting.html:
+    to: /docs/references/http-websocket-apis/api-conventions/error-formatting
+markers-and-pagination.html:
+    to: /docs/references/http-websocket-apis/api-conventions/markers-and-pagination
+rate-limiting.html:
+    to: /docs/references/http-websocket-apis/api-conventions/rate-limiting
+rippled-server-states.html:
+    to: /docs/references/http-websocket-apis/api-conventions/xrpld-server-states
+ctid.html:
+    to: /docs/references/http-websocket-apis/api-conventions/ctid
+public-api-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/
+public-rippled-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/
+account-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/
+account_channels.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_channels
+account_currencies.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_currencies
+account_info.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_info
+account_lines.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_lines
+account_nfts.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_nfts
+account_objects.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_objects
+account_offers.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_offers
+account_tx.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/account_tx
+gateway_balances.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/gateway_balances
+noripple_check.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/account-methods/noripple_check
+ledger-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/
+ledger.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger
+ledger_closed.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_closed
+ledger_current.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_current
+ledger_data.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_data
+ledger_entry.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry
+transaction-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/
+submit.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/submit
+submit_multisigned.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/submit_multisigned
+transaction_entry.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/transaction_entry
+tx.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/tx
+tx_history.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/transaction-methods/tx_history
+path-and-order-book-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/
+amm_info.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/amm_info
+book_offers.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/book_offers
+deposit_authorized.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/deposit_authorized
+nft_buy_offers.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/nft_buy_offers
+nft_sell_offers.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/nft_sell_offers
+path_find.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/path_find
+ripple_path_find.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/ripple_path_find
+payment-channel-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/payment-channel-methods/
+channel_authorize.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/signing-methods/channel_authorize
+channel_verify.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/payment-channel-methods/channel_verify
+subscription-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/subscription-methods/
+subscribe.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/subscription-methods/subscribe
+unsubscribe.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/subscription-methods/unsubscribe
+server-info-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/
+fee.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/fee
+manifest.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/manifest
+server_definitions.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_definitions
+server_info.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_info
+server_state.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_state
+clio-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-server/
+server_info-clio.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-methods/server_info-clio
+ledger-clio.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-methods/ledger-clio
+nft_history.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-methods/nft_history
+nft_info.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/clio-methods/nft_info
+utility-methods.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/utility-methods/
+json.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/utility-methods/json
+ping.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/utility-methods/ping
+random.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/utility-methods/random
+admin-api-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/
+admin-rippled-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/
+key-generation-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/key-generation-methods/
+validation_create.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/key-generation-methods/validation_create
+wallet_propose.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/key-generation-methods/wallet_propose
+logging-and-data-management-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+can_delete.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/can_delete
+crawl_shards.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+download_shard.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+ledger_cleaner.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/ledger_cleaner
+ledger_request.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/ledger_request
+log_level.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/log_level
+logrotate.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/logrotate
+node_to_shard.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/
+server-control-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/server-control-methods/
+ledger_accept.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/server-control-methods/ledger_accept
+stop.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/server-control-methods/stop
+validation_seed.html:
+    to: /docs/references/http-websocket-apis/public-api-methods/
+signing-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/signing-methods/
+sign.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/signing-methods/sign
+sign_for.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/signing-methods/sign_for
+peer-management-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/
+connect.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/connect
+peer_reservations_add.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/peer_reservations_add
+peer_reservations_del.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/peer_reservations_del
+peer_reservations_list.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/peer_reservations_list
+peers.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/peer-management-methods/peers
+status-and-debugging-methods.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/
+consensus_info.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/consensus_info
+feature.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/feature
+fetch_info.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/fetch_info
+get_counts.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/get_counts
+print.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/print
+validator_info.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validator_info
+validator_list_sites.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validator_list_sites
+validators.html:
+    to: /docs/references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validators
+peer-port-methods.html:
+    to: /docs/references/http-websocket-apis/peer-port-methods/
+health-check.html:
+    to: /docs/references/http-websocket-apis/peer-port-methods/health-check
+peer-crawler.html:
+    to: /docs/references/http-websocket-apis/peer-port-methods/peer-crawler
+validator-list.html:
+    to: /docs/references/http-websocket-apis/peer-port-methods/validator-list
+xrp-api.html:
+    to: https://xpring-eng.github.io/xrp-api/
+data-api.html:
+    to: /docs/references/data-api
+xrp-ledger-toml.html:
+    to: /docs/references/xrp-ledger-toml
+infrastructure.html:
+    to: /docs/infrastructure/
+commandline-usage.html:
+    to: /docs/infrastructure/commandline-usage
+install-rippled.html:
+    to: /docs/infrastructure/installation/
+system-requirements.html:
+    to: /docs/infrastructure/installation/system-requirements
+install-rippled-on-centos-rhel-with-yum.html:
+    to: /docs/infrastructure/installation/install-xrpld-on-rhel
+install-rippled-on-ubuntu.html:
+    to: /docs/infrastructure/installation/install-xrpld-on-ubuntu
+install-clio-on-ubuntu.html:
+    to: /docs/infrastructure/installation/install-clio-on-ubuntu
+update-rippled-automatically-on-linux.html:
+    to: /docs/infrastructure/installation/update-xrpld-automatically-on-linux
+update-rippled-manually-on-centos-rhel.html:
+    to: /docs/infrastructure/installation/update-xrpld-manually-on-rhel
+update-rippled-manually-on-ubuntu.html:
+    to: /docs/infrastructure/installation/update-xrpld-manually-on-ubuntu
+build-on-linux-mac-windows.html:
+    to: /docs/infrastructure/installation/build-on-linux-mac-windows
+build-run-rippled-in-reporting-mode.html:
+    to: /docs/infrastructure/installation/build-run-xrpld-in-reporting-mode
+capacity-planning.html:
+    to: /docs/infrastructure/installation/capacity-planning
+rippled-1-3-migration-instructions.html:
+    to: /docs/infrastructure/installation/rippled-1-3-migration-instructions
+configure-rippled.html:
+    to: /docs/infrastructure/configuration/
+server-modes.html:
+    to: /docs/infrastructure/configuration/server-modes/
+run-rippled-as-a-validator.html:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-validator
+run-rippled-as-a-stock-server.html:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-stock-server
+data-retention.html:
+    to: /docs/infrastructure/configuration/data-retention/
+configure-full-history.html:
+    to: /docs/infrastructure/configuration/data-retention/configure-full-history
+online-deletion.html:
+    to: /docs/infrastructure/configuration/data-retention/online-deletion
+configure-online-deletion.html:
+    to: /docs/infrastructure/configuration/data-retention/configure-online-deletion
+configure-advisory-deletion.html:
+    to: /docs/infrastructure/configuration/data-retention/configure-advisory-deletion
+history-sharding.html:
+    to: /docs/infrastructure/configuration/data-retention/history-sharding
+configure-history-sharding.html:
+    to: /docs/infrastructure/configuration/data-retention/configure-history-sharding
+configure-peering.html:
+    to: /docs/infrastructure/configuration/peering/
+cluster-rippled-servers.html:
+    to: /docs/infrastructure/configuration/peering/cluster-xrpld-servers
+configure-a-private-server.html:
+    to: /docs/infrastructure/configuration/peering/configure-a-private-server
+configure-the-peer-crawler.html:
+    to: /docs/infrastructure/configuration/peering/configure-the-peer-crawler
+enable-link-compression.html:
+    to: /docs/infrastructure/configuration/peering/enable-link-compression
+forward-ports-for-peering.html:
+    to: /docs/infrastructure/configuration/peering/forward-ports-for-peering
+manually-connect-to-a-specific-peer.html:
+    to: /docs/infrastructure/configuration/peering/manually-connect-to-a-specific-peer
+set-max-number-of-peers.html:
+    to: /docs/infrastructure/configuration/peering/set-max-number-of-peers
+use-a-peer-reservation.html:
+    to: /docs/infrastructure/configuration/peering/use-a-peer-reservation
+configure-amendment-voting.html:
+    to: /docs/infrastructure/configuration/configure-amendment-voting
+configure-statsd.html:
+    to: /docs/infrastructure/configuration/configure-statsd
+connect-your-rippled-to-the-xrp-test-net.html:
+    to: /docs/infrastructure/configuration/connect-your-xrpld-to-the-xrp-test-net
+configure-grpc.html:
+    to: /docs/infrastructure/configuration/configure-grpc
+enable-public-signing.html:
+    to: /docs/infrastructure/configuration/enable-public-signing
+use-stand-alone-mode.html:
+    to: /docs/infrastructure/testing-and-auditing/
+start-a-new-genesis-ledger-in-stand-alone-mode.html:
+    to: /docs/infrastructure/testing-and-auditing/start-a-new-genesis-ledger-in-stand-alone-mode
+load-a-saved-ledger-in-stand-alone-mode.html:
+    to: /docs/infrastructure/testing-and-auditing/load-a-saved-ledger-in-stand-alone-mode
+advance-the-ledger-in-stand-alone-mode.html:
+    to: /docs/infrastructure/testing-and-auditing/advance-the-ledger-in-stand-alone-mode
+test-amendments.html:
+    to: /docs/infrastructure/testing-and-auditing/test-amendments
+private-network-with-docker.html:
+    to: /docs/infrastructure/testing-and-auditing/run-private-network-with-docker
+troubleshoot-the-rippled-server.html:
+    to: /docs/infrastructure/troubleshooting/
+diagnosing-problems.html:
+    to: /docs/infrastructure/troubleshooting/diagnosing-problems
+health-check-interventions.html:
+    to: /docs/infrastructure/troubleshooting/health-check-interventions
+understanding-log-messages.html:
+    to: /docs/infrastructure/troubleshooting/understanding-log-messages
+server-doesnt-sync.html:
+    to: /docs/infrastructure/troubleshooting/server-doesnt-sync
+server-is-amendment-blocked.html:
+    to: /docs/infrastructure/troubleshooting/server-is-amendment-blocked
+server-wont-start.html:
+    to: /docs/infrastructure/troubleshooting/server-wont-start
+fix-sqlite-tx-db-page-size-issue.html:
+    to: /docs/infrastructure/troubleshooting/fix-sqlite-tx-db-page-size-issue
+manage-the-rippled-server.html:
+    to: /docs/infrastructure/installation/install-xrpld-on-ubuntu
+build-run-rippled-ubuntu.html:
+    to: /docs/infrastructure/installation/build-on-linux-mac-windows
+build-run-rippled-macos.html:
+    to: /docs/infrastructure/installation/build-on-linux-mac-windows
+update-rippled-automatically-on-centos-rhel.html:
+    to: /docs/infrastructure/installation/update-xrpld-automatically-on-linux
+install-rippled-on-ubuntu-with-alien.html:
+    to: /docs/infrastructure/installation/install-xrpld-on-ubuntu
+run-a-rippled-validator.html:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-validator
+list-xrp-in-your-exchange.html:
+    to: /docs/use-cases/defi/list-xrp-as-an-exchange
+/docs/use-cases/defi:
+    to: /docs/use-cases/trading
+/docs/use-cases/defi.html:
+    to: /docs/use-cases/trading
+contribute-code-to-rippled.html:
+    to: /resources/contribute-code
+contribute-code-to-ripple-lib.html:
+    to: /resources/contribute-code
+contribute-code-flow.html:
+    to: /resources/contribute-code
+resources.html:
+    to: /resources/
+known-amendments.html:
+    to: /resources/known-amendments
+contribute-code.html:
+    to: /resources/contribute-code
+create-custom-transactors.html:
+    to: /resources/contribute-code/create-custom-transactors
+contribute-documentation.html:
+    to: /resources/contribute-documentation/
+documentation-translations.html:
+    to: /resources/contribute-documentation/documentation-translations
+creating-diagrams.html:
+    to: /resources/contribute-documentation/creating-diagrams
+tutorial-guidelines.html:
+    to: /resources/contribute-documentation/tutorial-guidelines
+tutorial-structure.html:
+    to: /resources/contribute-documentation/tutorial-guidelines
+report-a-scam.html:
+    to: /community/report-a-scam
+wallets.html:
+    to: /docs/introduction/crypto-wallets
+
+# Blog redirects ---------------------------------------------------------------
+
+blog/2014/:
+    to: /blog
+blog/2015/:
+    to: /blog
+blog/2017/:
+    to: /blog
+blog/2018/:
+    to: /blog
+blog/2019/:
+    to: /blog
+blog/2020/:
+    to: /blog
+blog/2021/:
+    to: /blog
+blog/2024/rippled-2.2.0.html:
+    to: /blog/2024/rippled-2.2.0
+blog/2024/rippled-2.1.0.html:
+    to: /blog/2024/rippled-2.1.0
+blog/2024/clio-2.1.0.html:
+    to: /blog/2024/clio-2.1.0
+blog/2024/rippled-2.0.1.html:
+    to: /blog/2024/rippled-2.0.1
+blog/2024/web3auth.html:
+    to: /blog/2024/web3auth
+blog/2024/rippled-2.0.0.html:
+    to: /blog/2024/rippled-2.0.0
+blog/2023/decommissioning-amm-devnet.html:
+    to: /blog/2023/decommissioning-amm-devnet
+blog/2023/gemwallet-update.html:
+    to: /blog/2023/gemwallet-update
+blog/2023/clio-2.0.0.html:
+    to: /blog/2023/clio-2.0.0
+blog/2023/santiment.html:
+    to: /blog/2023/santiment
+blog/2023/data-api-v2-deprecated.html:
+    to: /blog/2023/data-api-v2-deprecated
+blog/2023/devnet-reset-scheduled-sep-19-2023.html:
+    to: /blog/2023/devnet-reset-scheduled-sep-19-2023
+blog/2023/rippled-1.12.0.html:
+    to: /blog/2023/rippled-1.12.0
+blog/2023/upcoming-devnet-reset.html:
+    to: /blog/2023/upcoming-devnet-reset
+blog/2023/blockdaemon.html:
+    to: /blog/2023/blockdaemon
+blog/2023/disallowincoming-and-others-expected.html:
+    to: /blog/2023/disallowincoming-and-others-expected
+blog/2023/xrp-toolkit.html:
+    to: /blog/2023/xrp-toolkit
+blog/2023/summarizing-xrpl-docs-iav3.html:
+    to: /blog/2023/summarizing-xrpl-docs-iav3
+blog/2023/xrpl-py-2.0-release.html:
+    to: /blog/2023/xrpl-py-2.0-release
+blog/2023/fieldboss.html:
+    to: /blog/2023/fieldboss
+blog/2023/rippled-1.11.0.html:
+    to: /blog/2023/rippled-1.11.0
+blog/2023/ciso.html:
+    to: /blog/2023/ciso
+blog/2023/edge.html:
+    to: /blog/2023/edge
+blog/2023/xrpcafe.html:
+    to: /blog/2023/xrpcafe
+blog/2023/chispend.html:
+    to: /blog/2023/chispend
+blog/2023/rippled-1.10.0.html:
+    to: /blog/2023/rippled-1.10.0
+blog/2023/bei-api.html:
+    to: /blog/2023/bei-api
+blog/2023/zoetic.html:
+    to: /blog/2023/zoetic
+blog/2023/mandla-money.html:
+    to: /blog/2023/mandla-money
+blog/2023/nft-devnet-decommission.html:
+    to: /blog/2023/nft-devnet-decommission
+blog/2023/aesthetes.html:
+    to: /blog/2023/aesthetes
+blog/2023/stably.html:
+    to: /blog/2023/stably
+blog/2022/introducing-xrpl-py-2.0.0beta.html:
+    to: /blog/2022/introducing-xrpl-py-2.0.0beta
+blog/2022/nftmaster.html:
+    to: /blog/2022/nftmaster
+blog/2022/xpmarket.html:
+    to: /blog/2022/xpmarket
+blog/2022/ziggurat.html:
+    to: /blog/2022/ziggurat
+blog/2022/gemwallet.html:
+    to: /blog/2022/gemwallet
+blog/2022/cryptoiso20022interop.html:
+    to: /blog/2022/cryptoiso20022interop
+blog/2022/non-fungible-tokens-are-now-available.html:
+    to: /blog/2022/non-fungible-tokens-are-now-available
+blog/2022/dev-reflections-relaunch.html:
+    to: /blog/2022/dev-reflections-relaunch
+blog/2022/expandedsignerlist-enabled-and-nfts-approaching.html:
+    to: /blog/2022/expandedsignerlist-enabled-and-nfts-approaching
+blog/2022/introducing-learning-portal.html:
+    to: /blog/2022/introducing-learning-portal
+blog/2022/rippled-1.9.4.html:
+    to: /blog/2022/rippled-1.9.4
+blog/2022/get-ready-for-nfts.html:
+    to: /blog/2022/get-ready-for-nfts
+blog/2022/rippled-1.9.3.html:
+    to: /blog/2022/rippled-1.9.3
+blog/2022/rippled-1.9.2.html:
+    to: /blog/2022/rippled-1.9.2
+blog/2022/clio-1.0.0.html:
+    to: /blog/2022/clio-1.0.0
+blog/2022/rippled-1.9.1.html:
+    to: /blog/2022/rippled-1.9.1
+blog/2022/rippled-1.9.0.html:
+    to: /blog/2022/rippled-1.9.0
+blog/2022/introducing-clio.html:
+    to: /blog/2022/introducing-clio
+blog/2022/nft-devnet-reset.html:
+    to: /blog/2022/nft-devnet-reset
+blog/2022/rippled-1.8.5.html:
+    to: /blog/2022/rippled-1.8.5
+blog/2022/rippled-1.8.4.html:
+    to: /blog/2022/rippled-1.8.4
+blog/2021/rippled-1.8.2.html:
+    to: /blog/2021/rippled-1.8.2
+blog/2021/rippled-1.8.1.html:
+    to: /blog/2021/rippled-1.8.1
+blog/2021/five-upcoming-amendments.html:
+    to: /blog/2021/five-upcoming-amendments
+blog/2021/introducing-xrpl-js.html:
+    to: /blog/2021/introducing-xrpl-js
+blog/2021/sidechain-engineering-preview.html:
+    to: /blog/2021/sidechain-engineering-preview
+blog/2021/reserves-lowered.html:
+    to: /blog/2021/reserves-lowered
+blog/2021/rippled-1.7.3.html:
+    to: /blog/2021/rippled-1.7.3
+blog/2021/ripple-lib-drops-lodash-browsers.html:
+    to: /blog/2021/ripple-lib-drops-lodash-browsers
+blog/2021/xrpl-grants-funding-the-next-phase-of-open-decentralized-innovation.html:
+    to: /blog/2021/xrpl-grants-funding-the-next-phase-of-open-decentralized-innovation
+blog/2021/rippled-1.7.2.html:
+    to: /blog/2021/rippled-1.7.2
+blog/2021/introducing-xrpl4j.html:
+    to: /blog/2021/introducing-xrpl4j
+blog/2021/xrpl-node-configurator.html:
+    to: /blog/2021/xrpl-node-configurator
+blog/2021/introducing-xrpl-py-for-pythonistas.html:
+    to: /blog/2021/introducing-xrpl-py-for-pythonistas
+blog/2021/three-amendments-expected.html:
+    to: /blog/2021/three-amendments-expected
+blog/2021/message-routing-optimizations-pt-1-proposal-validation-relaying.html:
+    to: /blog/2021/message-routing-optimizations-pt-1-proposal-validation-relaying
+blog/2021/community-spotlight-developing-wallet-protect.html:
+    to: /blog/2021/community-spotlight-developing-wallet-protect
+blog/2021/road-to-xrp-ledger-1-7-improving-efficiency-and-security.html:
+    to: /blog/2021/road-to-xrp-ledger-1-7-improving-efficiency-and-security
+blog/2021/rippled-1.7.0.html:
+    to: /blog/2021/rippled-1.7.0
+blog/2020/rippled-1.6.0.html:
+    to: /blog/2020/rippled-1.6.0
+blog/2020/moving-devnet-to-vl.html:
+    to: /blog/2020/moving-devnet-to-vl
+blog/2020/requirefullycanonicalsig-fixqualityupperbound-flowcross-enabled.html:
+    to: /blog/2020/requirefullycanonicalsig-fixqualityupperbound-flowcross-enabled
+blog/2020/developer-reflections-xrp-toolkit.html:
+    to: /blog/2020/developer-reflections-xrp-toolkit
+blog/2020/requirefullycanonicalsig-expected.html:
+    to: /blog/2020/requirefullycanonicalsig-expected
+blog/2020/checks-enabled.html:
+    to: /blog/2020/checks-enabled
+blog/2020/checks-expected.html:
+    to: /blog/2020/checks-expected
+blog/2020/developer-reflections-xrplorer.html:
+    to: /blog/2020/developer-reflections-xrplorer
+blog/2020/deletableaccounts-enabled.html:
+    to: /blog/2020/deletableaccounts-enabled
+blog/2020/get-ready-for-deletable-accounts.html:
+    to: /blog/2020/get-ready-for-deletable-accounts
+blog/2020/developer-reflections-xrpscan.html:
+    to: /blog/2020/developer-reflections-xrpscan
+blog/2020/two-fixes-enabled.html:
+    to: /blog/2020/two-fixes-enabled
+blog/2020/deletableaccounts-expected.html:
+    to: /blog/2020/deletableaccounts-expected
+blog/2020/testnet-amendments-rippled-1.5.0.html:
+    to: /blog/2020/testnet-amendments-rippled-1.5.0
+blog/2020/rippled-1.5.0.html:
+    to: /blog/2020/rippled-1.5.0
+blog/2020/running-an-xrp-ledger-validator.html:
+    to: /blog/2020/running-an-xrp-ledger-validator
+blog/2020/fixcheckthreading-fixpaychanrecipientownerdir-lost-majority.html:
+    to: /blog/2020/fixcheckthreading-fixpaychanrecipientownerdir-lost-majority
+blog/2020/rippled-1.4.0-upgrade-advisory.html:
+    to: /blog/2020/rippled-1.4.0-upgrade-advisory
+blog/2020/fixcheckthreading-fixpaychanrecipientownerdir-expected.html:
+    to: /blog/2020/fixcheckthreading-fixpaychanrecipientownerdir-expected
+blog/2019/rippled-1.4.0.html:
+    to: /blog/2019/rippled-1.4.0
+blog/2019/xrpl-devnet-launch.html:
+    to: /blog/2019/xrpl-devnet-launch
+blog/2019/fixmasterkeyasregularkey-enabled.html:
+    to: /blog/2019/fixmasterkeyasregularkey-enabled
+blog/2019/fixmasterkeyasregularkey-1day.html:
+    to: /blog/2019/fixmasterkeyasregularkey-1day
+blog/2019/fixmasterkeyasregularkey-expected.html:
+    to: /blog/2019/fixmasterkeyasregularkey-expected
+blog/2019/testnet-reset.html:
+    to: /blog/2019/testnet-reset
+blog/2019/rippled-1.3.1.html:
+    to: /blog/2019/rippled-1.3.1
+blog/2019/labeling-the-internet-of-value.html:
+    to: /blog/2019/labeling-the-internet-of-value
+blog/2019/discover-xrp-ledger-explorer.html:
+    to: /blog/2019/discover-xrp-ledger-explorer
+blog/2019/websocket-tool-update.html:
+    to: /blog/2019/websocket-tool-update
+blog/2019/welcome-to-xrpl-org.html:
+    to: /blog/2019/welcome-to-xrpl-org
+blog/2019/multisignreserve-enabled.html:
+    to: /blog/2019/multisignreserve-enabled
+blog/2019/rippled-1.2.4.html:
+    to: /blog/2019/rippled-1.2.4
+blog/2019/secure-development-practices.html:
+    to: /blog/2019/secure-development-practices
+blog/2019/multisignreserve-expected.html:
+    to: /blog/2019/multisignreserve-expected
+blog/2019/corrections-to-data-api-xrp-charts-metrics.html:
+    to: /blog/2019/corrections-to-data-api-xrp-charts-metrics
+blog/2019/interledger-checkin.html:
+    to: /blog/2019/interledger-checkin
+blog/2019/fixtakerdryofferremoval-enabled.html:
+    to: /blog/2019/fixtakerdryofferremoval-enabled
+blog/2019/rippled-1.2.3.html:
+    to: /blog/2019/rippled-1.2.3
+blog/2019/fix1578-enabled.html:
+    to: /blog/2019/fix1578-enabled
+blog/2019/fix1578-expected.html:
+    to: /blog/2019/fix1578-expected
+blog/2019/rippled-1.2.2.html:
+    to: /blog/2019/rippled-1.2.2
+blog/2019/rippled-1.2.1.html:
+    to: /blog/2019/rippled-1.2.1
+blog/2019/rippled-1.2.0.html:
+    to: /blog/2019/rippled-1.2.0
+blog/2019/statement-on-the-biased-nonce-sense-paper.html:
+    to: /blog/2019/statement-on-the-biased-nonce-sense-paper
+blog/2018/rippled-1.1.2.html:
+    to: /blog/2018/rippled-1.1.2
+blog/2018/introducing-history-sharding.html:
+    to: /blog/2018/introducing-history-sharding
+blog/2018/data-api-validations-changes.html:
+    to: /blog/2018/data-api-validations-changes
+blog/2018/rippled-1.1.1.html:
+    to: /blog/2018/rippled-1.1.1
+blog/2018/depositpreauth-fix1515-enabled.html:
+    to: /blog/2018/depositpreauth-fix1515-enabled
+blog/2018/rippled-1.1.0.html:
+    to: /blog/2018/rippled-1.1.0
+blog/2018/ripple-lib-1.0.0.html:
+    to: /blog/2018/ripple-lib-1.0.0
+blog/2018/fix1571-enabled.html:
+    to: /blog/2018/fix1571-enabled
+blog/2018/rippled-1.0.1.html:
+    to: /blog/2018/rippled-1.0.1
+blog/2018/fix1543-fix1571-fix1623-voting.html:
+    to: /blog/2018/fix1543-fix1571-fix1623-voting
+blog/2018/rippled-1.0.0.html:
+    to: /blog/2018/rippled-1.0.0
+blog/2018/depositauth-fix1513-available.html:
+    to: /blog/2018/depositauth-fix1513-available
+blog/2018/rippled-0.90.1.html:
+    to: /blog/2018/rippled-0.90.1
+blog/2018/rippled-0.90.0.html:
+    to: /blog/2018/rippled-0.90.0
+blog/2018/rippled-validator-key-replacement.html:
+    to: /blog/2018/rippled-validator-key-replacement
+blog/2018/rippled-boost166-warning.html:
+    to: /blog/2018/rippled-boost166-warning
+blog/2018/rippled-0.81.0.html:
+    to: /blog/2018/rippled-0.81.0
+blog/2017/explanation-of-ripples-xrp-escrow.html:
+    to: /blog/2017/explanation-of-ripples-xrp-escrow
+blog/2017/rippled-0.80.2.html:
+    to: /blog/2017/rippled-0.80.2
+blog/2017/rippled-0.80.0.html:
+    to: /blog/2017/rippled-0.80.0
+blog/2017/decent-strategy-update.html:
+    to: /blog/2017/decent-strategy-update
+blog/2017/high-scalability-xrp-ledger.html:
+    to: /blog/2017/high-scalability-xrp-ledger
+blog/2017/rippled-0.70.2.html:
+    to: /blog/2017/rippled-0.70.2
+blog/2017/invariant-checking.html:
+    to: /blog/2017/invariant-checking
+blog/2017/rippled-0.70.1.html:
+    to: /blog/2017/rippled-0.70.1
+blog/2017/rippled-0.70.0.html:
+    to: /blog/2017/rippled-0.70.0
+blog/2017/rippled-0.60.3.html:
+    to: /blog/2017/rippled-0.60.3
+blog/2017/rippled-0.60.2-2-rpm.html:
+    to: /blog/2017/rippled-0.60.2-2-rpm
+blog/2017/rippled-0.60.2.html:
+    to: /blog/2017/rippled-0.60.2
+blog/2017/rippled-0.60.1.html:
+    to: /blog/2017/rippled-0.60.1
+blog/2017/escrow-paychan-fix1368-reminder.html:
+    to: /blog/2017/escrow-paychan-fix1368-reminder
+blog/2017/rippled-0.60.0.html:
+    to: /blog/2017/rippled-0.60.0
+blog/2017/trust-line-quality-sendmax.html:
+    to: /blog/2017/trust-line-quality-sendmax
+blog/2017/rippled-0.50.3.html:
+    to: /blog/2017/rippled-0.50.3
+blog/2017/ripple-consensus-ledger-can-sustain-1000-transactions-per-second.html:
+    to: /blog/2017/ripple-consensus-ledger-can-sustain-1000-transactions-per-second
+blog/2017/ticksize-available.html:
+    to: /blog/2017/ticksize-available
+blog/2017/ticksize-3days.html:
+    to: /blog/2017/ticksize-3days
+blog/2017/ticksize-7days.html:
+    to: /blog/2017/ticksize-7days
+blog/2017/ticksize-voting.html:
+    to: /blog/2017/ticksize-voting
+blog/2017/rippled-0.50.2.html:
+    to: /blog/2017/rippled-0.50.2
+blog/2017/rippled-0.50.0.html:
+    to: /blog/2017/rippled-0.50.0
+blog/2017/data-api-load-balancing-test.html:
+    to: /blog/2017/data-api-load-balancing-test
+blog/2017/response-to-china-cert-report.html:
+    to: /blog/2017/response-to-china-cert-report
+blog/2017/rippled-0.40.1.html:
+    to: /blog/2017/rippled-0.40.1
+blog/2016/rippled-0.40.0.html:
+    to: /blog/2016/rippled-0.40.0
+blog/2016/flow-available.html:
+    to: /blog/2016/flow-available
+blog/2016/flow-reminder.html:
+    to: /blog/2016/flow-reminder
+blog/2016/flow-voting.html:
+    to: /blog/2016/flow-voting
+blog/2016/rippled-0.33.0-hf1.html:
+    to: /blog/2016/rippled-0.33.0-hf1
+blog/2016/rippled-0.33.0.html:
+    to: /blog/2016/rippled-0.33.0
+blog/2016/testnet-ledger-reset.html:
+    to: /blog/2016/testnet-ledger-reset
+blog/2016/flowv2-vetoed.html:
+    to: /blog/2016/flowv2-vetoed
+blog/2016/flowv2-voting.html:
+    to: /blog/2016/flowv2-voting
+blog/2016/rippled-0.32.1.html:
+    to: /blog/2016/rippled-0.32.1
+blog/2016/trustsetauth-available.html:
+    to: /blog/2016/trustsetauth-available
+blog/2016/trustsetauth-reminder.html:
+    to: /blog/2016/trustsetauth-reminder
+blog/2016/trustsetauth-voting.html:
+    to: /blog/2016/trustsetauth-voting
+blog/2016/multisign-available.html:
+    to: /blog/2016/multisign-available
+blog/2016/rippled-0.32.0.html:
+    to: /blog/2016/rippled-0.32.0
+blog/2016/multisign-reminder.html:
+    to: /blog/2016/multisign-reminder
+blog/2016/data-api-v2.2.html:
+    to: /blog/2016/data-api-v2.2
+blog/2016/introducing-rippleapi.html:
+    to: /blog/2016/introducing-rippleapi
+blog/2016/rippled-0.31.2-updates.html:
+    to: /blog/2016/rippled-0.31.2-updates
+blog/2016/rippled-0.30.1.html:
+    to: /blog/2016/rippled-0.30.1
+blog/2015/correction-to-ripple-white-paper.html:
+    to: /blog/2015/correction-to-ripple-white-paper
+blog/2015/validator-registry.html:
+    to: /blog/2015/validator-registry
+blog/2015/introducing-the-data-api.html:
+    to: /blog/2015/introducing-the-data-api
+blog/2015/gatewayd-no-longer-available.html:
+    to: /blog/2015/gatewayd-no-longer-available
+blog/2015/ripple-charts-update-payment-volume-and-issued-value.html:
+    to: /blog/2015/ripple-charts-update-payment-volume-and-issued-value
+blog/2015/do-you-have-what-it-takes-to-be-a-gateway.html:
+    to: /blog/2015/do-you-have-what-it-takes-to-be-a-gateway
+blog/2015/calculating-balance-changes-for-a-transaction.html:
+    to: /blog/2015/calculating-balance-changes-for-a-transaction
+blog/2014/turn-your-exchange-into-a-ripple-gateway.html:
+    to: /blog/2014/turn-your-exchange-into-a-ripple-gateway
+blog/2014/why-the-stellar-forking-issue-does-not-affect-ripple.html:
+    to: /blog/2014/why-the-stellar-forking-issue-does-not-affect-ripple
+blog/2014/release-notes-3-december-2014.html:
+    to: /blog/2014/release-notes-3-december-2014
+blog/2014/release-notes-19-november-2014.html:
+    to: /blog/2014/release-notes-19-november-2014
+blog/2014/ripplerest-1.3-release.html:
+    to: /blog/2014/ripplerest-1.3-release
+blog/2014/release-notes-29-october-2014.html:
+    to: /blog/2014/release-notes-29-october-2014
+blog/2014/gateway-advisory-on-partial-payment-flag.html:
+    to: /blog/2014/gateway-advisory-on-partial-payment-flag
+blog/2014/release-notes-14-october-2014.html:
+    to: /blog/2014/release-notes-14-october-2014
+blog/2014/how-ripple-labs-supports-gateways.html:
+    to: /blog/2014/how-ripple-labs-supports-gateways
+blog/2014/biweekly-release-notes-17-september-2014.html:
+    to: /blog/2014/biweekly-release-notes-17-september-2014
+blog/2014/biweekly-release-notes-3-september-2014.html:
+    to: /blog/2014/biweekly-release-notes-3-september-2014
+blog/2014/use-of-cpp14-in-rippled.html:
+    to: /blog/2014/use-of-cpp14-in-rippled
+blog/2014/biweekly-release-notes-14-august-2014.html:
+    to: /blog/2014/biweekly-release-notes-14-august-2014
+blog/2014/dev-portal-adds-rippled-apis.html:
+    to: /blog/2014/dev-portal-adds-rippled-apis
+blog/2014/biweekly-release-notes-31-july-2014.html:
+    to: /blog/2014/biweekly-release-notes-31-july-2014
+blog/2014/xrp-giveaway-for-developers.html:
+    to: /blog/2014/xrp-giveaway-for-developers
+blog/2014/ripple-labs-bounty-program-moves-to-bountysource.html:
+    to: /blog/2014/ripple-labs-bounty-program-moves-to-bountysource
+blog/2014/introducing-offer-autobridging.html:
+    to: /blog/2014/introducing-offer-autobridging
+blog/2014/curves-with-a-twist.html:
+    to: /blog/2014/curves-with-a-twist
+blog/2014/introducing-ripple-names.html:
+    to: /blog/2014/introducing-ripple-names
+blog/2014.html:
+    to: /blog/
+blog/2015.html:
+    to: /blog/
+blog/2016.html:
+    to: /blog/
+blog/2017.html:
+    to: /blog/
+blog/2018.html:
+    to: /blog/
+blog/2019.html:
+    to: /blog/
+blog/2020.html:
+    to: /blog/
+blog/2021.html:
+    to: /blog/
+blog/2022.html:
+    to: /blog/
+blog/2023.html:
+    to: /blog/
+blog/2024.html:
+    to: /blog/
+blog/label/developer-reflections.html:
+    to: /blog/
+
+# Miscellaneous redirects ------------------------------------------------------
+
+code_of_conduct/:
+    to: /code-of-conduct
+code_of_conduct:
+    to: /code-of-conduct
+code_of_conduct.ja/:
+    to: /ja/code-of-conduct
+code_of_conduct.ja:
+    to: /ja/code-of-conduct
+
+# rippled -> xrpld page renames (3.2.0 wording PR) ------------------------------
+/docs/concepts/networks-and-servers/rippled-server-modes/:
+    to: /docs/concepts/networks-and-servers/xrpld-server-modes/
+/docs/infrastructure/configuration/connect-your-rippled-to-the-xrp-test-net/:
+    to: /docs/infrastructure/configuration/connect-your-xrpld-to-the-xrp-test-net/
+/docs/infrastructure/configuration/peering/cluster-rippled-servers/:
+    to: /docs/infrastructure/configuration/peering/cluster-xrpld-servers/
+/docs/infrastructure/configuration/server-modes/run-rippled-as-a-stock-server/:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-stock-server/
+/docs/infrastructure/configuration/server-modes/run-rippled-as-a-validator/:
+    to: /docs/infrastructure/configuration/server-modes/run-xrpld-as-a-validator/
+/docs/infrastructure/installation/build-run-rippled-in-reporting-mode/:
+    to: /docs/infrastructure/installation/build-run-xrpld-in-reporting-mode/
+/docs/infrastructure/installation/install-rippled-on-rhel/:
+    to: /docs/infrastructure/installation/install-xrpld-on-rhel/
+/docs/infrastructure/installation/install-rippled-on-ubuntu/:
+    to: /docs/infrastructure/installation/install-xrpld-on-ubuntu/
+/docs/infrastructure/installation/update-rippled-automatically-on-linux/:
+    to: /docs/infrastructure/installation/update-xrpld-automatically-on-linux/
+/docs/infrastructure/installation/update-rippled-manually-on-rhel/:
+    to: /docs/infrastructure/installation/update-xrpld-manually-on-rhel/
+/docs/infrastructure/installation/update-rippled-manually-on-ubuntu/:
+    to: /docs/infrastructure/installation/update-xrpld-manually-on-ubuntu/
+/docs/references/http-websocket-apis/api-conventions/rippled-server-states/:
+    to: /docs/references/http-websocket-apis/api-conventions/xrpld-server-states/

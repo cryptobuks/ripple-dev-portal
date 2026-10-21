@@ -1,0 +1,335 @@
+.card, .cta-card, .q-wrapper {
+  position: relative;
+  @include media-breakpoint-up(lg) {
+    box-shadow: $dropdown-box-shadow;
+  }
+}
+#code-samples-deck  {
+  .card {
+    box-shadow: none;
+    margin: 0 2rem 5rem 2rem;
+  }
+  .card-header {
+    border-bottom: none;
+    background-color: unset;
+  }
+  .card-footer {
+    background-color: unset;
+    font-size: initial;
+  }
+
+  .card-deck .card a{
+    margin: 0 2.5rem 5rem 2.5rem;
+  }
+
+  .circled-logo {
+    margin-left: -15px;
+  }
+}
+
+.code-contribute {
+  @include media-breakpoint-up(lg) {
+  width: 75vw;
+  position: relative;
+  left: 20%;
+  right: 20%;
+  margin-left: -30vw;
+  margin-right: -30vw;
+  }
+}
+
+.contribute {
+  position: relative;
+  --timeline-direction: to right;
+
+  &::before {
+    content:"";
+    display: block;
+    height:2px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+
+  .dot {
+    height: 16px;
+    width: 16px;
+    background-color: #111112;
+    border-radius: 50%;
+    border: 3px solid #FBFF4C;
+    display: inline-block;
+    position: absolute;
+    top: -7px;
+    left: -6px;
+  }
+
+  @include media-breakpoint-down(lg) {
+    --timeline-direction: to bottom;
+
+    &::before {
+      left: -10px;
+      height: 100%;
+      width: 2px;
+      top: 15px;
+    }
+    .dot {
+      top: 5px;
+      left: -16px;
+    }
+  }
+}
+
+.contribute_1 {
+  &::before {
+    background: linear-gradient(var(--timeline-direction), rgba(254, 255, 1, 1), rgba(255, 45, 154, 1));
+  }
+  .dot {
+    border-color: #FBFF4C;
+  }
+}
+.contribute_2 {
+  &::before {
+    background: linear-gradient(var(--timeline-direction), rgba(255, 45, 154, 1), rgba(226, 76, 255, 1));
+  }
+  .dot {
+    border-color: #FF198B;
+  }
+}
+.contribute_3 {
+  &::before {
+    background: linear-gradient(var(--timeline-direction), rgba(226, 76, 255, 1), rgba(154, 82, 255, 1));
+  }
+  .dot {
+    border-color: #C000E5;
+  }
+}
+.contribute_4 {
+  &::before {
+    background: linear-gradient(var(--timeline-direction), rgba(154, 82, 255, 1), rgba(154, 82, 255, 1));
+  }
+  .dot {
+    border-color: #9A52FF;
+  }
+}
+
+
+.card > img {
+  border-radius: $border-radius-lg $border-radius-lg 0 0;
+}
+
+.card-body > p,
+.card-body > p:not(:last-child) {
+  padding: 0;
+  margin-bottom: 2rem;
+}
+
+/* Full-link cards */
+main a.card {
+  border: 0;
+  color: $white;
+}
+a.card:hover,
+a:hover .card-new,
+[data-component-name="Markdown/Markdown"] a.card {
+  text-decoration: none !important;
+  color: inherit;
+}
+a.card:hover h3 {
+  text-decoration: underline;
+}
+
+.circled-logo {
+  background-color: $gray-600;
+  border-radius: 50%;
+  padding: .65rem;
+  width: 50px;
+  height: 50px;
+  img {
+    width: 26px;
+    height: 26px;
+    display: inline-block; // fix sizing in Chrome
+  }
+  margin-bottom: 0.75rem;
+  border: 2px solid #232325;
+}
+
+.light .circled-logo {
+  border: none;
+}
+@for $i from 1 through 10 {
+  .cols-of-#{$i} {
+    grid-template-rows: repeat(#{$i}, min-content);
+  }
+}
+.card-deck {
+  margin-top: 2.5rem;
+  margin-left: (-$card-deck-margin);
+  margin-right: (-$card-deck-margin);
+  margin-bottom: 5rem;
+  flex-grow: 1;
+
+  @include media-breakpoint-up(lg) {
+    margin-top: 5rem;
+  }
+  .card {
+    flex-grow: 0;
+    flex-basis: 100%;
+    padding: 0;
+    margin: 0 $card-deck-margin (4 * $card-deck-margin) $card-deck-margin;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &.row-cols-1 .card {
+    flex-basis: 100%;
+    // Give cards some breathing room (but not in the 2×2 ones)
+    min-height: 264px;
+    @include media-breakpoint-up(md) {
+      min-height: 347px;
+    }
+  }
+
+  &.row-cols-lg-2 .card {
+  @include media-breakpoint-up(lg) {
+    flex-basis: calc(50% - #{(2 * $card-deck-margin)});
+  }
+}
+
+  &.row-cols-lg-3 {
+    @include media-breakpoint-up(xl) {
+      // Double the card deck margin on larger desktops
+      margin-left: (-2 * $card-deck-margin);
+      margin-right: (-2 * $card-deck-margin);
+    }
+    .card {
+      @include media-breakpoint-up(lg) {
+        flex-basis: calc(33% - #{(2 * $card-deck-margin)} );
+      }
+      @include media-breakpoint-up(xl) {
+        margin: 0 (2 * $card-deck-margin) (4 * $card-deck-margin) (2 * $card-deck-margin);
+        flex-basis: calc(33% - #{(4 * $card-deck-margin)} );
+      }
+    }
+  }
+
+  &.row-cols-lg-4 .card {
+    @include media-breakpoint-up(lg) {
+      flex-basis: calc(25% - #{(2 * $card-deck-margin)} );
+    }
+  }
+
+  a.card {
+    transition: all 0.35s ease-out;
+    cursor: pointer;
+    &:hover {
+      -webkit-transform: translateY(-16px);
+      -moz-transform: translateY(-16px);
+      -ms-transform: translateY(-16px);
+      -o-transform: translateY(-16px);
+      transform: translateY(-16px);
+    }
+  }
+
+  .card-footer {
+    font-size: 0;
+    padding: 1rem;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top: 0;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin-top: 2rem;
+
+    .card-body {
+      padding: 1rem;
+    }
+    &.row-cols-1 .card {
+      margin: .75rem .75rem (4 * $card-deck-margin) .75rem;
+      max-width: calc(100% - 1.5rem);
+    }
+    &.row-cols-2 .card {
+      margin: .75rem;
+      max-width: calc(50% - 1.5rem);
+    }
+  }
+}
+
+// Generic selection of card footers for Markdoc {% card-grid %}{% xrpl-card %} elements
+$footers-3col: "3-col-light-blue", "3-col-green-purple", "3col-purple-blue-green", "3col-magenta-3", "3col-green-blue", "3col-light-blue-2", "3col-orange-yellow-2", "3col-pink-purple", "3col-green-purple", "3col-magenta", "3-col-purple2", "3col-neutral-blue", "3col-purple-blue", "3-col-pink2", "3col-orange", "3col-light-green", "3col-blue-light-blue", "3col-green", "3-col-dark-blue", "3-col-purple", "3col-magenta-2", "3-col-light-blue-2", "3col-light-blue", "3col-magenta-orange", "3-col-purple-blue", "3col-orange-3", "3col-blue-green", "3-col-green", "3-col-orange", "3col-purple-blue-2", "3col-purple", "3-col-light-blue2", "3col-orange-yellow", "3-col-pink", "3col-green-2", "3col-orange-2", "3-col-pink-purple";
+
+@mixin card-footer-color($offset){
+  $index: 0;
+  @for $i from 1 through 9 {
+    .card:nth-child(#{$i}) .card-footer {
+      background-image: url("../img/cards/#{nth($footers-3col, $i+$offset)}.svg");
+    }
+  }
+}
+
+main article .card-grid {
+  &.card-grid-3xN {
+    grid-gap: 1rem;
+
+    .card {
+      padding: 0;
+      margin: 0.5rem;
+
+      .card-body {
+        padding: 1rem;
+      }
+
+    .card-icon-container {
+      width: 50px;
+      height: 50px;
+      background: $gray-600;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      margin-bottom: 12px;
+
+      img {
+        width: 70%;
+        height: 70%;
+      }
+    }
+
+      .card-footer {
+        font-size: 0;
+        line-height: 0;
+        padding: 1rem;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-top: 0;
+      }
+    }
+
+    // &:nth-of-type(0) {
+    //   @include card-footer-color(0);
+    // }
+    // &:nth-of-type(1) {
+    //   @include card-footer-color(9);
+    // }
+    // &:nth-of-type(2) {
+    //   @include card-footer-color(18);
+    // }
+    // &:nth-of-type(3) {
+    //   @include card-footer-color(27);
+    // }
+  }
+}
+
+.cta-card {
+  text-align: center;
+  background-color: $gray-800;
+}
+
+.card-subhead {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  margin-top: 0.5rem;
+}

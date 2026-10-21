@@ -1,0 +1,69 @@
+---
+seo:
+    description: A Decentralized Identifier (DID).
+labels:
+  - DID
+---
+# DID
+[[Source]](https://github.com/XRPLF/rippled/blob/a5d238e7d4fa6ef2b539b759d58744d0a1c33c0c/include/xrpl/protocol/detail/ledger_entries.macro#L61-L69 "Source")
+
+A `DID` ledger entry holds references to, or data associated with, a single [Decentralized Identifier (DID)](../../../../concepts/decentralized-storage/decentralized-identifiers.md). You can create or modify a DID by sending a [DIDSet transaction][].
+
+{% amendment-disclaimer name="DID" /%}
+
+## Example DID JSON
+
+```json
+{
+    "Account": "rpfqJrXg5uidNo2ZsRhRY6TiF1cvYmV9Fg",
+    "DIDDocument": "646F63",
+    "Data": "617474657374",
+    "Flags": 0,
+    "LedgerEntryType": "DID",
+    "OwnerNode": "0",
+    "PreviousTxnID": "A4C15DA185E6092DF5954FF62A1446220C61A5F60F0D93B4B09F708778E41120",
+    "PreviousTxnLgrSeq": 4,
+    "URI": "6469645F6578616D706C65",
+    "index": "46813BE38B798B3752CA590D44E7FEADB17485649074403AD1761A2835CE91FF"
+}
+```
+
+## DID Fields
+
+In addition to the [common fields](../common-fields.md), {% code-page-name /%} entries have the following fields:
+
+| Field               | JSON Type | [Internal Type][] | Required? | Description  |
+|:--------------------|:----------|:------------------|:----------|--------------|
+| `Account`           | String    | AccountID         | Yes       | The account that controls the DID. |
+| `DIDDocument`       | String    | Blob              | No        | The W3C standard DID document associated with the DID. The `DIDDocument` field isn't checked for validity and is limited to a maximum length of 256 bytes. |
+| `Data`              | String    | Blob              | No        | The public attestations of identity credentials associated with the DID. The `Data` field isn't checked for validity and is limited to a maximum length of 256 bytes. |
+| `OwnerNode`         | String    | UInt64            | Yes       | A hint indicating which page of the sender's owner directory links to this entry, in case the directory consists of multiple pages. |
+| `PreviousTxnID`     | String    | UInt256           | Yes       | The identifying hash of the transaction that most recently modified this object. |
+| `PreviousTxnLgrSeq` | Number    | UInt32            | Yes       | The index of the ledger that contains the transaction that most recently modified this object. |
+| `URI`               | String    | Blob              | No        | The Universal Resource Identifier that points to the corresponding DID document or the data associated with the DID. This field can be an HTTP(S) URL or IPFS URI. This field isn't checked for validity and is limited to a maximum length of 256 bytes. |
+
+
+## {% $frontmatter.seo.title %} Reserve
+
+The account that creates the {% code-page-name /%} object incurs one owner reserve.
+
+
+## {% $frontmatter.seo.title %} Flags
+
+There are no flags defined for {% code-page-name /%} entries.
+
+
+## DID ID Format
+
+The ID of a `DID` entry is the [SHA-512Half][] of the following values, concatenated in order:
+
+1. The `DID` space key (`0x0049`).
+2. The AccountID that controls the DID.
+
+## See Also
+
+- **Transactions:**
+  - [DIDDelete transaction][]
+  - [DIDSet transaction][]
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}

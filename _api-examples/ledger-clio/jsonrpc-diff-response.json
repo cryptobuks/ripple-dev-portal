@@ -1,0 +1,97 @@
+{
+  "result": {
+    "ledger_hash": "3787026448652A36491493C1202A443B2A6CC6022599BB0B25DDB0802DD7F1E7",
+    "ledger_index": 82681623,
+    "validated": true,
+    "ledger": {
+      "account_hash": "39D34D858A0FD652143ED84B67A09193772DE0CCEBD2D63619E679293B7A3388",
+      "close_flags": 0,
+      "close_time": 748569571,
+      "close_time_human": "2023-Sep-20 23:59:31.000000000 UTC",
+      "close_time_resolution": 10,
+      "close_time_iso": "2023-09-20T23:59:31Z",
+      "ledger_hash": "3787026448652A36491493C1202A443B2A6CC6022599BB0B25DDB0802DD7F1E7",
+      "parent_close_time": 748569570,
+      "parent_hash": "674FF6C68956E06CB9628833677C3DD71824C87C0AEFB487984CF98C3964DAEE",
+      "total_coins": "99988406188847858",
+      "transaction_hash": "11EE9C448D6B07B88A80B4FC7935B485E513816B3B47D0976CE9F51E7CF10A85",
+      "ledger_index": 82681623,
+      "closed": true,
+      "diff": [
+        {
+          "object_id": "02BAAC1E67C1CE0E96F0FA2E8061020536CEDD043FEB0FF54F0E134815E74400",
+          "object": {
+            "ExchangeRate": "4f0e134815e74400",
+            "Flags": 0,
+            "Indexes": [
+              "AA0B31FB7FEF4A2546DA2BD0C44E9EC0D3A173EDE92DA1D50F78E61024BAFE4F"
+            ],
+            "LedgerEntryType": "DirectoryNode",
+            "RootIndex": "02BAAC1E67C1CE0E96F0FA2E8061020536CEDD043FEB0FF54F0E134815E74400",
+            "TakerGetsCurrency": "0000000000000000000000000000000000000000",
+            "TakerGetsIssuer": "0000000000000000000000000000000000000000",
+            "TakerPaysCurrency": "000000000000000000000000434E590000000000",
+            "TakerPaysIssuer": "CED6E99370D5C00EF4EBF72567DA99F5661BFB3A",
+            "index": "02BAAC1E67C1CE0E96F0FA2E8061020536CEDD043FEB0FF54F0E134815E74400"
+          }
+        },
+        # ... (trimmed for length) ...
+        {
+          "object_id": "F65CCB13C33A1739BE63CBF6C77636429B0F4F506766D5E427A7CCC6C102037D",
+          "object": {
+            "Balance": {
+              "currency": "MAG",
+              "issuer": "rrrrrrrrrrrrrrrrrrrrBZbvji",
+              "value": "-0.0157136905"
+            },
+            "Flags": 2228224,
+            "HighLimit": {
+              "currency": "MAG",
+              "issuer": "rwED3Kn7qu2og2nhCiDun5gKfWBDZ1YzfM",
+              "value": "45999776.589682"
+            },
+            "HighNode": "0",
+            "LedgerEntryType": "RippleState",
+            "LowLimit": {
+              "currency": "MAG",
+              "issuer": "rXmagwMmnFtVet3uL26Q2iwk287SRvVMJ",
+              "value": "0"
+            },
+            "LowNode": "8d",
+            "PreviousTxnID": "82783FBAE34A01C1AFA580F105FD716FA083B572BCE91254FD1B93B580E6DD3C",
+            "PreviousTxnLgrSeq": 82681623,
+            "index": "F65CCB13C33A1739BE63CBF6C77636429B0F4F506766D5E427A7CCC6C102037D"
+          }
+        },
+        {
+          "object_id": "F7F1E123DC7B155F93DA6E122C4ED86B7032DFB6C399A5514A422635A8459821",
+          "object": ""
+        },
+        {
+          "object_id": "FA295451E29A37C8BDEC209DB56B2E7D35F714492A1CBD20258FD8E806906E1F",
+          "object": {
+            "Account": "rff9KstNpP3eFWDp81uv3vizh5dreQRVZv",
+            "Balance": "11720167",
+            "Domain": "6D61726B6574696E67",
+            "EmailHash": "A5EC2C95531D608F0DB6369F8097A16E",
+            "Flags": 0,
+            "LedgerEntryType": "AccountRoot",
+            "OwnerCount": 1,
+            "PreviousTxnID": "295A3AE6C90436F80EABB833B716DB52EC234C3D148622C2E5A449539C9FB0EE",
+            "PreviousTxnLgrSeq": 82681623,
+            "Sequence": 68507056,
+            "index": "FA295451E29A37C8BDEC209DB56B2E7D35F714492A1CBD20258FD8E806906E1F",
+            "urlgravatar": "http://www.gravatar.com/avatar/a5ec2c95531d608f0db6369f8097a16e"
+          }
+        }
+      ]
+    },
+    "status": "success"
+  },
+  "warnings": [
+    {
+      "id": 2001,
+      "message": "This is a clio server. clio only serves validated data. If you want to talk to rippled, include 'ledger_index':'current' in your request"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "browser-xrpl-wallet",
+    "type": "module",
+    "scripts": {
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "vite": "^8.0.10"
+    },
+    "dependencies": {
+        "xrpl": "^4.6.0"
+    }
+}

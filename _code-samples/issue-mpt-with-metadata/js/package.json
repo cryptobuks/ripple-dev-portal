@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "xrpl": "^5.1.0-smartescrow.0"
+  },
+  "type": "module"
+}

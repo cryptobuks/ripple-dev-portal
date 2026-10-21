@@ -1,0 +1,1529 @@
+// General color elements ------------------------------------------------------
+article {
+
+  p code,
+  table code,
+  li>code {
+    background-color: $gray-200;
+    color: $gray-900;
+  }
+}
+
+body {
+  background-color: $white;
+  color: $light-fg;
+}
+
+#topnav-theme .custom-theme-toggle {
+  .form-check-input {
+    background-color: transparent;
+    background-position: bottom right;
+    transform: rotate(-15deg);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  &:not(.chip) {
+    color: $light-fg;
+  }
+
+  &.green-500 {
+    color: $green-400;
+    text-shadow: white 0 0 2px, white -1px -1px 2px, white 1px 1px 2px;
+  }
+}
+
+.bg-grey-800 {
+  background-color: $light-standout-bg;
+}
+
+.grey-400 {
+  color: $gray-600;
+}
+
+.text-muted {
+  color: $light-fg-muted !important;
+}
+
+.longform {
+  color: $light-fg-muted;
+}
+
+.numbers {
+  color: $black;
+}
+
+.stat-highlight,
+.eyebrow {
+  color: $gray-900;
+}
+
+.invertible-img {
+  filter: invert(100%);
+}
+
+.arrow-link::after {
+  content: url("../img/lightmode/icon-long-arrow.svg");
+}
+
+// Forms and inputs ------------------------------------------------------------
+.search,
+.input-group,
+.form-group {
+  .input-group-text {
+    background-color: $gray-200;
+    color: $gray-800;
+  }
+
+  label .input-group-text,
+  .form-control:not(.btn) {
+    color: $light-fg;
+    background-color: $light-form-bg;
+    border-color: $light-form-bg;
+  }
+
+  .ds-input {
+    color: $light-fg;
+    background-color: $light-form-bg;
+    border-color: $light-form-bg;
+
+    &:focus {
+      border-color: $blue-purple-400;
+    }
+  }
+}
+
+.list-group-item {
+  border-color: $light-fg-muted;
+
+  &.disabled {
+    color: $gray-600;
+  }
+
+  a {
+    color: $light-fg;
+  }
+}
+
+#connection-status-item.active {
+  background-color: $xrpl-green-9;
+}
+
+.progress {
+  background-color: $light-form-bg;
+}
+
+[data-component-name="Search/SearchIcon"]>path {
+  fill: black;
+}
+
+// Navigation ------------------------------------------------------------------
+
+// `:where(:not(...))` wraps the exclusion chain at ZERO specificity so this
+// generic anchor styling can't override more specific component-level rules
+// (e.g. `.page-tutorials .page-toc.no-sideline li a:hover`). Without `:where()`,
+// each `:not()` adds to specificity, inflating to (0,6,2) and beating most
+// component rules. With `:where()` the selectors are (0,0,1) / (0,0,2), so
+// any page- or component-scoped class chain wins as expected.
+a:where(:not(.bds-link):not(.bds-card-offgrid):not(.bds-card-icon):not(.bds-btn)),
+nav a:where(:not(.bds-link):not(.bds-card-offgrid):not(.bds-card-icon):not(.bds-btn)),
+a:where(:not([role="button"]):not(.bds-link):not(.bds-card-offgrid):not(.bds-card-icon):not(.bds-btn)) {
+  color: $light-fg;
+
+  &.btn-primary {
+    // undo this for buttons
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &:hover,
+  &:active,
+  &.active {
+    color: $light-link-hover-color;
+  }
+
+  &:where(:not(.btn):not(.bds-text-card)):focus {
+    background-color: transparent;
+  }
+}
+
+a.card:hover,
+&:active,
+&.active {
+  // Don't turn link-card text purple on hover
+  color: $light-fg;
+}
+
+.landing-table tbody td {
+  color: $light-fg-muted;
+}
+
+// Buttons
+.btn-outline-secondary,
+article a.button,
+.navbar-dark .navbar-nav .nav-link.btn-outline-secondary {
+  color: $dark;
+  border-color: $dark;
+
+  &:not(:disabled):not(.disabled):hover,
+  &:not(:disabled):not(.disabled):active {
+    color: $primary;
+    border-color: $primary;
+    background-color: transparent;
+  }
+}
+
+// Breadcrumbs
+.breadcrumb {
+  background: transparent;
+}
+
+.breadcrumb-item a {
+  color: $gray-600;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+// Top Nav
+.top-nav {
+  background: $light-bg;
+
+  #topnav-pages .nav-link {
+    color: $light-fg;
+  }
+
+  // Logo
+  .navbar-brand {
+    .logo {
+      content: url(../img/XRPLedger_DevPortal-black.svg);
+      height: 40px;
+    }
+  }
+
+  // nav "hero" images
+  #dropdown-hero-for-docs>img {
+    content: url(../img/icons/lightmode/docs.svg);
+  }
+
+  #dropdown-hero-for-community>img {
+    content: url(../img/icons/lightmode/contribute.svg);
+  }
+
+  .dropdown-menu {
+    background-color: $gray-100;
+    border-color: $gray-100;
+    box-shadow: $light-box-shadow;
+
+    a:hover,
+    a.active {
+      color: $light-link-hover-color;
+    }
+
+    .dropdown-item.dropdown-hero {
+      >img {
+        background-color: $gray-050;
+      }
+
+      p {
+        color: $gray-700;
+      }
+    }
+
+    .dropdown-item.active {
+      color: $light-link-hover-color;
+    }
+
+    h5 {
+      color: $gray-600;
+    }
+
+    .col-for-get_started {
+      background-color: $gray-200;
+    }
+  }
+
+  #topnav-button {
+    background-color: $gray-200;
+  }
+
+  // Top nav mobile
+  @include media-breakpoint-down(md) {
+    .navbar-toggler {
+      .navbar-toggler-icon {
+
+        &::after,
+        &::before,
+        div {
+          background-color: $gray-900;
+        }
+      }
+    }
+
+    .navbar-nav .nav-link,
+    .navbar-collapse>.nav-item {
+      background: $gray-200;
+    }
+
+    #top-main-nav {
+      background-color: $gray-300;
+    }
+  }
+}
+
+// Left/right nav
+aside .sidenav_cat_title {
+  color: $black;
+}
+
+.page-toc .level-1 a,
+.command-list .separator {
+  color: $black;
+}
+
+// The command list's method links carry no color of their own, so in light
+// mode they fell through to `aside li a`'s $white (styles/_side-nav.scss),
+// which isn't theme-scoped -- white on white. Kept at two classes so the
+// hover/active rule below still outranks it on source order.
+.command-list a {
+  color: $light-fg;
+}
+
+aside a:hover,
+aside .sidenav_cat_title:hover,
+aside a.active,
+aside a.active:hover,
+aside .active>a,
+aside .active>a:hover {
+  color: $light-link-hover-color;
+}
+
+.dactyl-tree-nav {
+  nav {
+    border-left: 1px solid $black;
+
+    .nav-link:hover,
+    .nav-link:active {
+      border-left-color: $light-link-hover-color;
+    }
+
+    .active>.nav-link {
+      border-left-color: $light-link-hover-color;
+    }
+  }
+}
+
+.page-toc,
+.command-list {
+  border-left: 1px solid $black;
+
+  .level-3 {
+    border-left: 1px solid $black;
+  }
+
+  li a {
+
+    &:hover,
+    .active {
+      border-left-color: $light-link-hover-color;
+    }
+  }
+}
+
+// Footer
+.footer-brand {
+  .logo {
+    filter: invert(100%);
+  }
+}
+
+.copyright-license {
+  text-shadow: white 0px 0px 2px, white 1px 1px 2px, white 2px 2px 3px,
+    white 2px 2px 4px, white 2px 2px 5px, white 2px 2px 6px, white -1px -1px 2px,
+    white -2px -2px 3px, white -2px -2px 4px;
+}
+
+// Osano cookie consent overrides
+a.osano-cm-link {
+  color: #ffffff;
+}
+
+// Layout elements -------------------------------------------------------------
+article .card,
+.landing .card,
+.cta-card,
+aside .card {
+  color: $light-fg;
+  background-color: $light-standout-bg;
+  box-shadow: $light-box-shadow;
+}
+
+#code-samples-deck {
+  .card {
+    box-shadow: $light-box-shadow;
+  }
+
+  .card-header {
+    border-bottom: none;
+    background-color: $light-standout-bg;
+  }
+
+  .card-footer {
+    background-color: $light-standout-bg;
+  }
+}
+
+// FAQ
+.page-faq,
+.mini-faq {
+  &.landing-builtin-bg::before {
+    // Lighten the background image for legibility, since this one
+    // runs under a significant amount of the header text.
+    opacity: 0.6;
+  }
+
+  .q-wrapper {
+    background-color: $light-standout-bg;
+    color: $light-fg;
+    box-shadow: $light-box-shadow;
+
+    >h4 a.expander:hover {
+      color: $light-fg;
+    }
+  }
+}
+
+.page-community {
+  .com-card {
+    background: #FFFFFF;
+  }
+
+  .project-description {
+    color: #343437;
+  }
+
+  #platform-stack-overflow {
+    content: url("../img/logos/lightmode/stack-overflow.svg");
+  }
+
+  #platform-discord {
+    content: url("../img/logos/lightmode/discord.svg");
+  }
+}
+
+// Status labels
+.status.not_enabled {
+  color: $yellow-400;
+}
+
+// Parent ("category") page in label landings
+.pg-category {
+  color: $gray-600;
+}
+
+.landing {
+  .nav .nav-link {
+    color: $light-fg-muted;
+    border-bottom-color: $gray-300;
+  }
+
+  .circled-logo {
+    background-color: $gray-200;
+
+    img[src="assets/img/logos/globe.svg"] {
+      filter: invert(100%);
+    }
+  }
+
+  // :not(.xrpl-link) so the Link component's own brand/on-theme styling
+  // isn't overridden by this rule (see also styles/_landings.scss).
+  p a:not(.bds-link):not(.xrpl-link),
+  .longform a:not(.bds-link):not(.xrpl-link) {
+    color: $light-link-hover-color;
+  }
+}
+
+// Callouts
+.devportal-callout.caution,
+.devportal-callout.注意 {
+  border-color: $yellow-400;
+
+  >strong:first-child::before {
+    color: $yellow-400;
+  }
+}
+
+.devportal-callout.tip,
+.devportal-callout.ヒント {
+  border-color: $green-300;
+
+  >strong:first-child::before {
+    color: $green-300;
+  }
+}
+
+// Code ------------------------------------------------------------------------
+// Inline code font
+code {
+  color: $light-fg;
+}
+
+// Code blocks
+pre code,
+pre {
+  background-color: $gray-200;
+}
+
+// Code tabs
+.multicode {
+  a {
+    color: $black;
+
+    &.current {
+      color: $white;
+    }
+
+    &:hover {
+      text-decoration: none;
+      background-color: $light-form-bg;
+      color: $white;
+    }
+
+    &:focus {
+      background-color: $gray-800;
+    }
+  }
+}
+
+.codehilite .btn-outline-secondary {
+  background-color: $gray-800;
+  color: $gray-100;
+  border-color: $gray-100;
+}
+
+.interactive-block {
+  .breadcrumb-item.done a::after {
+    color: $green-500;
+  }
+}
+
+// Dev tools -------------------------------------------------------------------
+.modal-content {
+  background-color: $light-standout-bg;
+  color: $black;
+}
+
+.rpc-tool {
+  pre .toggle {
+    color: $white;
+
+    &:hover {
+      color: $blue-purple-300;
+    }
+  }
+}
+
+// Individual page styles ------------------------------------------------------
+
+// Homepage
+.page-home {
+  #home-hero-graphic {
+    content: url("../img/lightmode/home-hero.svg");
+  }
+
+  #benefits-list {
+    @each $benefit in "public", "streamlined", "performance", "low-cost",
+    "community", "reliability"
+
+      {
+      ##{$benefit} {
+        content: url("../img/icons/lightmode/#{$benefit}.svg");
+      }
+    }
+  }
+}
+
+// XRPL Overview
+#validator-graphic {
+  content: url("../img/lightmode/validators.svg");
+}
+
+// XRP Overview
+
+#wallets {
+  #wallet-xumm {
+    content: url("../img/wallets/lightmode/xumm.svg");
+  }
+
+  #wallet-bifrost {
+    content: url("../img/wallets/lightmode/bifrost.svg");
+  }
+
+  #wallet-keystone {
+    content: url("../img/wallets/lightmode/keystone.svg");
+  }
+
+  #wallet-dcent {
+    content: url("../img/wallets/lightmode/dcent.svg");
+  }
+
+  #wallet-coin {
+    content: url("../img/wallets/lightmode/coin.svg");
+  }
+
+  #wallet-gem {
+    content: url("../img/wallets/lightmode/gem.svg");
+  }
+
+  #wallet-crossmark {
+    content: url("../img/wallets/lightmode/crossmark.png");
+  }
+
+  #wallet-joey {
+    content: url("../img/wallets/lightmode/joey.svg");
+  }
+
+  #wallet-bitget {
+    content: url("../img/wallets/lightmode/bitget.svg");
+  }  
+}
+
+
+#top-exchanges {
+  // Kraken, eToro are OK on both light and dark
+
+  // Vector logos
+  @each $exchange in "bitstamp", "cex-io", "liquid", "bitfinex" {
+    #exch-#{$exchange} {
+      content: url("../img/exchanges/lightmode/#{$exchange}.svg");
+    }
+  }
+
+  // PNG logos
+  @each $exchange in "bittrex", "currency-com", "ftx", "lmax" {
+    #exch-#{$exchange} {
+      content: url("../img/exchanges/lightmode/#{$exchange}.png");
+    }
+  }
+}
+
+// History page
+.timeline-dot {
+  background-color: $light-bg;
+}
+
+// Use Cases & Featured Projects page
+.page-uses {
+
+  [data-bs-target="#categoryFilterModal"] {
+    color: $light-fg;
+
+    .category-filter-icon {
+      color: $black;
+
+      rect {
+        fill: $white;
+      }
+    }
+  }
+
+  .card-body {
+    background: $white;
+    color: $gray-700;
+  }
+
+  .modal-footer,
+  .modal-header {
+    background-color: $gray-050;
+  }
+
+
+
+  @each $usecase in "infrastructure",
+  "developer_tooling",
+  "interoperability",
+  "wallet",
+  "nfts",
+  "exchanges",
+  "gaming",
+  "security",
+  "payments",
+  "web_monetization",
+  "sustainability",
+  "cbdc",
+  "custody",
+  "other",
+  "carbon_markets",
+  "defi" {
+    ##{$usecase} {
+      content: url("../img/icons/usecases/lightmode/ic_#{$usecase}.png");
+    }
+  }
+
+  .category-header {
+    color: $gray-700;
+  }
+
+  .category_count {
+    background: #D2B2FF;
+    color: #350080;
+  }
+
+  .section-text-title {
+    color: #000;
+  }
+
+  @each $company, $type in ('bitgo': 'svg',
+    'sologenic-nft': 'svg',
+    'carbonland-trust': 'svg',
+    'futureverse': 'png',
+    "moai-finance": "svg",
+    "orchestra-finance": "svg",
+    'x-tokenize': 'svg',
+    'casino-coin': 'svg',
+    'xrp-cafe': 'svg',
+    'coil': 'svg',
+    'xrp-toolkit': 'svg',
+    'first-ledger-bot': 'svg',
+    'cryptum': 'svg',
+    'xrpl-org-ledger-explorer': 'svg',
+    'evernode': 'svg',
+    'xrpl-rosetta': 'svg',
+    'ripples-cbdc-platform': 'svg',
+    'xrpscan': 'svg',
+    'ripples-on-demand-liquidity': 'svg',
+    'xumm-wallet': 'svg',
+    'bifrost-wallet': 'svg',
+    'bitget-wallet': 'svg',
+    'sologenic-dex': 'svg',
+    'joey-wallet': 'svg',
+    'Crossmark': 'png'
+
+  ) {
+    #use_case_companies_list {
+      ##{$company} {
+        .biz-logo {
+          max-height: 40px;
+          content: url("../img/uses/lightmode/#{$company}.#{$type}");
+        }
+      }
+    }
+  }
+
+  #use_case_companies_list {
+    #threezy {
+      .biz-logo {
+        max-height: 40px;
+        content: url("../img/uses/lightmode/threezy.png");
+      }
+    }
+  }
+
+  .modal-content-uses {
+    .first-ledger-bot {
+      content: url("../img/uses/lightmode/first-ledger-bot.svg");
+    }
+
+    .moai-finance {
+      content: url("../img/uses/lightmode/moai-finance.svg");
+    }
+
+    .orchestra-finance {
+      max-height: 52px;
+      margin: 0;
+      content: url("../img/uses/lightmode/orchestra-finance.svg");
+    }
+  }
+
+  // Monochrome logos; invert.
+  #bitpay,
+  // #coil,
+  #forte,
+  #xrplorer,
+  #gatehub {
+    .biz-logo {
+      filter: invert(100%);
+    }
+  }
+
+}
+
+.landing-bg {
+  opacity: 0.4;
+
+  @include media-breakpoint-up(md) {
+    opacity: 1;
+  }
+}
+
+.landing-builtin-bg {
+  &::before {
+    opacity: 0.4;
+
+    @include media-breakpoint-up(md) {
+      opacity: 1;
+    }
+  }
+}
+
+// feedback widget
+#feedback-content {
+  .widget-form-wrapper {
+    background-color: $white !important;
+
+    div {
+      background-color: $white !important;
+    }
+
+    textarea {
+      background-color: $gray-100 !important;
+    }
+
+    .widget-header-title {
+      color: $gray-900 !important;
+    }
+
+    .cancel {
+      color: $blue-purple-500 !important;
+    }
+  }
+
+  .widget-helpful {
+    .widget-header {
+      background-color: $white !important;
+    }
+
+    .widget-header-title {
+      color: $gray-900 !important;
+    }
+
+    .widget-header-icon {
+      filter: invert(100%);
+    }
+  }
+
+}
+
+// Docs landing page
+.page-docs-index {
+  #software-and-sdks .card-deck {
+    .card:nth-child(1) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-green.svg);
+    }
+
+    .card:nth-child(2) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-light-blue.svg);
+    }
+
+    .card:nth-child(4) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-yellow.svg);
+    }
+  }
+
+  #doc-types .card-deck {
+    .card:nth-child(4) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-light-blue-2.svg);
+    }
+  }
+}
+
+.page-docs-index,
+.page-community {
+  .funding-text {
+    color: #232325;
+  }
+
+  .stat {
+    .small-text {
+      color: #232325;
+    }
+  }
+
+  .project-card {
+    background-color: transparent;
+
+  }
+
+  .card-details {
+    background-color: transparent;
+  }
+
+  .card-image {
+    background: #E0E0E1;
+  }
+
+  #community-table tr {
+    border-bottom: 1px solid #34343740;
+  }
+
+  .card-description {
+    color: #343437 !important;
+  }
+
+  .card-subtitle {
+    color: #111112 !important;
+  }
+
+  .card-title {
+    color: #111112 !important;
+  }
+
+  .main-title {
+    color: #111112;
+  }
+
+  .event-location {
+    color: #232325 !important;
+  }
+
+  .event-details {
+    color: #232325 !important;
+  }
+
+  .upcoming-event {
+    .event-name {
+      color: #111112;
+    }
+  }
+
+  .upcoming-label {
+    color: #232325 !important;
+  }
+
+  .description {
+    color: #232325;
+  }
+
+  .events-text {
+    color: #111112;
+  }
+
+  .discord-icon {
+    content: url(../img/community/ic_discord_light.png)
+  }
+
+  .twitter-icon {
+    content: url(../img/community/ic_twitter_light.png);
+  }
+
+  .youtube-icon {
+    content: url(../img/community/ic_youtube_light.png);
+  }
+
+  .xrpl-icon {
+    content: url(../img/community/ic_xrpl_light.png);
+  }
+
+  .github-icon {
+    content: url(../img/community/ic_github_light.png);
+  }
+
+  .stackoverflow-icon {
+    content: url(../img/community/ic_stackoverflow_light.png);
+  }
+
+  #run-a-network-node .card-deck {
+    .card:nth-child(4) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-light-green.svg);
+    }
+  }
+
+  #run-a-network-node .text-cards a {
+    color: $black;
+  }
+
+  #xrpl-blog .blog-graphic {
+    content: url(../img/community/lightmode/community-blog@2x.png);
+  }
+
+  #xrpl-events .text-light {
+    color: $black !important;
+  }
+
+  #xrplGrantsDark g,
+  #xrplGrantsDark-small g,
+  #careersDark g,
+  #careersDark-small g {
+    filter: invert(100%) brightness(0.8);
+  }
+}
+
+#find-us-on-platforms .card-deck {
+  .card:nth-child(2) .card-footer {
+    background-image: url(../img/cards/lightmode/4col-light-blue-3.svg);
+  }
+}
+
+.page-references {
+  #refs-types .card-deck {
+    .card:nth-child(2) .card-footer {
+      background-image: url(../img/cards/lightmode/3col-green-2.svg);
+    }
+  }
+
+  #xrpl-protocol .card-deck {
+    .card:nth-child(1) .card-footer {
+      background-image: url(../img/cards/lightmode/4col-light-blue-4.svg);
+    }
+  }
+}
+
+// Placeholder text colors (search bars, etc.)
+$placeholder-color: $gray-600;
+
+::-webkit-input-placeholder {
+  /* Chrome */
+  color: $placeholder-color;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: $placeholder-color;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+:-moz-placeholder {
+  /* Firefox 4 - 18 */
+  color: $placeholder-color;
+  opacity: 1;
+}
+
+// Events page
+.page-events {
+  label {
+    color: $gray-900;
+  }
+
+  .event-card {
+    color: $black;
+    background-color: $gray-050;
+    box-shadow: 0px 5px 20px 0px $gray-300;
+  }
+
+  a.event-card:hover {
+    color: $black;
+  }
+
+  .event-hero {
+    color: $gray-900;
+  }
+
+  .event-save-date {
+    color: $gray-900;
+  }
+
+  .event-small-gray {
+    color: $gray-600;
+  }
+
+  #event-hero-image {
+    height: 100%;
+    min-height: 209px;
+    background: url(../img/events/event-hero1-light@2x.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .icon-date::before {
+    background: url(../img/events/event-date-light.svg);
+  }
+
+  .icon-location::before {
+    background: url(../img/events/event-location-light.svg);
+  }
+
+  .events-filter[type="checkbox"]::before {
+    background-color: $gray-100;
+  }
+
+  .events-filter[type="checkbox"]:not(:disabled):checked:hover::after {
+    background-image: url(../img/events/event-check.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $blue-purple-300;
+    border-width: 2px;
+    border-style: solid;
+    border-color: $blue-purple-300;
+    border-radius: 4px;
+  }
+
+  .events-filter[type="checkbox"]:not(:disabled):hover::before {
+    background-color: $gray-100;
+  }
+
+  .events-filter[type="checkbox"]:not(:disabled):hover::after {
+    background-color: $gray-100;
+  }
+}
+
+
+.page-funding {
+  .funding-list {
+    @each $funding in "funding-01", "funding-02", "funding-03", "funding-04" {
+      ##{$funding} {
+        content: url("../img/funding/lightmode/#{$funding}.svg");
+      }
+    }
+  }
+
+  #xrplGrantsDark {
+    filter: invert(100%) brightness(0.8);
+  }
+}
+
+.page-impact {
+
+  .connect-list {
+    @each $connect in "connect-01", "connect-02", "connect-03", "connect-04" {
+      ##{$connect} {
+        content: url("../img/impact/lightmode/#{$connect}.svg");
+      }
+    }
+  }
+
+  #map-light {
+    display: block;
+  }
+
+  #map-dark {
+    display: none;
+  }
+
+}
+
+main article .card-grid {
+  color: $black;
+
+  code {
+    background-color: $green-100;
+  }
+
+  .card-icon-container,
+  &.card-grid-3xN .card-icon-container {
+    background: $gray-300;
+  }
+}
+
+[data-component-name="Markdown/Markdown"] article {
+  border-bottom-color: $gray-500;
+}
+
+.dev-blog {
+  .text-bg {
+    background-color: $white;
+  }
+
+  #card-date {
+    color: $gray-600;
+  }
+
+  .category-header {
+    color: $gray-900;
+  }
+
+  label {
+    color: $gray-700;
+  }
+
+  .blog-filter[type="checkbox"]::before {
+    background: $gray-100;
+  }
+
+  .blog-filter[type="checkbox"]:checked::before {
+    background: $gray-100;
+  }
+
+  .blog-filter[type="checkbox"]:not(:disabled):checked:hover::after {
+    background-image: url(../img/blog/blog-check-light-mode.svg);
+  }
+
+  .blog-filter[type="checkbox"]:not(:disabled):hover::before {
+    background: $gray-100;
+  }
+
+  .blog-filter[type="checkbox"]:not(:disabled):hover::after {
+    background: $gray-100;
+  }
+
+  .post-date {
+    text-decoration: overline solid #145C35 10%;
+  }
+
+  #general-badge {
+    background-color: #FFFFFF;
+    color: #343437;
+  }
+
+  #release_notes-badge {
+    background-color: #32E685;
+    color: #145C35;
+  }
+
+  #advisories-badge {
+    background-color: #FF6719;
+    color: #4C1A00;
+  }
+
+  #amendments-badge {
+    background-color: #FAFF19;
+    color: #4B4C00;
+  }
+
+  #development-badge {
+    background-color: #7919FF;
+    color: #20004C;
+  }
+
+  #developer_reflections-badge {
+    background-color: #19A3FF;
+    color: #002E4C;
+  }
+
+  #gateway_bulletins-badge {
+    background-color: #D919FF;
+    color: #40004C;
+  }
+
+  #features-badge {
+    background-color: #32E685;
+    color: #145C35;
+  }
+
+  #security-badge {
+    background-color: #FF198B;
+    color: #4C0026;
+  }
+
+  .dropdown-btn {
+    color: $gray-900;
+    background-color: $gray-200;
+    border-color: $gray-200;
+
+    img {
+      content: url("../img/icons/lightmode/chevron-arrow-down.svg");
+    }
+  }
+
+  .dropdown-content {
+    background-color: $gray-200;
+  }
+}
+
+.page-tokenization {
+  .project-cards .project-logo {
+    filter: invert(100%);
+  }
+
+  .article-card {
+    background-color: $white;
+  }
+
+  .article-card-background {
+    filter: drop-shadow(0px 1px 18px rgba(24, 24, 24, 0.50));
+  }
+
+  .evernode {
+    content: url("../img/logos/evernode.svg");
+  }
+
+  .prev img {
+    content: url("../img/icons/prev_light.svg");
+  }
+
+  .next img {
+    content: url("../img/icons/prev_light.svg");
+    transform: scaleX(-1);
+  }
+
+  .arrow-button {
+    background-color: $gray-200;
+  }
+}
+
+.page-rwa-tokenization {
+  .section-title {
+    color: $black;
+  }
+  .utility-card {
+  .utility-title{
+    color: $black;
+  }
+  .utility-description {
+    color: $black;
+  }
+ }
+  $icons: (
+    'low-fees': '../img/tokenization/lightmode/low-fees.png',
+    'access': '../img/tokenization/lightmode/cross-chain.png',
+    'native-compliance': '../img/tokenization/lightmode/native-compliance.png',
+    'delegated-token-management': '../img/tokenization/lightmode/delegated-token-management.png',
+  );
+
+  @each $name, $path in $icons {
+    .benefit-icon.#{$name} {
+      background-image: url(#{$path});
+    }
+  }
+  
+
+  $company-logos-light: (
+    'open-eden': '../img/tokenization/lightmode/open-eden.png',
+    'zoniqx': '../img/tokenization/lightmode/zoniqx.png',
+    'axiology': '../img/tokenization/lightmode/axiology.png',
+    'archax': '../img/tokenization/lightmode/archax.png',
+    'meld': '../img/tokenization/lightmode/meld.png',
+    'palisade': '../img/tokenization/lightmode/palisade.png',
+    'ripple-logo': '../img/tokenization/lightmode/ripple-logo.png',
+    'ondo': '../img/tokenization/lightmode/ondo.png',
+    'hidden-road': '../img/tokenization/lightmode/hidden-road.png',
+  );
+
+  @each $name, $path in $company-logos-light {
+    .company-logo.#{$name} {
+      background-image: url(#{$path});
+    }
+  }
+  .token-features-section {
+    .btn-link {
+      color: #7919FF;
+    }
+  }
+  .card-description {
+    a {
+      color: #7919FF !important;
+    }
+  }
+  .developer-tools__image {
+    background-image: url("../img/tokenization/lightmode/graphic.png");
+  }
+  .right-arrow-item::after {
+    content: url('../img/icons/lightmode/arrow-right-purple.svg');
+  }
+  .token-video-text-container {
+    p {
+      color: var(--XRPL-Primary-Black, #000);
+    }
+  }
+
+  .cards-title-token {
+    color: var(--XRPL-Primary-Black, #000);
+  }
+
+  .benefit-card {
+    background: #FFF;
+
+    .benefit-title {
+      color: var(--XRPL-Primary-Black, #000);
+    }
+
+    .benefit-description {
+      color: var(--XRPL-Black-Black-80, #232325);
+    }
+  }
+
+  .developer-tools__description {
+    color: var(--XRPL-Primary-Black, #000);
+  }
+
+  .feature-item__title {
+    color: var(--XRPL-Primary-Black, #000);
+  }
+
+  .feature-item__divider {
+    background-color: black;
+  }
+
+  .rwa-subtitle {
+    color: var(--XRPL-Primary-Black, #000);
+  }
+
+  .feature-title {
+    color: var(--XRPL-Primary-Black, #000);
+  }
+
+  .feature-description {
+    color: var(--XRPL-Black-Black-80, #232325);
+  }
+  .com-card-link {
+    color: #7919FF !important;
+  }
+}
+
+/* Algolia Search styles
+
+.algolia-autocomplete .ds-dropdown-menu::before {
+  background-color: $gray-100;
+}
+.algolia-autocomplete .algolia-docsearch-suggestion {
+  background-color: $gray-100;
+}
+
+.DocSearch-Modal {
+  box-shadow: $light-box-shadow;  
+}
+ */
+.use-case-payments {
+  .payments-integration-section{
+  .integration-column__title{
+    color: var(--XRPL-Primary-Black, #000);
+  }
+  .integration-column__subtitle{
+    color: var(--XRPL-Black-Black-80, #232325);
+  }
+  .feature-item__title{
+    color: var(--XRPL-Primary-Black, #000);
+  }
+  .feature-item__divider{
+    background-color: #000;
+  }
+}
+
+  .payments-project-card {
+   background: #FFF;
+   box-shadow: none;
+   .first-word{
+    color: var(--XRPL-Black-Black-80, #232325);
+   }
+   .rest-text{
+    color: var(--XRPL-Black-Black-80, #232325);
+   }
+   
+   /* Light mode payment logos */
+   .project-logo {
+     img.ripple-usd {
+       content: url('../img/uses/lightmode/payments/rlusd.png');
+     }
+     
+     img.usdc {
+       content: url('../img/uses/lightmode/payments/usdc.png');
+     }
+     
+     img.usdb {
+       content: url('../img/uses/lightmode/payments/usdb.png');
+     }
+     
+     img.europ {
+       content: url('../img/uses/lightmode/payments/erop.png');
+     }
+     
+     img.xsgd {
+       content: url('../img/uses/lightmode/payments/xsgd.png');
+     }
+     
+     img.audd {
+       content: url('../img/uses/lightmode/payments/audd.png');
+     }
+   }
+  }
+  .advantages-section {
+    .advantage-item {
+      strong{
+        color: var(--XRPL-Black-Black-80, #232325);
+      }
+    }
+  }
+}
+
+/* Light mode embedded payments icons */
+#embedded-payments-list {
+  #digital-wallets {
+    content: url("../img/uses/lightmode/payments/digital-wallet.png");
+  }
+  
+  #cross-border-remittance {
+    content: url("../img/uses/lightmode/payments/cross-border.png");
+  }
+  
+  #regulated-foreign-exchange {
+    content: url("../img/uses/lightmode/payments/regulated.png");
+  }
+  
+  #merchant-settlement {
+    content: url("../img/uses/lightmode/payments/merchant-settlement.png");
+  }
+  
+  #b2b-payment-rails {
+    content: url("../img/uses/lightmode/payments/b2b-payment.png");
+  }
+  
+  #compliance-first-payment-acceptance {
+    content: url("../img/uses/lightmode/payments/compliance.png");
+  }
+}
+
+/* Light mode battle-tested company logos */
+.use-case-payments .battle-tested-section {
+  .payments-project-card {
+     background: #FFF !important;
+    .project-logo img {
+      &.coinpayments {
+        content: url('../img/uses/lightmode/payments/coinpayments.png');
+      }
+      
+      &.ripple {
+        content: url('../img/uses/lightmode/payments/ripple-black.png');
+      }
+      
+      &.friipay {
+        content: url('../img/uses/lightmode/payments/friipay.png');
+      }
+    }
+  }
+
+
+}
+
+.tx-type-list .tx-type {
+  background-color: $gray-200;
+  color: $gray-800;
+
+  &:nth-child(even) {
+    background-color: $white;
+  }
+
+  a.tx-title {
+    color: $blue-purple-500;
+    &:visited {
+      color: $blue-purple-500;
+    }
+    &:hover, &:visited:hover {
+      color: $light-link-hover-color
+    }
+    img {
+      filter: brightness(0.1);
+    }
+  }
+}
+
+.tx-icon-legend {
+  border-color: $black;
+
+  .tx-legend-item img.tx-type-icon {
+    filter: none;
+  }
+}  
+
+[data-component-name="Layout/DocumentationLayoutBottom"] {
+  border-top-color: black;
+}

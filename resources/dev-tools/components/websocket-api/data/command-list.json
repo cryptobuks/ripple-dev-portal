@@ -1,0 +1,1058 @@
+[
+  {
+    "group": "Account Methods",
+    "methods": [
+      {
+        "name": "account_channels",
+        "description": "Returns information about an account's payment channels.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_channels",
+        "body": {
+          "command": "account_channels",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "destination_account": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "account_currencies",
+        "description": "Retrieves a list of currencies that an account can send or receive, based on its trust lines.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_currencies",
+        "body": {
+          "command": "account_currencies",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "account_info",
+        "description": "Retrieves information about an account, its activity, and its XRP balance.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_info",
+        "body": {
+          "command": "account_info",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "ledger_index": "current",
+          "queue": true
+        }
+      },
+      {
+        "name": "account_lines",
+        "description": "Retrieves information about an account's trust lines, including balances for all non-XRP currencies and assets.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_lines",
+        "body": {
+          "command": "account_lines",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "account_nfts",
+        "description": "Retrieves NFTs owned by an account.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_nfts",
+        "body": {
+          "command": "account_nfts",
+          "account": "rsuHaTvJh1bDmDoxX9QcKP7HEBSBt4XsHx",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "account_objects",
+        "description": "Returns the raw ledger format for all objects owned by an account.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_objects",
+        "body": {
+          "command": "account_objects",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "ledger_index": "validated",
+          "type": "state",
+          "limit": 10
+        }
+      },
+      {
+        "name": "account_offers",
+        "description": "Retrieves a list of offers made by a given account that are outstanding as of a particular ledger version.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_offers",
+        "body": {
+          "command": "account_offers",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"
+        }
+      },
+      {
+        "name": "account_tx",
+        "description": "Retrieves a list of transactions that affected the specified account.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/account_tx",
+        "body": {
+          "id": "example_account_tx",
+          "command": "account_tx",
+          "account": "rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w",
+          "ledger_index_min": -1,
+          "ledger_index_max": -1,
+          "binary": false,
+          "limit": 2,
+          "forward": false,
+          "api_version": 2
+        }
+      },
+      {
+        "name": "gateway_balances",
+        "description": "Calculates the total balances issued by a given account, optionally excluding amounts held by operational addresses.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/gateway_balances",
+        "body": {
+          "id": "example_gateway_balances_1",
+          "command": "gateway_balances",
+          "account": "rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q",
+          "hotwallet": [
+            "rKm4uWpg9tfwbVSeATv4KxDe6mpE9yPkgJ",
+            "ra7JkEzrgeKHdzKgo4EUUVBnxggY4z37kt"
+          ],
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "noripple_check",
+        "description": "Compares an account's Default Ripple and No Ripple flags to the recommended settings.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/account-methods/noripple_check",
+        "body": {
+          "command": "noripple_check",
+          "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "role": "gateway",
+          "ledger_index": "current",
+          "limit": 2,
+          "transactions": true
+        }
+      }
+    ]
+  },
+  {
+    "group": "Ledger Methods",
+    "methods": [
+      {
+        "name": "ledger",
+        "description": "Retrieves information about the public ledger.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger",
+        "body": {
+          "id": "example_ledger_req",
+          "command": "ledger",
+          "ledger_index": "validated",
+          "transactions": false,
+          "expand": false,
+          "owner_funds": false,
+          "api_version": 2
+        }
+      },
+      {
+        "name": "ledger_closed",
+        "description": "Returns the unique identifiers of the most recently closed ledger. (This ledger is not necessarily validated and immutable yet.)",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_closed",
+        "body": {
+          "command": "ledger_closed"
+        }
+      },
+      {
+        "name": "ledger_current",
+        "description": "Returns the unique identifiers of the current in-progress ledger.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_current",
+        "body": {
+          "command": "ledger_current"
+        }
+      },
+      {
+        "name": "ledger_data",
+        "description": "Retrieves contents of the specified ledger.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_data",
+        "body": {
+          "id": "example_ledger_data",
+          "command": "ledger_data",
+          "ledger_hash": "842B57C1CC0613299A686D3E9F310EC0422C84D3911E5056389AA7E5808A93C8",          
+          "limit": 5,
+          "api_version": 2
+        }
+      },
+      {
+        "name": "ledger_index",
+        "description": "Looks up the most recently closed ledger at a specific time.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/clio-methods/ledger_index",
+        "body": {
+          "command": "ledger_index",
+          "date": "2024-06-20T09:00:42Z"
+        },
+        "clio_only": true
+      }
+    ]
+  },
+  {
+    "group": "Transaction Methods",
+    "methods": [
+      {
+        "name": "simulate",
+        "description": "Executes a dry run of any transaction type, enabling you to preview the results and metadata of a transaction without committing them to the XRP Ledger.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/transaction-methods/simulate",
+        "body": {
+          "id": "example_simulate",
+          "command": "simulate",
+          "tx_json" : {
+              "TransactionType" : "Payment",
+              "Account" : "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+              "Destination" : "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX",
+              "Amount" : "1000000"
+          }
+        }
+      },
+      {
+        "name": "submit",
+        "description": "Submits a transaction to the network to be confirmed and included in future ledgers.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/transaction-methods/submit",
+        "body": {
+          "id": "example_submit",
+          "command": "submit",
+          "tx_blob": "1200002280000000240000001E61D4838D7EA4C6800000000000000000000000000055534400000000004B4E9C06F24296074F7BC48F92A97916C6DC5EA968400000000000000B732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7447304502210095D23D8AF107DF50651F266259CC7139D0CD0C64ABBA3A958156352A0D95A21E02207FCF9B77D7510380E49FF250C21B57169E14E9B4ACFD314CEDC79DDD0A38B8A681144B4E9C06F24296074F7BC48F92A97916C6DC5EA983143E9D4A2B8AA0780F682D136F7A56D6724EF53754"
+        }
+      },
+      {
+        "name": "submit_multisigned",
+        "description": "Submits a multi-signed transaction to the network to be confirmed and included in future ledgers.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/transaction-methods/submit_multisigned",
+        "body": {
+          "id": "submit_multisigned_example",
+          "command": "submit_multisigned",
+          "tx_json": {
+            "Account": "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
+            "Fee": "30000",
+            "Flags": 262144,
+            "LimitAmount": {
+              "currency": "USD",
+              "issuer": "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+              "value": "100"
+            },
+            "Sequence": 2,
+            "Signers": [
+              {
+                "Signer": {
+                  "Account": "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW",
+                  "SigningPubKey": "02B3EC4E5DD96029A647CFA20DA07FE1F85296505552CCAC114087E66B46BD77DF",
+                  "TxnSignature": "30450221009C195DBBF7967E223D8626CA19CF02073667F2B22E206727BFE848FF42BEAC8A022048C323B0BED19A988BDBEFA974B6DE8AA9DCAE250AA82BBD1221787032A864E5"
+                }
+              },
+              {
+                "Signer": {
+                  "Account": "rUpy3eEg8rqjqfUoLeBnZkscbKbFsKXC3v",
+                  "SigningPubKey": "028FFB276505F9AC3F57E8D5242B386A597EF6C40A7999F37F1948636FD484E25B",
+                  "TxnSignature": "30440220680BBD745004E9CFB6B13A137F505FB92298AD309071D16C7B982825188FD1AE022004200B1F7E4A6A84BB0E4FC09E1E3BA2B66EBD32F0E6D121A34BA3B04AD99BC1"
+                }
+              }
+            ],
+            "SigningPubKey": "",
+            "TransactionType": "TrustSet",
+            "hash": "BD636194C48FD7A100DE4C972336534C8E710FD008C0F3CF7BC5BF34DAF3C3E6"
+          }
+        }
+      },
+      {
+        "name": "transaction_entry",
+        "description": "Retrieves information on a single transaction from a specific ledger version.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/transaction-methods/transaction_entry",
+        "body": {
+          "id": "example_transaction_entry",
+          "command": "transaction_entry",
+          "tx_hash": "C53ECF838647FA5A4C780377025FEC7999AB4182590510CA461444B207AB74A9",
+          "ledger_index": 56865245,
+          "api_version": 2
+        }
+      },
+      {
+        "name": "tx",
+        "description": "Retrieves information on a single transaction.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/transaction-methods/tx",
+        "body": {
+          "id": "example_tx_hash",
+          "command": "tx",
+          "transaction": "C53ECF838647FA5A4C780377025FEC7999AB4182590510CA461444B207AB74A9",
+          "binary": false,
+          "api_version": 2
+        }
+      }
+    ]
+  },
+  {
+    "group": "Path and DEX Methods",
+    "methods": [
+      {
+        "name": "amm_info",
+        "description": "Looks up info on an Automated Market Maker instance.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/amm_info",
+        "body": {
+          "command": "amm_info",
+          "asset": {
+            "currency": "XRP"
+          },
+          "asset2": {
+            "currency": "TST",
+            "issuer": "rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "book_changes",
+        "description": "Reports changes to the order books that occurred in a specific ledger version.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/book_changes/",
+        "body": {
+          "command": "book_changes",
+          "ledger_index": 88530953
+        }
+      },
+      {
+        "name": "book_offers",
+        "description": "Retrieves a list of offers, also known as the order book, between two currencies.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/book_offers/",
+        "body": {
+          "command": "book_offers",
+          "taker": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "taker_gets": {
+            "currency": "XRP"
+          },
+          "taker_pays": {
+            "currency": "USD",
+            "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+          },
+          "limit": 10
+        }
+      },
+      {
+        "name": "deposit_authorized",
+        "description": "Checks whether one account is authorized to send payments directly to another.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/deposit_authorized",
+        "body": {
+          "command": "deposit_authorized",
+          "source_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "destination_account": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "get_aggregate_price",
+        "description": "Retrieves the aggregate price of specified Oracle objects, returning three price statistics: mean, median, and trimmed mean.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/get_aggregate_price",
+        "body": {
+          "command": "get_aggregate_price",
+          "ledger_index": "current",
+          "base_asset": "XRP",
+          "quote_asset": "USD",
+          "trim": 20,
+          "oracles": [
+            {
+              "account": "rNZ9m6AP9K7z3EVg6GhPMx36V4QmZKeWds",
+              "oracle_document_id": 34
+            },
+            {
+              "account": "rMVKq8zrVsJZQFEiTARyC6WfZznhhLMcNi",
+              "oracle_document_id": 100
+            },
+            {
+              "account": "r92kJTnUbUUq15t2BBZYGYxY79RnNc7rLQ",
+              "oracle_document_id": 2
+            }
+          ]
+        }
+      },
+      {
+        "name": "nft_buy_offers",
+        "description": "Retrieves offers to buy a given NFT.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/nft_buy_offers",
+        "body": {
+          "command": "nft_buy_offers",
+          "nft_id": "00090000D0B007439B080E9B05BF62403911301A7B1F0CFAA048C0A200000007",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "nft_sell_offers",
+        "description": "Retrieves offers to sell a given NFT.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/nft_sell_offers",
+        "body": {
+          "command": "nft_sell_offers",
+          "nft_id": "00090000D0B007439B080E9B05BF62403911301A7B1F0CFAA048C0A200000007",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "path_find",
+        "description": "Searches for a path along which a payment can possibly be made, and periodically sends updates when the path changes over time.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/path_find",
+        "ws_only": true,
+        "body": {
+          "command": "path_find",
+          "subcommand": "create",
+          "source_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "destination_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "destination_amount": {
+            "value": "0.001",
+            "currency": "USD",
+            "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+          }
+        }
+      },
+      {
+        "name": "ripple_path_find",
+        "description": "Searches one time for a payment path.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/path-and-order-book-methods/ripple_path_find",
+        "body": {
+          "command": "ripple_path_find",
+          "source_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "source_currencies": [
+            {
+              "currency": "XRP"
+            },
+            {
+              "currency": "USD"
+            }
+          ],
+          "destination_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "destination_amount": {
+            "value": "0.001",
+            "currency": "USD",
+            "issuer": "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "group": "MPT Methods",
+    "methods": [
+      {
+        "name": "mpt_holders",
+        "description": "Return all holders of an MPT and their balance.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/clio-methods/mpt_holders",
+        "clio_only": true,
+        "body": {
+          "id": "example_mpt_holders",
+          "command": "mpt_holders",
+          "mpt_issuance_id": "05EECEBE97A7D635DE2393068691A015FED5A89AD203F5AA",
+          "ledger_index": "validated"
+        }
+      }
+    ]
+  },
+  {
+    "group": "NFT Methods",
+    "methods": [
+      {
+        "name": "nft_history",
+        "description": "Get past transaction metadata for an NFT.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/clio-methods/nft_history",
+        "clio_only": true,
+        "body": {
+          "id": "example_nft_history",
+          "command": "nft_history",
+          "nft_id": "000827106807BF848FACD972F2F617E27003D75B2CAAC9816CEE14840521D1E9"
+        }
+      },
+      {
+        "name": "nft_info",
+        "description": "Get info about an NFT.",
+        "clio_only": true,
+        "link": "/docs/references/http-websocket-apis/public-api-methods/clio-methods/nft_info",
+        "body": {
+          "id": "example_nft_info",
+          "command": "nft_info",
+          "nft_id": "000827106807BF848FACD972F2F617E27003D75B2CAAC9816CEE14840521D1E9"
+        }
+      },
+      {
+        "name": "nfts_by_issuer",
+        "description": "Get a list of NFTs issued by a specific account, optionally filtered by taxon.",
+        "clio_only": true,
+        "link": "/docs/references/http-websocket-apis/public-api-methods/clio-methods/nfts_by_issuer",
+        "body": {
+          "id": "example_nfts_by_issuer",
+          "command": "nfts_by_issuer",
+          "issuer": "rwVhZJLcdtioxdETLq31Ne2K97xm4zA8Jv",
+          "nft_taxon": 0
+        }
+      }
+    ]
+  },
+  {
+    "group": "Payment Channel Methods",
+    "methods": [
+      {
+        "name": "channel_verify",
+        "description": "Checks the validity of a signature that can be used to redeem a specific amount of XRP from a payment channel.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/payment-channel-methods/channel_verify",
+        "body": {
+          "command": "channel_verify",
+          "channel_id": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",
+          "signature": "304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064",
+          "public_key": "aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3",
+          "amount": "1000000"
+        }
+      }
+    ]
+  },
+  {
+    "group": "Subscription Methods",
+    "methods": [
+      {
+        "name": "subscribe",
+        "description": "Requests periodic notifications from the server when certain events happen.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/subscription-methods/subscribe",
+        "body": {
+          "id": "Example watch one account and all new ledgers",
+          "command": "subscribe",
+          "streams": [
+            "ledger"
+          ],
+          "accounts": [
+            "rrpNnNLKrartuEqfJGpqyDwPj1AFPg9vn1"
+          ]
+        }
+      },
+      {
+        "name": "unsubscribe",
+        "description": "Tells the server to stop sending messages for a particular subscription or set of subscriptions.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/subscription-methods/unsubscribe",
+        "body": {
+          "id": "Example stop watching one account and new ledgers",
+          "command": "unsubscribe",
+          "streams": [
+            "ledger"
+          ],
+          "accounts": [
+            "rrpNnNLKrartuEqfJGpqyDwPj1AFPg9vn1"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "group": "Server Info Methods",
+    "methods": [
+      {
+        "name": "fee",
+        "description": "Reports the current state of the open-ledger requirements for the transaction cost.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/fee",
+        "body": {
+          "id": "fee_websocket_example",
+          "command": "fee"
+        }
+      },
+      {
+        "name": "manifest",
+        "description": "Look up manifest information for a given validator public key.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/manifest",
+        "body": {
+          "id": "manifest_example",
+          "command": "manifest",
+          "public_key": "nHUFE9prPXPrHcG3SkwP1UzAQbSphqyQkQK9ATXLZsfkezhhda3p"
+        }
+      },
+      {
+        "name": "server_definitions",
+        "description": "Returns an SDK-compatible definitions.json, generated from the rippled server being queried.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_definitions",
+        "body": {
+          "command": "server_definitions"
+        }
+      },
+      {
+        "name": "server_info",
+        "description": "Reports a human-readable version of various information about the rippled server being queried.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_info",
+        "body": {
+          "command": "server_info"
+        }
+      },
+      {
+        "name": "server_state",
+        "description": "Reports a machine-readable version of various information about the rippled server being queried.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/server_state",
+        "body": {
+          "command": "server_state"
+        }
+      },
+      {
+        "name": "version",
+        "description": "Retrieves the API version information. When you connect to a cluster that includes a Clio server, the Clio method is used.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/version",
+        "body": {
+          "command": "version"
+        }
+      },
+      {
+        "name": "feature",
+        "description": "Returns information about amendments this server knows about. When you connect to a cluster that includes a Clio server, the Clio method is used.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/server-info-methods/feature",
+        "body": {
+          "command": "feature",
+          "feature": "4C97EBA926031A7CF7D7B36FDE3ED66DDA5421192D63DE53FFB46E43B9DC8373"
+        }
+      }
+    ]
+  },
+  {
+    "group": "Utility Methods",
+    "methods": [
+      {
+        "name": "ping",
+        "description": "Checks that the connection is working.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/utility-methods/ping",
+        "body": {
+          "command": "ping"
+        }
+      },
+      {
+        "name": "random",
+        "description": "Provides a random number, which may be a useful source of entropy for clients.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/utility-methods/random",
+        "body": {
+          "command": "random"
+        }
+      }
+    ]
+  },
+  {
+    "group": "Vault Methods",
+    "methods": [
+      {
+        "name": "vault_info",
+        "description": "Retrieves information about a vault, its owner, available assets, and details on issued shares.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/vault-methods/vault_info",
+        "body": {
+          "command": "vault_info",
+          "vault_id": "9E48171960CD9F62C3A7B6559315A510AE544C3F51E02947B5D4DAC8AA66C3BA"
+        }
+      }
+    ]
+  },
+  {
+    "group": "Ledger Entry Examples",
+    "methods": [
+      {
+        "name": "ledger_entry - by object ID",
+        "description": "Returns an object by its unique ID.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-ledger-object-by-id",
+        "body": {
+          "command": "ledger_entry",
+          "index": "7DB0788C020F02780A673DC74757F23823FA3014C1866E72CC4CD8B226CD6EF4",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - AccountRoot",
+        "description": "Returns a single account in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-accountroot-object",
+        "body": {
+          "id": "example_get_accountroot",
+          "command": "ledger_entry",
+          "account_root": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Amendments",
+        "description": "Returns the Amendments object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-amendments-entry",
+        "body": {
+          "id": "example_get_amendments",
+          "command": "ledger_entry",
+          "amendments": "7DB0788C020F02780A673DC74757F23823FA3014C1866E72CC4CD8B226CD6EF4",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - AMM",
+        "description": "Returns a single Automated Market Maker object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-amm-object",
+        "body": {
+          "id": "example_get_amm",
+          "command": "ledger_entry",
+          "amm": {
+            "asset": {
+              "currency": "XRP"
+            },
+            "asset2": {
+              "currency": "TST",
+              "issuer": "rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"
+            }
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Bridge",
+        "description": "Returns a single Bridge object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-bridge-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_bridge",
+          "command": "ledger_entry",
+          "bridge_account": "rf7zCh1aPD2DpeJVo6keG5Cf1TVyAKMFpR",
+          "bridge": {
+            "IssuingChainDoor": "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+            "IssuingChainIssue": {
+              "currency": "XRP"
+            },
+            "LockingChainDoor": "rf7zCh1aPD2DpeJVo6keG5Cf1TVyAKMFpR",
+            "LockingChainIssue": {
+              "currency": "XRP"
+            }
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Check",
+        "description": "Returns a Check object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-check-object",
+        "body": {
+          "id": "example_get_check",
+          "command": "ledger_entry",
+          "check": "C4A46CCD8F096E994C4B0DEAB6CE98E722FC17D7944C28B95127C2659C47CBEB",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Credential",
+        "description": "Returns a Credential object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-credential-entry",
+        "body": {
+          "id": "example_get_credential",
+          "command": "ledger_entry",
+          "credential": {
+            "subject": "rNnsnWZCsakxyMz5GzFrbbMpUnSmiDeKTW",
+            "issuer": "rFtKiHYdvmAiVvxAr6U6TNjcPSrAeANQa",
+            "credential_type": "746573742D63726564656E7469616C"
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - DepositPreauth",
+        "description": "Returns a DepositPreauth object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-depositpreauth-object",
+        "body": {
+          "id": "example_get_deposit_preauth",
+          "command": "ledger_entry",
+          "deposit_preauth": {
+            "owner": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+            "authorized": "ra5nK24KXen9AHvsdFTKHSANinZseWnPcX"
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - DID",
+        "description": "Returns a single DID object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-did-entry",
+        "body": {
+          "id": "example_get_did",
+          "command": "ledger_entry",
+          "did": "rFtKiHYdvmAiVvxAr6U6TNjcPSrAeANQa",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - DirectoryNode",
+        "description": "Returns a directory object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-directorynode-object",
+        "body": {
+          "id": "example_get_directorynode",
+          "command": "ledger_entry",
+          "directory": {
+            "owner": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+            "sub_index": 0
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Escrow",
+        "description": "Returns an Escrow object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-escrow-object",
+        "body": {
+          "id": "example_get_escrow",
+          "command": "ledger_entry",
+          "escrow": {
+            "owner": "rL4fPHi2FWGwRGRQSH7gBcxkuo2b9NTjKK",
+            "seq": 126
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - FeeSettings",
+        "description": "Returns the FeeSettings object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-feesettings-entry",
+        "body": {
+          "id": "example_get_feesettings",
+          "command": "ledger_entry",
+          "fee": "4BC50C9B0D8515D3EAAE1E74B29A95804346C491EE1A95BF25E4AAB854A6A651",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - LedgerHashes",
+        "description": "Returns the LedgerHashes object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-ledgerhashes-entry",
+        "body": {
+          "id": "example_get_ledgerhashes",
+          "command": "ledger_entry",
+          "hashes": "B4979A36CDC7F3D3D5C31A4EAE2AC7D7209DDA877588B9AFC66799692AB0D66B",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Loan",
+        "description": "Returns a single Loan object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-loan-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_loan",
+          "command": "ledger_entry",
+          "loan": {
+            "loan_broker_id": "490DB29AD0CCFBDFE9A176F71AB7512497407CCA37E86F0C88CCDA1DF99A1F09",
+            "loan_seq": 2
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - LoanBroker",
+        "description": "Returns a single LoanBroker object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-loanbroker-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_loanbroker",
+          "command": "ledger_entry",
+          "loan_broker": {
+            "owner": "rKHVvo9vMQwm2xz44qfhHyDC2VwYKfzgrX",
+            "seq": 6903
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - MPToken",
+        "description": "Returns an MPToken object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-mptoken-entry",
+        "body": {
+          "id": "example_get_mpt",
+          "command": "ledger_entry",
+          "mptoken": {
+            "mpt_issuance_id": "05EECEBE97A7D635DE2393068691A015FED5A89AD203F5AA",
+            "account":"rsNw23ygZatXv7h8QVSgAE4jktY2uW1iZP"
+          }
+        }
+      },
+      {
+        "name": "ledger_entry - MPTokenIssuance",
+        "description": "Returns an MPTokenIssuance object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-mptokenissuance-entry",
+        "body": {
+          "id": "example_get_mpt_issuance",
+          "command": "ledger_entry",
+          "mpt_issuance": "05EECEBE97A7D635DE2393068691A015FED5A89AD203F5AA",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - NegativeUNL",
+        "description": "Returns the NegativeUNL object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-negativeunl-entry",
+        "body": {
+          "id": "example_get_negativeunl",
+          "command": "ledger_entry",
+          "nunl": "2E8A59AA9D3B5B186B0B9E0F62E6C02587CA74A4D778938E957B6357D364B244",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - NFT Page",
+        "description": "Returns an NFT Page object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-nft-page",
+        "body": {
+          "id": "example_get_nft_page",
+          "command": "ledger_entry",
+          "nft_page": "255DD86DDF59D778081A06D02701E9B2C9F4F01DFFFFFFFFFFFFFFFFFFFFFFFF",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - NFTokenOffer",
+        "description": "Returns an NFTokenOffer object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-nftokenoffer-entry",
+        "body": {
+          "id": "example_get_nftokenoffer",
+          "command": "ledger_entry",
+          "nft_offer": "6C4FC85B1F64FF2E30C3F657E41E373E5C1AC007A6B4F936C43B2F38BD8FFC14",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Offer",
+        "description": "Returns an Offer object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-offer-object",
+        "body": {
+          "id": "example_get_offer",
+          "command": "ledger_entry",
+          "offer": {
+            "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+            "seq": 359
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Oracle",
+        "description": "Returns a single Oracle object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-oracle-object",
+        "body": {
+          "id": "example_get_oracle",
+          "command": "ledger_entry",
+          "oracle" : {
+            "account": "rNZ9m6AP9K7z3EVg6GhPMx36V4QmZKeWds",
+            "oracle_document_id":  34
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - PayChannel",
+        "description": "Returns a PayChannel object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-paychannel-object",
+        "body": {
+          "id": "example_get_paychannel",
+          "command": "ledger_entry",
+          "payment_channel": "C7F634794B79DB40E87179A9D1BF05D05797AE7E92DF8E93FD6656E8C4BE3AE7",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - PermissionedDomain",
+        "description": "Returns a PermissionedDomain object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-permissioneddomain-entry",
+        "body": {
+          "id": "example_get_permissioneddomain",
+          "command": "ledger_entry",
+          "permissioned_domain": {
+            "account": "rHt39rFPxgy3hDcajtSK4Ty12oRFuw5A2g",
+            "seq": 0
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - RippleState",
+        "description": "Returns a RippleState object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-ripplestate-object",
+        "body": {
+          "id": "example_get_ripplestate",
+          "command": "ledger_entry",
+          "ripple_state": {
+            "accounts": [
+              "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+              "rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW"
+            ],
+            "currency": "USD"
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - SignerList",
+        "description": "Returns a SignerList object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-signerlist-entry",
+        "body": {
+          "id": "example_get_signerlist",
+          "command": "ledger_entry",
+          "signer_list": "A9C28A28B85CD533217F5C0A0C7767666B093FA58A0F2D80026FCC4CD932DDC7",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Sponsorship",
+        "description": "Returns a Sponsorship object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-sponsorship-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_sponsorship",
+          "command": "ledger_entry",
+          "sponsorship": {
+            "sponsor": "rpUqggHmAvbeWDr3v8QPTds7HgFBPKNkLX",
+            "sponsee": "rEfvNyfG1GC4CXxqe4ct3KJBRz6oW6NPrD"
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Ticket",
+        "description": "Returns a Ticket object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-ticket-object",
+        "body": {
+          "id": "example_get_ticket",
+          "command": "ledger_entry",
+          "ticket": {
+            "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",
+            "ticket_seq": 389
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - Vault",
+        "description": "Returns a Vault object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-vault-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_vault",
+          "command": "ledger_entry",
+          "vault": "3C52C93E5A2F5B075F04C33861E434CC7B98580F6F3403CA3A97E19B6C7266AA",
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - XChainOwnedClaimID",
+        "description": "Returns a single XChainOwnedClaimID object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-xchainownedclaimid-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_xchainownedclaimid",
+          "command": "ledger_entry",
+          "xchain_owned_claim_id": {
+            "IssuingChainDoor": "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+            "IssuingChainIssue": {
+              "currency": "XRP"
+            },
+            "LockingChainDoor": "rf7zCh1aPD2DpeJVo6keG5Cf1TVyAKMFpR",
+            "LockingChainIssue": {
+              "currency": "XRP"
+            },
+            "xchain_owned_claim_id": 1
+          },
+          "ledger_index": "validated"
+        }
+      },
+      {
+        "name": "ledger_entry - XChainOwnedCreateAccountClaimID",
+        "description": "Returns a single XChainOwnedCreateAccountClaimID object in its raw ledger format.",
+        "link": "/docs/references/http-websocket-apis/public-api-methods/ledger-methods/ledger_entry#get-xchainownedcreateaccountclaimid-entry",
+        "status": "not_enabled",
+        "body": {
+          "id": "example_get_xchainownedcreateaccountclaimid",
+          "command": "ledger_entry",
+          "xchain_owned_create_account_claim_id": {
+            "IssuingChainDoor": "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+            "IssuingChainIssue": {
+              "currency": "XRP"
+            },
+            "LockingChainDoor": "rf7zCh1aPD2DpeJVo6keG5Cf1TVyAKMFpR",
+            "LockingChainIssue": {
+              "currency": "XRP"
+            },
+            "xchain_owned_create_account_claim_id": 1
+          },
+          "ledger_index": "validated"
+        }
+      }
+    ]
+  }
+]

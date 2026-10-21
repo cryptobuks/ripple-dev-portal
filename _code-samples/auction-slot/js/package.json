@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "xrpl": "^4.6.0",
+    "bignumber.js": "^10.0.2"
+  },
+  "type": "module"
+}

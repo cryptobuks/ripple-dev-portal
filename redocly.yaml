@@ -1,0 +1,329 @@
+ignore:
+  - docs/references/http-websocket-apis/admin-api-methods/_template-admin-method.md
+  - docs/img/_sources/*
+  - _code-samples/**/README.md
+  - _code-samples/create-amm/ts/tsconfig.json
+  - resources/contribute-blog/_blog-template.md
+  - resources/contribute-documentation/_tutorial-template.md
+  # From master: Selenium link-checker tool dir, not part of the site build.
+  - tools/*
+  # From branch: Internal design-system showcase pages — keep out of production
+  # builds. These ~32 component demos widen the module graph and contributed to
+  # a Redocly cloud OOM build failure. They remain usable in `realm develop`.
+  - .claude/**
+  # Component demos and non-page documentation files
+  - showcase/**/*.page.tsx
+  - showcase/**/*.md
+l10n:
+  defaultLocale: en-US
+  locales:
+    - code: en-US
+      name: English
+    - code: ja
+      name: 日本語
+redirects:
+  $ref: redirects.yaml
+  /ja/XRPL_Brand_Kit.zip:
+    to: /XRPL_Brand_Kit.zip
+responseHeaders:
+  '**':
+    - name: X-Frame-Options
+      value: DENY
+    - name: Content-Security-Policy
+      value: frame-ancestors 'none'
+  '/@l10n/es-ES/**':
+    - name: X-Robots-Tag
+      value: noindex
+search:
+  engine: typesense
+  filters:
+    hide: true
+aiAssistant:
+  hide: false
+mcp:
+  hide: false
+  docs:
+    hide: false
+    name: "xrpl.org MCP server"
+    ignore:
+      - ja/**
+      - es-es/**
+metadataGlobs:
+  'docs/**':
+    redocly_category: Documentation
+  'blog/**':
+    redocly_category: Blog
+  'resources/**':
+    redocly_category: Resources
+  'community/**':
+    redocly_category: Community
+seo:
+  siteUrl: https://xrpl.org/
+  llmstxt:
+    hide: false
+    title: XRPL Developer Portal & Documentation
+    description: >-
+      Explore XRP Ledger documentation, blogs, and other blockchain
+      developer resources needed to start building and integrating with the ledger.
+    details:
+      content: >-
+        XRP Ledger concepts, use cases, tutorials, references, and other blockchain
+        developer resources. Also, stay up to date with release announcements
+        and more through the XRPL Blog.
+    sections:
+      - title: Introduction
+        description: A high-level introduction to the XRP Ledger.
+        includeFiles:
+          - docs/introduction/**/*.*
+          - about/faq.md
+        excludeFiles:
+          - docs/introduction/index.md
+      - title: Use Cases
+        description: Real-world applications and business scenarios for the XRP Ledger.
+        includeFiles:
+          - docs/use-cases/**/*.*
+        excludeFiles:
+          - docs/use-cases/index.md
+          - docs/use-cases/defi/index.md
+      - title: Agentic Transactions
+        description: XRPL AI Starter Kit to help autonomous agents discover, set up, and execute agentic transactions on the XRP Ledger.
+        includeFiles:
+          - docs/agents/**/*.*
+      - title: Concepts
+        description: Core concepts including accounts, tokens, transactions, consensus, and more.
+        includeFiles:
+          - docs/concepts/**/*.*
+        excludeFiles:
+          - docs/concepts/index.md
+          - docs/concepts/decentralized-storage/index.md
+          - docs/concepts/payment-types/index.md
+      - title: Tutorials
+        description: Step-by-step guides for building on the XRP Ledger in JavaScript, Python, Go, and more.
+        includeFiles:
+          - docs/tutorials/**/*.*
+      - title: References
+        description: Protocol specification, transaction types, ledger entries, and API methods.
+        includeFiles:
+          - docs/references/**/*.*
+        excludeFiles:
+          - docs/references/xrp-api.md
+          - docs/references/data-api.md
+          - docs/references/protocol/index.md
+          - docs/references/protocol/ledger-data/ledger-entry-types/index.md
+          - docs/references/protocol/transactions/index.md
+          - docs/references/protocol/transactions/types/index.md
+          - docs/references/http-websocket-apis/api-conventions/index.md
+          - docs/references/http-websocket-apis/public-api-methods/*/index.md
+          - docs/references/http-websocket-apis/admin-api-methods/*/index.md
+      - title: Infrastructure
+        description: Install, configure, and troubleshoot xrpld and Clio servers.
+        includeFiles:
+          - docs/infrastructure/**/*.*
+        excludeFiles:
+          - docs/infrastructure/index.md
+          - docs/infrastructure/*/index.md
+          - docs/infrastructure/installation/build-run-xrpld-in-reporting-mode.md
+          - docs/infrastructure/configuration/data-retention/index.md
+          - docs/infrastructure/configuration/server-modes/index.md
+      - title: Blog (2023+)
+        description: Recent XRPL Blog posts (showing 2023 and newer).
+        includeFiles:
+          - blog/2023/**/*.*
+          - blog/2024/**/*.*
+          - blog/2025/**/*.*
+          - blog/2026/**/*.*
+      - title: Resources
+        description: Developer resources and contribution guidelines.
+        includeFiles:
+          - resources/**/*.*
+analytics:
+  gtm:
+    includeInDevelopment: true
+    trackingId: GTM-KCQZ3L8
+    defaultDataLayer:
+      platform: redocly
+    enableWebVitalsTracking: true
+feedback:
+  type: scale
+  settings:
+    label: How helpful was this page?
+    submitText: Thanks for your feedback!
+    leftScaleLabel: Not helpful
+    rightScaleLabel: Very helpful
+scripts:
+  head:
+    # Loaded first so the persisted color scheme is applied before first paint
+    # and survives across page navigations. See static/js/theme-switch.js.
+    - src: ./static/js/theme-switch.js
+    - src: https://cmp.osano.com/SXt7r81ogd/bbc71a55-7b77-492e-94d7-b9eaa94e8bb2/osano.js
+    # xrpl.js / jQuery / Bootstrap are only used by the interactive tool scripts
+    # on a handful of tutorial + dev-tools pages, not by the theme or navbar.
+    # `defer` makes them non-render-blocking on every page; the tool pages' own
+    # inline <script> tags are also deferred so execution order is preserved
+    # (deferred scripts run in document order, after HTML parse).
+    - src: ./static/js/xrpl-2.11.0.min.js
+      defer: true
+    - src: ./static/vendor/jquery-3.7.1.min.js
+      defer: true
+    - src: ./static/vendor/bootstrap.min.js
+      defer: true
+    - src: ./static/js/osano.js
+      type: text/javascript
+links:
+  # Warm up the Google Fonts connections before the render-blocking stylesheet
+  # below is fetched, saving DNS + TCP + TLS round-trips on every page. (The
+  # primary UI fonts are the local Booton/Tobias; Noto here is a fallback and
+  # the Japanese-locale font.)
+  - href: https://fonts.googleapis.com
+    rel: preconnect
+  - href: https://fonts.gstatic.com
+    rel: preconnect
+    crossorigin: anonymous
+  # Warm up the third-party origins that load on every page (osano cookie-consent
+  # CMP + Google Tag Manager) so their first request skips the DNS/TCP/TLS setup.
+  # These are script fetches, so no `crossorigin`.
+  - href: https://cmp.osano.com
+    rel: preconnect
+  - href: https://www.googletagmanager.com
+    rel: preconnect
+  - href: https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Noto+Serif:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap
+    rel: stylesheet
+  - href: ./static/css/devportal2024-v1.css
+    rel: stylesheet
+  - href: ./static/css/font-awesome.min.css
+    rel: stylesheet
+
+logo:
+  srcSet: ./static/img/XRPLedger_DevPortal-black.svg light ./static/img/XRPLedger_DevPortal-white.svg dark
+  altText: XRP Ledger Developer Portal
+  link: /
+# navbar.items is no longer used — the BDS-2026 React navbar
+# (@theme/components/Navbar) reads its data directly from
+# @theme/components/Navbar/constants/navigation.ts and bypasses
+# themeConfig.navbar entirely. The top-nav.yaml file is kept on disk
+# for now as a safety net while we verify nothing else in Realm
+# (SEO sitemap, search index, mobile fallback, etc.) consumes
+# themeConfig.navbar.items. If a preview build comes back clean,
+# uncomment-and-delete in a follow-up: remove this block AND the
+# top-nav.yaml file.
+# navbar:
+#   items:
+#     $ref: top-nav.yaml
+markdown:
+  partialsFolders: ["docs/_snippets", "_code-samples", "_api-examples"]
+  editPage:
+    baseUrl: https://github.com/XRPLF/xrpl-dev-portal/tree/master/
+    hide: false
+footer:
+  logo:
+    hide: true
+  copyrightText: © 2026 XRP Ledger. Open Source.
+  items:
+    - group: About
+      groupTranslationKey: footer.about
+      items:
+        - page: about/index.page.tsx
+          label: XRPL Overview
+          labelTranslationKey: footer.about.xrpl-overview
+        - label: Use Cases & Projects
+          page: about/uses.page.tsx
+          labelTranslationKey: footer.about.use-cases-projects
+        - page: about/history.page.tsx
+          label: History
+          labelTranslationKey: footer.about.history
+        - page: about/impact.page.tsx
+          label: Impact
+          labelTranslationKey: footer.about.impact
+        - label: XRPL Foundation
+          labelTranslationKey: footer.about.xrpl-foundation
+          href: https://xrpl.foundation
+          external: true
+        - page: about/faq.md
+          label: FAQ
+          labelTranslationKey: footer.about.faq
+        - page: about/privacy-policy.md
+          label: Privacy Policy
+          labelTranslationKey: footer.about.privacy-policy
+    - group: Docs
+      groupTranslationKey: footer.docs
+      items:
+        - label: XRPL Documentation
+          page: docs/index.page.tsx
+          labelTranslationKey: footer.docs.xrpl-documentation
+        - page: docs/introduction/index.md
+          label: Introduction
+          labelTranslationKey: footer.docs.introduction
+        - page: docs/use-cases/index.md
+          label: Use Cases
+          labelTranslationKey: footer.docs.use-cases
+        - page: docs/concepts/index.md
+          label: Concepts
+          labelTranslationKey: footer.docs.concepts
+        - page: docs/tutorials/index.page.tsx
+          label: Tutorials
+          labelTranslationKey: footer.docs.tutorials
+        - page: docs/references/index.md
+          label: References
+          labelTranslationKey: footer.docs.references
+        - page: docs/infrastructure/index.md
+          label: Infrastructure
+          labelTranslationKey: footer.docs.infrastructure
+    - group: Resources
+      groupTranslationKey: footer.resources
+      items:
+        - page: resources/code-samples.page.tsx
+          label: Code Samples
+          labelTranslationKey: footer.resources.code-samples
+        - page: resources/dev-tools/index.page.tsx
+          label: Dev Tools
+          labelTranslationKey: footer.resources.dev-tools
+        - label: XRPL Learning Portal
+          labelTranslationKey: footer.resources.xrpl-learning-portal
+          href: https://learn.xrpl.org/
+          external: true
+        - label: XRPL Brand Kit
+          labelTranslationKey: footer.resources.xrpl-brand-kit
+          href: /XRPL_Brand_Kit.zip
+          external: true
+        - label: XRPL Explorers
+          labelTranslationKey: footer.resources.explorer
+          href: /resources/dev-tools/xrpl-explorers
+        - page: resources/known-amendments.md
+          label: Known Amendments
+          labelTranslationKey: footer.resources.known-amendments
+        - page: resources/contribute-code/index.md
+          label: Contribute Code
+          labelTranslationKey: footer.resources.contribute-code
+        - page: resources/contribute-documentation/index.md
+          label: Contribute Documentation
+          labelTranslationKey: footer.resources.contribute-documentation
+    - group: Community
+      groupTranslationKey: footer.community
+      items:
+        - page: community/index.page.tsx
+          label: Community
+          labelTranslationKey: footer.community.community
+        - page: community/events.page.tsx
+          label: Events
+          labelTranslationKey: footer.community.events
+        - page: community/developer-funding.page.tsx
+          label: Developer Funding
+          labelTranslationKey: footer.community.developer-funding
+        - label: XRPL Jobs
+          labelTranslationKey: footer.community.xrpl-jobs
+          href: https://jobs.xrpl.org/
+          external: true
+        - page: blog/index.page.tsx
+          label: XRP Ledger Community Blog
+          labelTranslationKey: footer.community.dev-blog
+        - label: XRPL Grants
+          labelTranslationKey: footer.community.xrpl-grants
+          href: https://xrplgrants.org/
+          external: true
+        - label: GitHub
+          labelTranslationKey: footer.community.github
+          href: https://github.com/XRPLF/
+          external: true
+        - page: community/report-a-scam.md
+          label: Report a Scam
+          labelTranslationKey: footer.community.report-a-scam

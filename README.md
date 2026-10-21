@@ -1,63 +1,59 @@
-ripple-dev-portal
-=================
+# XRPL Dev Portal
 
-The [Ripple Developer Portal](https://dev.ripple.com) is the authoritative source for Ripple documentation, including the `rippled` server, RippleAPI, the Ripple Data API, and other Ripple open-source software.
+The [XRP Ledger Dev Portal](https://xrpl.org) is the authoritative source for XRP Ledger documentation, including the core server, client libraries, and other open-source XRP Ledger software.
 
+The site is built and published using Redocly. 
 
-Repository Layout
------------------
+Before you proceed, make sure you have Node.js and NPM installed. The site is tested with the current LTS release of each.
 
-The HTML pages in this portal are generated from the markdown files in the [content/](content/) folder. Always edit the markdown files, not the HTML files. The [assets/](assets/) folder contains static files used by the site's templates. The [img](img/) folder contains images used in the docs.
+To build the site locally:
 
-The HTML files are generated using Ripple's documentation tool, called [**Dactyl**](https://github.com/ripple/dactyl). After you've done the [Dactyl Setup](#dactyl-setup), you can build the docs from the project root directory:
+1. Clone the repo and change into its directory:
 
-```
-dactyl_build
-```
+        git clone git@github.com:XRPLF/xrpl-dev-portal.git && cd xrpl-dev-portal
 
-Dactyl also provides link checking (the `dactyl_link_checker` script) and style checking (`dactyl_style_checker`), which you can run from the project root directory.
+2. Install **Redocly Realm**:
 
-The list of which files are built, and metadata about those files, is in the `dactyl-config.yml` file. The `tool/` folder also contains the templates and style-checker rules used by Dactyl. For information on our conventions, see [Config Formatting](#config-formatting).
+        npm install @redocly/realm
 
+3. Switch to the `master` branch if you aren't on it already.
+      
+        git switch master
 
-Dactyl Setup
-------------
+4. Build and start a local server:
 
-Dactyl uses Python 3 and a number of modules. First, make sure you have Python 3 installed in your local operating system, then use [PIP](https://pip.pypa.io/en/stable/) to install the dependencies:
+        npm start
 
-`pip3 install dactyl`
-
-
-Contributing
-------------
-
-The Developer Portal welcomes outside contributions, especially to the documentation contents. If you have any corrections, improvements, or expansions of the portal, please contribute pull requests to the **master** branch.
-
-Contributions become copyright Ripple and are provided under the MIT [LICENSE](LICENSE).
+For more details, see the [contribution guidelines (EN)](CONTRIBUTING.md) ([日本語](@l10n/ja/CONTRIBUTING.md)) and the [contributor Code of Conduct (EN)](CODE-OF-CONDUCT.md) ([日本語](@l10n/ja/CODE-OF-CONDUCT.md)).
 
 
-Config Formatting
------------------
+### Localization / Translations
 
-The templates in this repository use metadata from the `dactyl-config.yml` file to generate a hierarchy of pages when navigating the generated site. To generate the appropriate navigation, you must include the proper fields in the page definitions. The following example shows a page with all fields provided:
+The documentation in this repository is created in English first, then translated into other languages by community contributors. Currently, only the Japanese translations are live on the site; Spanish translation efforts are incomplete and not actively used. For information on the process of adding and maintaining translated files, see [Translations](https://xrpl.org/resources/contribute-documentation/documentation-translations).
 
-```
--   md: concept-authorized-trust-lines.md
-    funnel: Docs
-    doc_type: Concepts
-    category: Payment System
-    subcategory: Accounts
-    targets:
-        - local
-```
+## Issues, Projects, and Project Boards
 
-Navigation uses the fields `funnel`, `doc_type`, `category`, and `subcategory`, in that order (from broadest to most specific). At each level, the first page to have a new value is the parent or landing of that level. (For example, the parent of the "Accounts" subcategory should have the `subcategory: Accounts` field and must appear before any of its children.) For landing pages, omit the lower level fields. (For example, the "Concepts" doc_type landing should have a `doc_type` field but not a `category` field.)
+Use GitHub Issues under the [`xrpl-dev-portal`](https://github.com/XRPLF/xrpl-dev-portal) repository to report bugs, feature requests, and suggestions for the XRP Ledger Documentation or the `xrpl.org` website. 
 
-**Warning:** If you make a typo in one of these fields, your page may not show up in navigation or may appear in the wrong place.
+For issues related to `xrpld`/`rippled`, Clio, or client libraries (`xrpl.js`, `xrpl-py`, and others), use the respective source repository under [`https://github.com/XRPLF`](https://github.com/XRPLF).
 
-By convention, parent pages should have the same names as the hierarchy for which they are parents. (For example, the landing page for the `Payment System` category should be named `Payment System`.) The name of `md`-sourced files is automatically determined by the header in the first line of the file.
+If you are a contributor, use GitHub Projects and Project Boards to plan and track updates to xrpl.org. 
 
-For pages that don't have markdown source content, leave out the `md` line and instead provide the following fields:
+### Project Board `xrpl-docs`
 
-| `name` | Human-readable page name. (Plain text only) |
-| `html` | Output filename for the page. Should end in `.html` and be unique within the target. |
+The [`xrpl-docs`](https://github.com/orgs/XRPLF/projects/4) Kanban board is used to plan and track updates to the XRP Ledger Documentation. Contributors must update the status of an issue as it progresses through different stages.
+
+The `xrpl-docs` board has six columns based on the status of issues in this repository:
+
+* **No Status**: New or existing issues that no one has triaged yet.
+
+* **Backlog**: Issues that represent tasks to be done eventually. They should contain actionable and helpful information for a contributor to work on addressing the issue.
+
+* **Planned**: Issues with assignees who plan to address them in the near future, like 2-4 weeks.
+
+* **In Progress**: Issues that a contributor is actively working on.
+
+* **In Review**: Issues with a proposed fix that is currently being reviewed. These should be associated with an open pull request.
+
+* **Done**: Issues that have been completed, whose related content updates have been merged.
+

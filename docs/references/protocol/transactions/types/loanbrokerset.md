@@ -1,0 +1,75 @@
+---
+seo:
+    description: Create or update an existing loan broker.
+labels:
+    - Transactions
+    - Lending Protocol
+requiredAmendment: LendingProtocol
+txIcon: modify
+status: not_enabled
+---
+# LoanBrokerSet
+{% source-link path="src/libxrpl/tx/transactors/lending/LoanBrokerSet.cpp" /%}
+
+Creates or updates a `LoanBroker` ledger entry, configuring protocol parameters and associating it with a `Vault`.
+
+Only the owner of the associated vault can initiate this transaction.
+
+{% admonition type="info" name="Note" %}
+A loan broker can only be attached to a _closed-ended_ vault. This restriction only applies to loan brokers created after the [LendingProtocolV1_1 amendment][] is enabled. If a loan broker was created before the amendment, it can still originate loans from _open-ended_ vaults.
+{% /admonition %}
+
+{% amendment-disclaimer name="LendingProtocol" /%}
+{% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}
+
+## Example {% $frontmatter.seo.title %} JSON
+
+```json
+{
+  "TransactionType": "LoanBrokerSet",
+  "Account": "rEXAMPLE9AbCdEfGhIjKlMnOpQrStUvWxYz",
+  "Fee": "12",
+  "Flags": 0,
+  "LastLedgerSequence": 7108682,
+  "Sequence": 8,
+  "VaultID": "ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890",
+  "LoanBrokerID": "E123F4567890ABCDE123F4567890ABCDEF1234567890ABCDEF1234567890ABCD",
+  "Data": "5468697320697320617262697472617279206D657461646174612061626F757420746865206C6F616E62726F6B65722E",
+  "ManagementFeeRate": 100,
+  "DebtMaximum": 100000,
+  "CoverRateMinimum": 10000,
+  "CoverRateLiquidation": 5000
+}
+```
+
+## {% $frontmatter.seo.title %} Fields
+
+In addition to the [common fields][], {% code-page-name /%} transactions use the following fields:
+
+| Field Name             | JSON Type | Internal Type | Required? | Description |
+|:-----------------------|:----------|:--------------|:----------|:------------|
+| `VaultID`              | String    | Hash256       | Yes       | The ID of the vault that the lending protocol will use to access liquidity. |
+| `LoanBrokerID`         | String    | Hash256       | No        | The loan broker ID that the transaction is modifying. |
+| `Data`                 | String    | Blob          | No        | Arbitrary metadata in hex format--limited to 256 bytes. |
+| `ManagementFeeRate`    | Number    | UInt16        | No        | The 1/10th basis point fee charged by the lending protocol owner against any loan interest. Valid values range from `0` to `10000` (inclusive), representing 0% to 10%. |
+| `DebtMaximum`          | String    | Number        | No        | The maximum amount the protocol can owe the vault. The default value of `0` means there is no limit to the debt. Must be a positive value. |
+| `CoverRateMinimum`     | Number    | UInt32        | No        | The 1/10th basis point `DebtTotal` that the first-loss capital must cover. Valid values range from `0` to `100000` (inclusive), representing 0% to 100%. |
+| `CoverRateLiquidation` | Number    | UInt32        | No        | The 1/10th basis point of minimum required first-loss capital that is moved to an asset vault to cover a loan default. Valid values range from `0` to `100000` (inclusive), representing 0% to 100%. |
+
+When this transaction modifies an existing `LoanBroker` ledger entry, you can only modify `Flags`, `Data`, and `DebtMaximum`.
+
+
+## Error Cases
+
+Besides errors that can occur for all transactions, {% code-page-name /%} transactions can result in the following [transaction result codes][]:
+
+| Error Code                | Description                        |
+|:--------------------------|:-----------------------------------|
+| `tecINSUFFICIENT_RESERVE` | The owner's account doesn't have enough to cover the reserve requirement for the new `LoanBroker` ledger entry. |
+| `tecLIMIT_EXCEEDED`       | The transaction reduces `DebtMaximum` below the `LoanBroker`'s current `DebtTotal`. |
+| `tecNO_ENTRY`             | A `LoanBroker` entry with the specified ID does not exist. You can also receive this if the specified `VaultID` doesn't exist. |
+| `tecNO_PERMISSION`        | <li>The account submitting the transaction doesn't own the associated `Vault` ledger entry.</li><li>The account submitting the transaction doesn't own the `LoanBroker` ledger entry it's modifying.</li><li>The transaction tries to modify the `VaultID` of an existing `LoanBroker` ledger entry.</li><li>The transaction is creating a new `LoanBroker` and the associated vault isn't closed-ended. Updating an existing `LoanBroker` isn't affected. {% amendment-disclaimer name="LendingProtocolV1_1" mode="updated" /%}</li> |
+| `tecPRECISION_LOSS`       | `DebtMaximum` is more precise than the vault's asset can hold. |
+| `temINVALID`              | <li>`Data` is present but empty, or larger than 256 bytes.</li><li>A numeric field is outside its valid range.</li><li>The transaction is trying to modify a fixed field. You can only update the values for `Flags`, `Data`, or `DebtMaximum`.</li><li>`LoanBrokerID` or `VaultID` is zero.</li><li>Only one of `CoverRateMinimum` and `CoverRateLiquidation` is zero. Both must be zero, or neither.</li> |
+
+{% raw-partial file="/docs/_snippets/common-links.md" /%}
